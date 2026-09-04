@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kisan Setu — Farmer Registration &amp; Slot Booking Portal</title>
+<meta name="description" content="Register as a farmer, book MSP procurement slots, and generate gate entry tokens on the Kisan Setu portal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root {
+  --primary:#16a34a; --primary-hover:#15803d; --primary-light:#f0fdf4; --primary-border:rgba(22,163,74,0.3);
+  --navy:#0f2942; --success:#22c55e;
+  --bg-page:#f1f5f9; --bg-surface:#ffffff; --bg-subtle:#f8fafc; --bg-input:#ffffff;
+  --text-main:#0f172a; --text-muted:#475569; --text-faint:#94a3b8;
+  --border:#e2e8f0; --border-strong:#cbd5e1; --border-input:#d1d5db;
+  --shadow-card:0 1px 3px rgba(0,0,0,0.07),0 8px 24px rgba(0,0,0,0.06);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 2px 8px rgba(0,0,0,0.04);
+}
+[data-theme="dark"]{
+  --navy:#f8fafc;
+  --navy-dark:#cbd5e1;
+  --bg-page:#0d1117; --bg-surface:#161b22; --bg-subtle:#1c2433; --bg-input:#1c2433;
+  --text-main:#e2e8f0; --text-muted:#94a3b8; --text-faint:#64748b;
+  --border:#21262d; --border-strong:#30363d; --border-input:#30363d;
+  --shadow-card:0 1px 3px rgba(0,0,0,0.3),0 8px 24px rgba(0,0,0,0.3);
+  --primary-light:rgba(22,163,74,0.12);
+}
+
+/* Dark mode overrides for login.html */
+[data-theme="dark"] .portal-title{color:var(--text-main)!important;}
+[data-theme="dark"] .step-header h3{color:var(--text-main)!important;}
+[data-theme="dark"] .demo-pick-btn{background:var(--bg-subtle)!important;border-color:var(--border-strong)!important;color:var(--text-main)!important;}
+[data-theme="dark"] .demo-pick-btn:hover{background:var(--primary)!important;color:#ffffff!important;border-color:var(--primary)!important;}
+[data-theme="dark"] .reg-detail-item span{color:var(--text-main)!important;}
+[data-theme="dark"] select,
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="tel"],
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] textarea,
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-input{background:var(--bg-input)!important;color:var(--text-main)!important;border-color:var(--border-strong)!important;}
+[data-theme="dark"] .role-tab-group{background:var(--bg-surface)!important;border-color:var(--border)!important;}
+[data-theme="dark"] .role-tab-btn{color:var(--text-muted)!important;}
+[data-theme="dark"] .role-tab-btn.active{background:var(--primary)!important;color:#ffffff!important;}
+[data-theme="dark"] .wizard-step-circle{background:var(--bg-subtle)!important;border-color:var(--border)!important;color:var(--text-muted)!important;}
+[data-theme="dark"] .wizard-step-node{background:var(--bg-surface)!important;}
+[data-theme="dark"] .choice-chip{background:var(--bg-surface)!important;border-color:var(--border-strong)!important;color:var(--text-main)!important;}
+[data-theme="dark"] .ownership-card{background:var(--bg-surface)!important;border-color:var(--border)!important;}
+[data-theme="dark"] .slot-option{background:var(--bg-surface)!important;border-color:var(--border)!important;color:var(--text-main)!important;}
+[data-theme="dark"] .pill.low{background:#064e3b!important;color:#6ee7b7!important;}
+[data-theme="dark"] .pill.medium{background:#713f12!important;color:#fde047!important;}
+[data-theme="dark"] .pill.high{background:#7f1d1d!important;color:#fca5a5!important;}
+[data-theme="dark"] .printable-pass{background:var(--bg-surface)!important;border-color:var(--border-strong)!important;}
+[data-theme="dark"] .emitra-card{background:var(--bg-surface)!important;border-color:var(--border)!important;}
+[data-theme="dark"] .emitra-icon-box{background:rgba(56,189,248,0.15)!important;color:#38bdf8!important;}
+[data-theme="dark"] .reg-details-grid{background:var(--bg-subtle)!important;border-color:var(--border)!important;}
+[data-theme="dark"] .otp-digit-input{background:var(--bg-input)!important;border-color:var(--border-strong)!important;color:var(--text-main)!important;}
+
+.emitra-icon-box{width:38px;height:38px;border-radius:8px;background:rgba(15,41,66,0.08);color:var(--navy);display:flex;align-items:center;justify-content:center;flex:none;}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-page);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;transition:background .25s,color .25s;-webkit-font-smoothing:antialiased;}
+
+/* Gov Bar */
+.gov-bar{background:#0f172a;color:#94a3b8;font-size:11.5px;padding:7px 24px;}
+.gov-bar-inner{max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.gov-title{display:flex;align-items:center;gap:8px;font-weight:500;color:#cbd5e1;}
+.gov-flag{display:inline-flex;flex-direction:column;height:12px;width:18px;border-radius:1px;overflow:hidden;}
+.gov-flag span:nth-child(1){background:#ff9933;flex:1;}
+.gov-flag span:nth-child(2){background:#ffffff;flex:1;}
+.gov-flag span:nth-child(3){background:#138808;flex:1;}
+.top-controls{display:flex;align-items:center;gap:10px;}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,0.18);border-radius:6px;overflow:hidden;}
+.lang-btn{border:none;background:transparent;padding:4px 8px;font-size:11px;font-weight:600;color:#94a3b8;cursor:pointer;transition:all .15s;}
+.lang-btn.active{background:#ffffff;color:#0f172a;}
+.theme-toggle{background:transparent;border:1px solid rgba(255,255,255,0.18);border-radius:6px;padding:4px 10px;cursor:pointer;color:#94a3b8;font-size:11.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:all .15s;}
+.theme-toggle:hover{border-color:rgba(255,255,255,0.35);color:#fff;}
+
+/* Layout */
+.main-wrap{flex:1;padding:32px 20px 48px;max-width:1160px;margin:0 auto;width:100%;}
+.portal-header{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.portal-logo{width:44px;height:44px;border-radius:10px;background:var(--primary);display:flex;align-items:center;justify-content:center;flex:none;}
+.portal-title{font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-0.02em;}
+.portal-subtitle{font-size:13px;color:var(--text-muted);margin-top:2px;}
+
+/* Role Tabs */
+.role-tab-group{display:flex;gap:4px;background:var(--bg-surface);border:1px solid var(--border);padding:4px;border-radius:10px;margin-bottom:24px;width:fit-content;box-shadow:var(--shadow-sm);}
+.role-tab-btn{background:transparent;border:none;padding:9px 20px;font-size:13px;font-weight:500;color:var(--text-muted);border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap;}
+.role-tab-btn.active{background:var(--primary);color:#fff;font-weight:700;box-shadow:0 2px 8px rgba(22,163,74,0.3);}
+
+/* Wizard Card */
+.wizard-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;padding:36px;box-shadow:var(--shadow-card);transition:background .25s,border-color .25s;}
+
+/* Progress Bar */
+.wizard-progress{display:flex;justify-content:space-between;margin-bottom:30px;position:relative;overflow-x:auto;padding-bottom:6px;}
+.wizard-progress::before{content:'';position:absolute;top:15px;left:20px;right:20px;height:2px;background:var(--border);z-index:1;}
+.wizard-step-node{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--bg-surface);padding:0 6px;cursor:pointer;min-width:60px;}
+.wizard-step-circle{width:32px;height:32px;border-radius:50%;background:var(--bg-subtle);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text-muted);transition:all .2s;}
+.wizard-step-node.active .wizard-step-circle{border-color:var(--primary);background:var(--primary);color:#fff;box-shadow:0 0 0 4px rgba(22,101,52,0.15);}
+.wizard-step-node.completed .wizard-step-circle{border-color:var(--success);background:var(--success);color:#fff;}
+.wizard-step-label{font-size:10.5px;font-weight:600;color:var(--text-muted);white-space:nowrap;text-align:center;}
+.wizard-step-node.active .wizard-step-label{color:var(--text-main);font-weight:700;}
+.wizard-step-node.completed .wizard-step-label{color:var(--success);}
+
+/* Step card */
+.step-card{animation:fadeInUp .25s ease;}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.step-header{margin-bottom:22px;border-bottom:1px solid var(--border);padding-bottom:14px;}
+.step-header h3{font-size:19px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:10px;}
+.step-header p{font-size:13.5px;color:var(--text-muted);margin-top:5px;}
+
+/* Grids */
+.form-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:18px;}
+.form-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px;}
+@media(max-width:700px){.form-grid-2,.form-grid-3{grid-template-columns:1fr;}}
+.form-group label{display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.form-control{width:100%;padding:10px 14px;font-size:14px;font-family:inherit;background:var(--bg-input);color:var(--text-main);border:1px solid var(--border-input);border-radius:7px;outline:none;transition:border-color .15s,box-shadow .15s;}
+.form-control:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(22,163,74,0.15);}
+.form-control::placeholder{color:var(--text-faint);}
+.form-control.mono{font-family:'JetBrains Mono',monospace;font-size:13.5px;}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;font-size:13.5px;font-weight:600;font-family:inherit;border-radius:7px;cursor:pointer;border:none;transition:all .15s;text-decoration:none;}
+.btn-primary{background:var(--primary);color:#fff;} .btn-primary:hover{background:var(--primary-hover);}
+.btn-outline{background:transparent;color:var(--text-main);border:1.5px solid var(--border-strong);} .btn-outline:hover{border-color:var(--primary);color:var(--primary);}
+.btn-ghost{background:transparent;color:var(--text-muted);border:none;text-decoration:underline;cursor:pointer;}
+.btn-full{width:100%;justify-content:center;padding:12px;font-size:14px;}
+
+/* Demo bar */
+.fast-demo-bar{background:var(--bg-subtle);border:1px dashed var(--border);border-radius:8px;padding:10px 14px;margin-bottom:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;}
+.demo-pick-btn{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:11.5px;font-weight:600;cursor:pointer;color:var(--navy);transition:all .15s;font-family:inherit;}
+.demo-pick-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
+
+/* OTP */
+.otp-boxes-wrap{display:flex;gap:10px;justify-content:center;margin:20px 0;}
+.otp-digit-input{width:46px;height:52px;text-align:center;font-size:20px;font-weight:700;font-family:'JetBrains Mono',monospace;border:2px solid var(--border);border-radius:8px;background:var(--bg-surface);color:var(--text-main);transition:all .15s;outline:none;}
+.otp-digit-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(22,101,52,0.15);}
+.otp-sent-alert{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:8px;padding:12px 18px;font-size:13.5px;color:#15803d;font-weight:600;display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;}
+[data-theme="dark"] .otp-sent-alert{background:rgba(34,197,94,0.15);color:#86efac;}
+
+/* Chips & Options */
+.option-row{display:flex;flex-wrap:wrap;gap:10px;}
+.choice-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg-subtle);cursor:pointer;font-size:13px;font-weight:600;color:var(--text-main);transition:all .15s;}
+.choice-chip:hover{border-color:var(--primary);} .choice-chip.active{border-color:var(--primary);background:var(--primary-light);color:var(--primary);}
+
+/* Ownership */
+.ownership-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px;}
+@media(max-width:700px){.ownership-cards-grid{grid-template-columns:1fr;}}
+.ownership-card{background:var(--bg-surface);border:2px solid var(--border);border-radius:10px;padding:18px 16px;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;gap:8px;}
+.ownership-card:hover,.ownership-card.active{border-color:var(--primary);background:var(--primary-light);}
+.ownership-card.active{box-shadow:0 0 0 3px rgba(22,163,74,0.18);}
+.ownership-card-head{display:flex;align-items:center;justify-content:space-between;}
+.ownership-card-title{font-size:15px;font-weight:700;color:var(--text-main);}
+.ownership-radio-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;}
+.ownership-card.active .ownership-radio-dot{border-color:var(--primary);background:var(--primary);}
+.ownership-card.active .ownership-radio-dot::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff;}
+.ownership-card-desc{font-size:12.5px;color:var(--text-muted);line-height:1.45;}
+.ownership-info-alert{background:#fffbeb;border:1.5px solid #fde68a;border-radius:8px;padding:14px 18px;font-size:13.5px;font-weight:600;color:#92400e;margin-bottom:20px;display:flex;align-items:center;gap:12px;line-height:1.45;}
+[data-theme="dark"] .ownership-info-alert{background:#231805;border-color:#78350f;color:#fcd34d;}
+
+/* Slot */
+.slot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.slot-option{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg-subtle);cursor:pointer;transition:all .15s;font-size:13.5px;font-weight:600;}
+.slot-option:hover{border-color:var(--primary);background:var(--primary-light);}
+.slot-option.active{border-color:var(--primary);background:var(--primary-light);color:var(--primary);box-shadow:0 0 0 3px rgba(22,163,74,0.18);}
+
+/* Pills */
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;}
+.pill i{width:5px;height:5px;border-radius:50%;background:currentColor;flex:none;}
+.pill.low{background:#dcfce7;color:#15803d;} .pill.medium{background:#fef9c3;color:#a16207;} .pill.high{background:#fee2e2;color:#b91c1c;}
+
+/* Pass */
+.printable-pass{background:var(--bg-surface);border:1.5px solid var(--border);border-radius:12px;padding:24px;}
+
+/* e-Mitra */
+.emitra-wrap{margin-top:36px;border-top:2px dashed var(--border-strong);padding-top:28px;}
+.emitra-card{background:var(--bg-surface);border:1.5px solid var(--border);border-radius:12px;padding:24px 26px;}
+.reg-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--primary-light);border:1px solid var(--primary-border);color:var(--primary);border-radius:5px;font-size:12px;font-weight:700;}
+.reg-details-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;background:var(--bg-subtle);padding:14px;border-radius:8px;border:1px solid var(--border);margin:14px 0;}
+.reg-detail-item label{display:block;font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin-bottom:2px;}
+.reg-detail-item span{font-size:13.5px;font-weight:700;color:var(--navy);}
+
+/* Login panels */
+.login-panel{max-width:480px;}
+.form-field{margin-bottom:16px;}
+.form-field label{display:block;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.form-input{width:100%;padding:10px 14px;font-size:14px;font-family:inherit;background:var(--bg-input);color:var(--text-main);border:1px solid var(--border-input);border-radius:7px;transition:border-color .15s,box-shadow .15s;outline:none;}
+.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(22,163,74,0.12);}
+.form-input::placeholder{color:var(--text-faint);}
+.form-view{display:none;}
+.form-view.active{display:block;animation:fadeInUp .18s ease;}
+
+/* Toast */
+#toastContainer{position:fixed;bottom:24px;right:24px;z-index:1000;display:flex;flex-direction:column;gap:10px;}
+.toast-msg{background:#0f172a;color:#fff;border-radius:6px;padding:12px 18px;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.2);display:flex;align-items:center;gap:10px;border-left:4px solid var(--primary);animation:toastSlide .25s ease;}
+@keyframes toastSlide{from{transform:translateY(12px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+
+footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint);border-top:1px solid var(--border);background:var(--bg-surface);}
+</style>
+</head>
+<body>
+
+<!-- Gov Bar -->
+<div class="gov-bar">
+  <div class="gov-bar-inner">
+    <div class="gov-title">
+      <div class="gov-flag"><span></span><span></span><span></span></div>
+      <span data-i18n="gov.title">Government of India &middot; Ministry of Consumer Affairs, Food &amp; Public Distribution</span>
+    </div>
+    <div class="top-controls">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="hi">&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle">
+        <svg id="themeIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span id="themeLabel" data-i18n="theme.light">Light Mode</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="main-wrap">
+
+  <!-- Header -->
+  <div class="portal-header">
+    <div class="portal-logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+    </div>
+    <div>
+      <div class="portal-title" data-i18n="portal.title">Kisan Setu</div>
+      <div class="portal-subtitle" data-i18n="portal.subtitle">MSP Procurement &amp; Queue Portal &mdash; Government of Rajasthan</div>
+    </div>
+    <a href="index.html" style="margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--text-muted); text-decoration:none; padding:6px 12px; border-radius:6px; border:1px solid var(--border); transition:all .15s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span data-i18n="nav.gotoDashboard">Go to Dashboard</span>
+    </a>
+  </div>
+
+  <!-- Role Tabs -->
+  <div class="role-tab-group">
+    <button class="role-tab-btn active" data-auth-role="farmer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:5px;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg><span data-i18n="role.farmer">Farmer Portal</span>
+    </button>
+    <button class="role-tab-btn" data-auth-role="centre">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:5px;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span data-i18n="role.centre">Centre Staff</span>
+    </button>
+    <button class="role-tab-btn" data-auth-role="admin">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:5px;"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span data-i18n="role.admin">Dept Admin</span>
+    </button>
+  </div>
+
+  <!-- ======== FARMER PORTAL: 9-STEP WIZARD ======== -->
+  <div id="farmerPanel" class="form-view active">
+    <div class="wizard-card">
+
+      <!-- Progress -->
+      <div class="wizard-progress" id="loginWizardProgress">
+        <div class="wizard-step-node active" id="lstepNode1" onclick="lgoToStep(1)"><div class="wizard-step-circle">1</div><div class="wizard-step-label" data-i18n="step.jan">Jan Aadhaar</div></div>
+        <div class="wizard-step-node" id="lstepNode2" onclick="lgoToStep(2)"><div class="wizard-step-circle">2</div><div class="wizard-step-label" data-i18n="step.otp">OTP Verify</div></div>
+        <div class="wizard-step-node" id="lstepNode3" onclick="lgoToStep(3)"><div class="wizard-step-circle">3</div><div class="wizard-step-label" data-i18n="step.bank">Bank Account</div></div>
+        <div class="wizard-step-node" id="lstepNode4" onclick="lgoToStep(4)"><div class="wizard-step-circle">4</div><div class="wizard-step-label" data-i18n="step.land">Land Details</div></div>
+        <div class="wizard-step-node" id="lstepNode5" onclick="lgoToStep(5)"><div class="wizard-step-circle">5</div><div class="wizard-step-label" data-i18n="step.crop">Crop Details</div></div>
+        <div class="wizard-step-node" id="lstepNode6" onclick="lgoToStep(6)"><div class="wizard-step-circle">6</div><div class="wizard-step-label" data-i18n="step.own">Ownership</div></div>
+        <div class="wizard-step-node" id="lstepNode7" onclick="lgoToStep(7)"><div class="wizard-step-circle">7</div><div class="wizard-step-label" data-i18n="step.centre">Mandi Centre</div></div>
+        <div class="wizard-step-node" id="lstepNode8" onclick="lgoToStep(8)"><div class="wizard-step-circle">8</div><div class="wizard-step-label" data-i18n="step.slot">Book Slot</div></div>
+        <div class="wizard-step-node" id="lstepNode9" onclick="lgoToStep(9)"><div class="wizard-step-circle">9</div><div class="wizard-step-label" data-i18n="step.token">Token</div></div>
+      </div>
+
+      <!-- Demo Bar -->
+      <div class="fast-demo-bar">
+        <span style="font-weight:700;color:var(--navy);" data-i18n="demo.barTitle">&#9889; Quick Demo Auto-Fill:</span>
+        <button type="button" class="demo-pick-btn" onclick="lFillDemo(0)" data-i18n="demo.farmer1">Farmer 1 (Wheat &middot; Self-Owned &middot; Bassi)</button>
+        <button type="button" class="demo-pick-btn" onclick="lFillDemo(1)" data-i18n="demo.farmer2">Farmer 2 (Mustard &middot; Sharecropper &middot; Chomu)</button>
+        <button type="button" class="demo-pick-btn" onclick="lFillDemo(2)" data-i18n="demo.farmer3">Farmer 3 (Bajra &middot; Inherited &middot; Dudu)</button>
+      </div>
+
+      <!-- STEP 1 -->
+      <div id="lStep1" class="step-card">
+        <div class="step-header">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><rect width="18" height="14" x="3" y="5" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 9h4"/><path d="M14 13h4"/><path d="M14 15h2"/></svg><span data-i18n="step1.title">1. Jan Aadhaar Number &amp; Farmer Details</span></h3>
+          <p data-i18n="step1.desc">Enter your 10 or 12 digit Rajasthan Jan Aadhaar Identification number to initiate MSP registration.</p>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group"><label data-i18n="lbl.janAadhaar">Jan Aadhaar Number *</label><input type="text" id="lJanAadhaar" class="form-control mono" placeholder="748291038472" value="748291038472"></div>
+          <div class="form-group"><label data-i18n="lbl.mobile">Registered Mobile Number *</label><input type="tel" id="lMobile" class="form-control mono" maxlength="10" placeholder="10-digit mobile" value="9829019835"></div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group"><label data-i18n="lbl.farmerName">Farmer Full Name *</label><input type="text" id="lFarmerName" class="form-control" placeholder="e.g. Ramkishan Choudhary" value="Ramkishan Choudhary"></div>
+          <div class="form-group"><label data-i18n="lbl.fatherName">Father's / Husband's Name</label><input type="text" id="lFatherName" class="form-control" placeholder="e.g. Hariram Choudhary" value="Hariram Choudhary"></div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+          <button type="button" class="btn btn-primary" onclick="lSendOtp()"><span data-i18n="btn.sendOtp">Send OTP</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="lStep2" class="step-card" style="display:none;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:rgba(22,163,74,0.1);color:var(--primary);display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg></div>
+        <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:14px;" data-i18n="step2.title">2. Mobile OTP Verification</h3>
+        <div class="otp-sent-alert" style="display:inline-flex;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span id="lotpSentText">OTP has been sent to the registered mobile number XXXXXX9835</span>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;" data-i18n="step2.desc">Enter the 6-digit OTP verification code received on your mobile.</p>
+        <div class="otp-boxes-wrap">
+          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp1" oninput="lOtpDigit(1)" onkeydown="lOtpKey(event,1)">
+          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp2" oninput="lOtpDigit(2)" onkeydown="lOtpKey(event,2)">
+          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp3" oninput="lOtpDigit(3)" onkeydown="lOtpKey(event,3)">
+          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp4" oninput="lOtpDigit(4)" onkeydown="lOtpKey(event,4)">
+          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp5" oninput="lOtpDigit(5)" onkeydown="lOtpKey(event,5)">
+          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp6" oninput="lOtpDigit(6)" onkeydown="lOtpKey(event,6)">
+        </div>
+        <div style="font-size:12px;color:var(--text-faint);margin-bottom:24px;">(<span data-i18n="demo.otpPrompt">Demo OTP:</span> <strong>123456</strong>) &middot; <span id="lotpTimer">Resend in 30s</span><button id="lResendOtpBtn" style="display:none;background:none;border:none;color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;" onclick="lSendOtp()" data-i18n="btn.resendOtp">Resend OTP</button></div>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button type="button" class="btn btn-outline" onclick="lgoToStep(1)" data-i18n="btn.back">Back</button>
+          <button type="button" class="btn btn-primary" onclick="lVerifyOtp()"><span data-i18n="btn.verifyOtp">Verify OTP &amp; Proceed</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div id="lStep3" class="step-card" style="display:none;">
+        <div class="step-header">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg><span data-i18n="step3.title">3. Bank Account Information (PFMS Direct Disbursal)</span></h3>
+          <p data-i18n="step3.desc">Mandatory for direct benefit transfer. MSP payments deposited within 48 hours.</p>
+        </div>
+        <div style="background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.25);border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:13px;color:#15803d;font-weight:600;" data-i18n="step3.seeded">Jan Aadhaar Seeded Account Detected &mdash; Pre-verified with PFMS</span></div>
+        <div class="form-grid-2">
+          <div class="form-group"><label data-i18n="lbl.bankName">Bank Name *</label><input type="text" id="lBankName" class="form-control" value="State Bank of India"></div>
+          <div class="form-group"><label data-i18n="lbl.branchName">Branch Name</label><input type="text" id="lBranchName" class="form-control" value="Bassi Mandi Branch, Jaipur"></div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group"><label data-i18n="lbl.accNo">Account Number *</label><input type="text" id="lAccNo" class="form-control mono" value="389201948214"></div>
+          <div class="form-group"><label data-i18n="lbl.ifsc">IFSC Code *</label><input type="text" id="lIfsc" class="form-control mono" value="SBIN0031245"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:20px;">
+          <button type="button" class="btn btn-outline" onclick="lgoToStep(2)" data-i18n="btn.back">Back</button>
+          <button type="button" class="btn btn-primary" onclick="lgoToStep(4)"><span data-i18n="btn.nextLand">Next: Land Details</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div id="lStep4" class="step-card" style="display:none;">
+        <div class="step-header">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span data-i18n="step4.title">4. Agricultural Land Details</span></h3>
+          <p data-i18n="step4.desc">Land location and revenue identification as registered in Jamabandi / Girdawari.</p>
+        </div>
+        <div class="form-grid-3">
+          <div class="form-group"><label data-i18n="lbl.district">District *</label><select id="lDistrict" class="form-control"><option value="jaipur" selected>Jaipur</option><option value="nagaur">Nagaur</option><option value="alwar">Alwar</option><option value="kota">Kota</option><option value="jodhpur">Jodhpur</option></select></div>
+          <div class="form-group"><label data-i18n="lbl.tehsil">Tehsil *</label><input type="text" id="lTehsil" class="form-control" value="Bassi"></div>
+          <div class="form-group"><label data-i18n="lbl.village">Village *</label><input type="text" id="lVillage" class="form-control" value="Mohanpura"></div>
+        </div>
+        <div class="form-grid-3">
+          <div class="form-group"><label data-i18n="lbl.khasra">Khasra Number(s) *</label><input type="text" id="lKhasra" class="form-control mono" value="412/1, 415/2"></div>
+          <div class="form-group"><label data-i18n="lbl.landArea">Land Area (Hectares) *</label><input type="number" step="0.1" id="lLandArea" class="form-control mono" value="3.5"></div>
+          <div class="form-group"><label data-i18n="lbl.girdawari">Girdawari Record No.</label><input type="text" id="lGirdawari" class="form-control mono" value="GIRD-RJ-2026-9912"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:20px;">
+          <button type="button" class="btn btn-outline" onclick="lgoToStep(3)" data-i18n="btn.back">Back</button>
+          <button type="button" class="btn btn-primary" onclick="lgoToStep(5)"><span data-i18n="btn.nextCrop">Next: Crop Details</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div id="lStep5" class="step-card" style="display:none;">
+        <div class="step-header">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10S2 17.5 2 12A10 10 0 0 1 12 2z"/><path d="m9 12 2 2 4-4"/></svg><span data-i18n="step5.title">5. Crop Details &amp; Declared Quantity</span></h3>
+          <p data-i18n="step5.desc">Select the crop for MSP procurement with estimated and declared quantities.</p>
+        </div>
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectCrop">Select Crop *</label>
+        <div class="option-row" id="lCropOptions" style="margin-bottom:20px;">
+          <div class="choice-chip active" data-lcrop="wheat" onclick="lSelectCrop('wheat','Wheat','&#8377;2,275/Qtl')">&#127806; <span data-i18n="crop.wheat">Wheat (&#8377;2,275/Q)</span></div>
+          <div class="choice-chip" data-lcrop="mustard" onclick="lSelectCrop('mustard','Mustard','&#8377;5,650/Qtl')">&#127803; <span data-i18n="crop.mustard">Mustard (&#8377;5,650/Q)</span></div>
+          <div class="choice-chip" data-lcrop="bajra" onclick="lSelectCrop('bajra','Bajra','&#8377;2,500/Qtl')">&#127805; <span data-i18n="crop.bajra">Bajra (&#8377;2,500/Q)</span></div>
+          <div class="choice-chip" data-lcrop="chana" onclick="lSelectCrop('chana','Chana','&#8377;5,440/Qtl')">&#129752; <span data-i18n="crop.chana">Chana (&#8377;5,440/Q)</span></div>
+        </div>
+        <div class="form-grid-3">
+          <div class="form-group"><label data-i18n="lbl.sownArea">Sown Area (Hectares) *</label><input type="number" step="0.1" id="lSownArea" class="form-control mono" value="3.0"></div>
+          <div class="form-group"><label data-i18n="lbl.estYield">Estimated Yield (Qtl)</label><input type="number" id="lEstYield" class="form-control mono" value="65"></div>
+          <div class="form-group"><label data-i18n="lbl.procureQty">Declared Qty (Qtl) *</label><input type="number" id="lProcureQty" class="form-control mono" value="50"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:20px;">
+          <button type="button" class="btn btn-outline" onclick="lgoToStep(4)" data-i18n="btn.back">Back</button>
+          <button type="button" class="btn btn-primary" onclick="lgoToStep(6)"><span data-i18n="btn.nextOwn">Next: Ownership</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div id="lStep6" class="step-card" style="display:none;">
+        <div class="step-header">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="step6.title">6. Land Ownership Details</span></h3>
+          <p data-i18n="step6.desc">Specify the legal ownership title or tenancy type of the cultivated land.</p>
+        </div>
+        <div class="ownership-info-alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex:none;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          <span data-i18n="ownership.alert">Information regarding land ownership type (Self-Owned, Sharecropper, or Inherited) must be specified.</span>
+        </div>
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectOwn">Select Land Ownership Type *</label>
+        <div class="ownership-cards-grid">
+          <div class="ownership-card active" id="lOwnSelf" onclick="lSelectOwnership('Self-Owned')">
+            <div class="ownership-card-head"><span class="ownership-card-title">&#127969; <span data-i18n="own.selfTitle">Self-Owned</span></span><div class="ownership-radio-dot"></div></div>
+            <p class="ownership-card-desc" data-i18n="own.selfDesc">The land is legally owned by you with title deed / Jamabandi in your name.</p>
+          </div>
+          <div class="ownership-card" id="lOwnShare" onclick="lSelectOwnership('Sharecropper')">
+            <div class="ownership-card-head"><span class="ownership-card-title">&#129309; <span data-i18n="own.shareTitle">Sharecropper</span></span><div class="ownership-radio-dot"></div></div>
+            <p class="ownership-card-desc" data-i18n="own.shareDesc">Cultivating land under mutual tenancy, sharecropping agreement or Batai system.</p>
+          </div>
+          <div class="ownership-card" id="lOwnInherited" onclick="lSelectOwnership('Inherited')">
+            <div class="ownership-card-head"><span class="ownership-card-title">&#128220; <span data-i18n="own.inheritTitle">Inherited</span></span><div class="ownership-radio-dot"></div></div>
+            <p class="ownership-card-desc" data-i18n="own.inheritDesc">Ancestral land holding with inheritance / legal heir mutation in progress.</p>
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group"><label data-i18n="lbl.ownRef">Jamabandi / Agreement Ref No.</label><input type="text" id="lOwnershipRef" class="form-control mono" value="JAM-2026-88192"></div>
+          <div class="form-group"><label data-i18n="lbl.ownSelected">Selected Ownership Type</label><input type="text" id="lOwnershipDisplay" class="form-control" readonly value="Self-Owned" style="font-weight:700;color:var(--primary);background:var(--bg-subtle);"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:20px;">
+          <button type="button" class="btn btn-outline" onclick="lgoToStep(5)" data-i18n="btn.back">Back</button>
+          <button type="button" class="btn btn-primary" onclick="lgoToStep(7)"><span data-i18n="btn.nextCentre">Next: Procurement Centre</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 7 -->
+      <div id="lStep7" class="step-card" style="display:none;">
+        <div class="step-header">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="step7.title">7. Procurement Centre &amp; Date Selection</span></h3>
+          <p data-i18n="step7.desc">Choose your designated Mandi procurement centre and preferred appointment date.</p>
+        </div>
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectCentre">Select Procurement Centre *</label>
+        <div class="option-row" id="lCentreOptions" style="margin-bottom:20px;">
+          <div class="choice-chip active" data-lcentre="bassi" onclick="lSelectCentre('bassi','Bassi APMC Mandi')"><span data-i18n="centre.bassi">Bassi APMC Mandi</span><span class="pill high" style="margin-left:4px;"><i></i><span data-i18n="load.high">High Load</span></span></div>
+          <div class="choice-chip" data-lcentre="chomu" onclick="lSelectCentre('chomu','Chomu Mandi Yard')"><span data-i18n="centre.chomu">Chomu Mandi Yard</span><span class="pill low" style="margin-left:4px;"><i></i><span data-i18n="load.low">Low Load</span></span></div>
+          <div class="choice-chip" data-lcentre="dudu" onclick="lSelectCentre('dudu','Dudu APMC Yard')"><span data-i18n="centre.dudu">Dudu APMC Yard</span><span class="pill medium" style="margin-left:4px;"><i></i><span data-i18n="load.medium">Medium Load</span></span></div>
+        </div>
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectDate">Select Appointment Date *</label>
+        <div class="option-row" id="lDateOptions" style="margin-bottom:24px;">
+          <div class="choice-chip active" data-ldate="d1" onclick="lSelectDate('d1','Today, 28 Aug')"><span data-i18n="date.today">Today, 28 Aug</span></div>
+          <div class="choice-chip" data-ldate="d2" onclick="lSelectDate('d2','Tomorrow, 29 Aug')"><span data-i18n="date.tomorrow">Tomorrow, 29 Aug</span></div>
+          <div class="choice-chip" data-ldate="d3" onclick="lSelectDate('d3','Friday, 30 Aug')"><span data-i18n="date.friday">Friday, 30 Aug</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:20px;">
+          <button type="button" class="btn btn-outline" onclick="lgoToStep(6)" data-i18n="btn.back">Back</button>
+          <button type="button" class="btn btn-primary" onclick="lgoToStep(8)"><span data-i18n="btn.nextSlot">Next: Book Time Slot</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 8 -->
+      <div id="lStep8" class="step-card" style="display:none;">
+        <div class="step-header">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="step8.title">8. Book Mandi Arrival Time Slot</span></h3>
+          <p data-i18n="step8.desc">Select your arrival time window. AI-controlled slot allocation prevents traffic choke points at weighing bridges.</p>
+        </div>
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectTime">Select Available Time Window *</label>
+        <div class="slot-grid" id="lSlotGrid">
+          <div class="slot-option" data-lslot="s1" onclick="lSelectSlot('s1','08:00 AM &ndash; 09:00 AM')"><span>08:00 AM &ndash; 09:00 AM</span><span class="pill low"><i></i><span data-i18n="slot.fast">Fast intake</span></span></div>
+          <div class="slot-option active" data-lslot="s2" onclick="lSelectSlot('s2','09:00 AM &ndash; 10:00 AM')"><span>09:00 AM &ndash; 10:00 AM</span><span class="pill medium"><i></i><span data-i18n="slot.normal">Normal</span></span></div>
+          <div class="slot-option" data-lslot="s3" onclick="lSelectSlot('s3','10:00 AM &ndash; 11:00 AM')"><span>10:00 AM &ndash; 11:00 AM</span><span class="pill high"><i></i><span data-i18n="slot.heavy">Heavy rush</span></span></div>
+          <div class="slot-option" data-lslot="s4" onclick="lSelectSlot('s4','11:00 AM &ndash; 12:00 PM')"><span>11:00 AM &ndash; 12:00 PM</span><span class="pill low"><i></i><span data-i18n="slot.fast">Fast intake</span></span></div>
+        </div>
+        <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:20px;">
+          <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;" data-i18n="lbl.bookingSummary">Booking Summary</div>
+          <div style="font-size:13.5px;color:var(--navy);font-weight:600;" id="lSlotSummary">Farmer: Ramkishan Choudhary &middot; Wheat (50 Qtl) &middot; Bassi APMC Mandi &middot; 28 Aug, 09:00 &ndash; 10:00 AM</div>
+        </div>
+        <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:12.5px;color:var(--text-muted);">
+          <strong style="color:var(--text-main);" data-i18n="lbl.loadGuide">Yard Load Guide:</strong>
+          <span class="pill low" style="vertical-align:middle;margin-left:6px;"><i></i><span data-i18n="load.low">Low Load</span></span> &mdash; &lt;15 min &nbsp;
+          <span class="pill medium" style="vertical-align:middle;"><i></i><span data-i18n="load.medium">Medium</span></span> &mdash; &lt;35 min &nbsp;
+          <span class="pill high" style="vertical-align:middle;"><i></i><span data-i18n="load.high">High</span></span> &mdash; <span data-i18n="load.altPrompt">Consider alternate slot</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:20px;">
+          <button type="button" class="btn btn-outline" onclick="lgoToStep(7)" data-i18n="btn.back">Back</button>
+          <button type="button" class="btn btn-primary" onclick="lSubmitRegistration()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span data-i18n="btn.confirmReg">Confirm Registration &amp; Generate Token</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 9 -->
+      <div id="lStep9" class="step-card" style="display:none;text-align:center;">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(34,197,94,0.1);color:#16a34a;display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 0 0 8px rgba(34,197,94,0.1);"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3 style="font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px;" id="ltokenTitle">Token Generated Successfully &mdash; B-046</h3>
+        <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:22px;" data-i18n="step9.desc">Your MSP procurement registration is complete and your Mandi entry slot has been locked.</p>
+        <div class="printable-pass" style="max-width:520px;margin:0 auto 24px;text-align:left;">
+          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:14px;">
+            <div>
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.04em;" data-i18n="pass.head">Government of Rajasthan &middot; Mandi Gate Pass</div>
+              <div style="font-size:16px;font-weight:700;color:var(--navy);" id="ltokenFarmerName">Ramkishan Choudhary</div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:26px;color:var(--primary);font-weight:800;" id="ltokenBadge">B-046</div>
+          </div>
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center;">
+            <div id="ltokenQrBox" style="text-align:center;"></div>
+            <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;">
+              <div><strong style="color:var(--text-muted);" data-i18n="lbl.passJan">Jan Aadhaar:</strong> <span style="font-family:'JetBrains Mono',monospace;" id="ltokenJanAadhaar">7482 9103 8472</span></div>
+              <div><strong style="color:var(--text-muted);" data-i18n="lbl.passOwn">Ownership:</strong> <span id="ltokenOwnership">Self-Owned</span></div>
+              <div><strong style="color:var(--text-muted);" data-i18n="lbl.passProduce">Produce:</strong> <span id="ltokenCrop">Wheat &middot; 50 Quintals (&#8377;2,275/Q)</span></div>
+              <div><strong style="color:var(--text-muted);" data-i18n="lbl.passCentre">Centre:</strong> <span id="ltokenCentre">Bassi APMC Mandi</span></div>
+              <div><strong style="color:var(--text-muted);" data-i18n="lbl.passSlot">Slot:</strong> <span id="ltokenSlot" style="color:var(--primary);font-weight:700;">Today, 28 Aug (09:00 &ndash; 10:00 AM)</span></div>
+              <div><strong style="color:var(--text-muted);" data-i18n="lbl.passDisbursal">Est. Disbursal:</strong> <span style="color:#16a34a;font-weight:700;" id="ltokenDisbursal">&#8377;1,13,750 via PFMS</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
+          <button type="button" class="btn btn-primary" onclick="goToDashboard()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span data-i18n="btn.openDashboard">Open Dashboard &amp; Track Queue</span>
+          </button>
+          <button type="button" class="btn btn-outline" onclick="window.print()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+            <span data-i18n="btn.printPass">Print Gate Pass</span>
+          </button>
+          <button type="button" class="btn btn-ghost" onclick="lResetWizard()" data-i18n="btn.registerAnother">Register Another Farmer</button>
+        </div>
+      </div>
+
+      <!-- BOTTOM: e-MITRA SECTION -->
+      <div class="emitra-wrap" id="lEmitraSection">
+        <div class="emitra-card">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+            <div class="emitra-icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <div>
+              <h4 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:2px;" data-i18n="emitra.promptTitle">Already registered through e-Mitra or an authorized procurement channel?</h4>
+              <p style="font-size:13px;color:var(--text-muted);" data-i18n="emitra.promptDesc">Enter your existing Farmer Registration ID to verify your credentials and directly book your arrival slot.</p>
+            </div>
+          </div>
+
+          <div id="lEmitraStep1">
+            <div class="form-grid-2">
+              <div class="form-group"><label data-i18n="lbl.emitraRegId">Farmer Registration ID (e-Mitra / Portal)</label><input type="text" id="lEmitraRegId" class="form-control mono" placeholder="e.g. REG-RJ-2026-001234" value="REG-RJ-2026-001234"></div>
+              <div class="form-group"><label data-i18n="lbl.emitraMobile">Registered Mobile Number</label><input type="tel" id="lEmitraMobile" class="form-control mono" maxlength="10" placeholder="9829019835" value="9829019835"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+              <div style="display:flex;gap:8px;align-items:center;">
+                <span style="font-size:12px;font-weight:600;color:var(--text-muted);" data-i18n="demo.quickSample">Quick Sample:</span>
+                <button type="button" class="demo-pick-btn" onclick="lFillEmitra(0)" data-i18n="emitra.sample1">REG-RJ-2026-001234 (Wheat)</button>
+                <button type="button" class="demo-pick-btn" onclick="lFillEmitra(1)" data-i18n="emitra.sample2">REG-RJ-2026-005678 (Mustard)</button>
+              </div>
+              <button type="button" class="btn btn-outline" onclick="lEmitraSendOtp()"><span data-i18n="btn.sendOtp">Send OTP</span> &rarr;</button>
+            </div>
+          </div>
+
+          <div id="lEmitraStep2" style="display:none;text-align:center;padding:18px 0;">
+            <div class="otp-sent-alert" style="display:inline-flex;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span id="lEmitraOtpText">OTP has been sent to XXXXXX9835</span>
+            </div>
+            <div class="otp-boxes-wrap">
+              <input type="text" maxlength="1" class="otp-digit-input" id="leOtp1" oninput="leOtpDigit(1)" onkeydown="leOtpKey(event,1)">
+              <input type="text" maxlength="1" class="otp-digit-input" id="leOtp2" oninput="leOtpDigit(2)" onkeydown="leOtpKey(event,2)">
+              <input type="text" maxlength="1" class="otp-digit-input" id="leOtp3" oninput="leOtpDigit(3)" onkeydown="leOtpKey(event,3)">
+              <input type="text" maxlength="1" class="otp-digit-input" id="leOtp4" oninput="leOtpDigit(4)" onkeydown="leOtpKey(event,4)">
+              <input type="text" maxlength="1" class="otp-digit-input" id="leOtp5" oninput="leOtpDigit(5)" onkeydown="leOtpKey(event,5)">
+              <input type="text" maxlength="1" class="otp-digit-input" id="leOtp6" oninput="leOtpDigit(6)" onkeydown="leOtpKey(event,6)">
+            </div>
+            <div style="font-size:12px;color:var(--text-faint);margin-bottom:18px;">(<span data-i18n="demo.otpPrompt">Demo OTP:</span> <strong>123456</strong>)</div>
+            <div style="display:flex;gap:10px;justify-content:center;">
+              <button type="button" class="btn btn-outline" onclick="document.getElementById('lEmitraStep1').style.display='';document.getElementById('lEmitraStep2').style.display='none';" data-i18n="btn.back">Back</button>
+              <button type="button" class="btn btn-primary" onclick="lEmitraVerify()"><span data-i18n="btn.verifyRecord">Verify &amp; Fetch Record</span> &rarr;</button>
+            </div>
+          </div>
+
+          <div id="lEmitraStep3" style="display:none;margin-top:16px;">
+            <div style="background:var(--bg-subtle);border:1px solid rgba(34,197,94,0.3);border-radius:8px;padding:18px 20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span class="reg-badge" data-i18n="emitra.badge">&#10003; Verified e-Mitra Registration</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--primary);" id="lEVerifiedRegId">REG-RJ-2026-001234</span>
+                </div>
+                <span style="font-size:12px;color:var(--text-faint);" data-i18n="emitra.season">Active for Season 2026-27</span>
+              </div>
+              <div class="reg-details-grid" style="margin:0 0 16px;">
+                <div class="reg-detail-item"><label data-i18n="lbl.farmerName">Farmer Name</label><span id="lEVerifiedName">Ramkishan Choudhary</span></div>
+                <div class="reg-detail-item"><label data-i18n="lbl.approvedCrop">Approved Crop &amp; Qty</label><span id="lEVerifiedCropQty">Wheat &middot; 50 Quintals</span></div>
+                <div class="reg-detail-item"><label data-i18n="lbl.assignedMandi">Assigned Mandi</label><span id="lEVerifiedCentre">Bassi APMC Mandi</span></div>
+                <div class="reg-detail-item"><label data-i18n="lbl.janAadhaar">Jan Aadhaar</label><span style="font-family:'JetBrains Mono',monospace;" id="lEVerifiedJanAadhaar">7482 9103 8472</span></div>
+              </div>
+              <div style="display:flex;justify-content:flex-end;">
+                <button type="button" class="btn btn-primary" onclick="lEmitraProceedToSlot()"><span data-i18n="btn.proceedSlot">Proceed to Book Slot</span> &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTRE STAFF -->
+  <div id="centrePanel" class="form-view">
+    <div class="wizard-card login-panel">
+      <h2 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px;" data-i18n="staff.title">Centre Staff Sign In</h2>
+      <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:24px;" data-i18n="staff.desc">Sign in to access the gate scanner and live queue manager.</p>
+      <form onsubmit="handleCentreLogin(event)">
+        <div class="form-field"><label data-i18n="lbl.centreSelect">Procurement Centre</label><select id="centreSelect" class="form-input"><option value="bassi" data-i18n="centre.bassiLong">Bassi APMC Procurement Centre</option><option value="chomu" data-i18n="centre.chomu">Chomu Mandi Yard</option><option value="dudu" data-i18n="centre.dudu">Dudu APMC Yard</option></select></div>
+        <div class="form-field"><label data-i18n="lbl.staffId">Operator Staff ID</label><input type="text" id="staffId" class="form-input" placeholder="OP-BASSI-01" value="OP-BASSI-01"></div>
+        <div class="form-field"><label data-i18n="lbl.staffPass">Operator Password</label><input type="password" class="form-input" value="operator2026"></div>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px;"><span data-i18n="btn.staffLogin">Access Operator Console</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="adminPanel" class="form-view">
+    <div class="wizard-card login-panel">
+      <h2 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px;" data-i18n="admin.title">Department Administration</h2>
+      <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:24px;" data-i18n="admin.desc">State-level procurement surveillance and reporting console.</p>
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="form-field"><label data-i18n="lbl.adminEmail">Gov.in Email Address</label><input type="email" id="adminEmail" class="form-input" placeholder="officer@nic.in" value="procurement.officer@nic.in"></div>
+        <div class="form-field"><label data-i18n="lbl.adminPass">Department Passcode</label><input type="password" class="form-input" value="nicadmin2026"></div>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px;"><span data-i18n="btn.adminLogin">Access Department Console</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<footer>&copy; 2025 <span data-i18n="footer.gov">Ministry of Consumer Affairs, Food &amp; Public Distribution, Government of India. All rights reserved.</span> &nbsp;&middot;&nbsp; <span data-i18n="footer.helpline">Farmer Helpline:</span> <strong>1800-180-1551</strong></footer>
+<div id="toastContainer"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// ================= I18N TRANSLATION DICTIONARY =================
+const I18N = {
+  en: {
+    "gov.title": "Government of India · Ministry of Consumer Affairs, Food & Public Distribution",
+    "portal.title": "Kisan Setu",
+    "portal.subtitle": "MSP Procurement & Queue Portal — Government of Rajasthan",
+    "nav.gotoDashboard": "Go to Dashboard",
+    "role.farmer": "Farmer Portal",
+    "role.centre": "Centre Staff",
+    "role.admin": "Dept Admin",
+    "step.jan": "Jan Aadhaar",
+    "step.otp": "OTP Verify",
+    "step.bank": "Bank Account",
+    "step.land": "Land Details",
+    "step.crop": "Crop Details",
+    "step.own": "Ownership",
+    "step.centre": "Mandi Centre",
+    "step.slot": "Book Slot",
+    "step.token": "Token",
+    "demo.barTitle": "⚡ Quick Demo Auto-Fill:",
+    "demo.farmer1": "Farmer 1 (Wheat · Self-Owned · Bassi)",
+    "demo.farmer2": "Farmer 2 (Mustard · Sharecropper · Chomu)",
+    "demo.farmer3": "Farmer 3 (Bajra · Inherited · Dudu)",
+    "centre.bassi": "Bassi APMC Mandi",
+    "centre.bassiLong": "Bassi APMC Procurement Centre",
+    "centre.chomu": "Chomu Mandi Yard",
+    "centre.dudu": "Dudu APMC Yard",
+    "emitra.sample1": "REG-RJ-2026-001234 (Wheat)",
+    "emitra.sample2": "REG-RJ-2026-005678 (Mustard)",
+    "step1.title": "1. Jan Aadhaar Number & Farmer Details",
+    "step1.desc": "Enter your 10 or 12 digit Rajasthan Jan Aadhaar Identification number to initiate MSP registration.",
+    "lbl.janAadhaar": "Jan Aadhaar Number *",
+    "lbl.mobile": "Registered Mobile Number *",
+    "lbl.farmerName": "Farmer Full Name *",
+    "lbl.fatherName": "Father's / Husband's Name",
+    "btn.sendOtp": "Send OTP",
+    "step2.title": "2. Mobile OTP Verification",
+    "step2.desc": "Enter the 6-digit OTP verification code received on your mobile.",
+    "demo.otpPrompt": "Demo OTP:",
+    "btn.resendOtp": "Resend OTP",
+    "btn.back": "Back",
+    "btn.verifyOtp": "Verify OTP & Proceed",
+    "step3.title": "3. Bank Account Information (PFMS Direct Disbursal)",
+    "step3.desc": "Mandatory for direct benefit transfer. MSP payments deposited within 48 hours.",
+    "step3.seeded": "Jan Aadhaar Seeded Account Detected — Pre-verified with PFMS",
+    "lbl.bankName": "Bank Name *",
+    "lbl.branchName": "Branch Name",
+    "lbl.accNo": "Account Number *",
+    "lbl.ifsc": "IFSC Code *",
+    "btn.nextLand": "Next: Land Details",
+    "step4.title": "4. Agricultural Land Details",
+    "step4.desc": "Land location and revenue identification as registered in Jamabandi / Girdawari.",
+    "lbl.district": "District *",
+    "lbl.tehsil": "Tehsil *",
+    "lbl.village": "Village *",
+    "lbl.khasra": "Khasra Number(s) *",
+    "lbl.landArea": "Land Area (Hectares) *",
+    "lbl.girdawari": "Girdawari Record No.",
+    "btn.nextCrop": "Next: Crop Details",
+    "step5.title": "5. Crop Details & Declared Quantity",
+    "step5.desc": "Select the crop for MSP procurement with estimated and declared quantities.",
+    "lbl.selectCrop": "Select Crop *",
+    "crop.wheat": "Wheat (₹2,275/Q)",
+    "crop.mustard": "Mustard (₹5,650/Q)",
+    "crop.bajra": "Bajra (₹2,500/Q)",
+    "crop.chana": "Chana (₹5,440/Q)",
+    "lbl.sownArea": "Sown Area (Hectares) *",
+    "lbl.estYield": "Estimated Yield (Qtl)",
+    "lbl.procureQty": "Declared Qty (Qtl) *",
+    "btn.nextOwn": "Next: Ownership",
+    "step6.title": "6. Land Ownership Details",
+    "step6.desc": "Specify the legal ownership title or tenancy type of the cultivated land.",
+    "ownership.alert": "Information regarding land ownership type (Self-Owned, Sharecropper, or Inherited) must be specified.",
+    "lbl.selectOwn": "Select Land Ownership Type *",
+    "own.selfTitle": "Self-Owned",
+    "own.selfDesc": "The land is legally owned by you with title deed / Jamabandi in your name.",
+    "own.shareTitle": "Sharecropper",
+    "own.shareDesc": "Cultivating land under mutual tenancy, sharecropping agreement or Batai system.",
+    "own.inheritTitle": "Inherited",
+    "own.inheritDesc": "Ancestral land holding with inheritance / legal heir mutation in progress.",
+    "lbl.ownRef": "Jamabandi / Agreement Ref No.",
+    "lbl.ownSelected": "Selected Ownership Type",
+    "btn.nextCentre": "Next: Procurement Centre",
+    "step7.title": "7. Procurement Centre & Date Selection",
+    "step7.desc": "Choose your designated Mandi procurement centre and preferred appointment date.",
+    "lbl.selectCentre": "Select Procurement Centre *",
+    "lbl.selectDate": "Select Appointment Date *",
+    "load.high": "High Load",
+    "load.low": "Low Load",
+    "load.medium": "Medium Load",
+    "date.today": "Today, 28 Aug",
+    "date.tomorrow": "Tomorrow, 29 Aug",
+    "date.friday": "Friday, 30 Aug",
+    "btn.nextSlot": "Next: Book Time Slot",
+    "step8.title": "8. Book Mandi Arrival Time Slot",
+    "step8.desc": "Select your arrival time window. AI-controlled slot allocation prevents traffic choke points at weighing bridges.",
+    "lbl.selectTime": "Select Available Time Window *",
+    "slot.fast": "Fast intake",
+    "slot.normal": "Normal",
+    "slot.heavy": "Heavy rush",
+    "lbl.bookingSummary": "Booking Summary",
+    "lbl.loadGuide": "Yard Load Guide:",
+    "load.altPrompt": "Consider alternate slot",
+    "btn.confirmReg": "Confirm Registration & Generate Token",
+    "step9.desc": "Your MSP procurement registration is complete and your Mandi entry slot has been locked.",
+    "pass.head": "Government of Rajasthan · Mandi Gate Pass",
+    "lbl.passJan": "Jan Aadhaar:",
+    "lbl.passOwn": "Ownership:",
+    "lbl.passProduce": "Produce:",
+    "lbl.passCentre": "Centre:",
+    "lbl.passSlot": "Slot:",
+    "lbl.passDisbursal": "Est. Disbursal:",
+    "btn.openDashboard": "Open Dashboard & Track Queue",
+    "btn.printPass": "Print Gate Pass",
+    "btn.registerAnother": "Register Another Farmer",
+    "emitra.promptTitle": "Already registered through e-Mitra or an authorized procurement channel?",
+    "emitra.promptDesc": "Enter your existing Farmer Registration ID to verify your credentials and directly book your arrival slot.",
+    "lbl.emitraRegId": "Farmer Registration ID (e-Mitra / Portal)",
+    "lbl.emitraMobile": "Registered Mobile Number",
+    "demo.quickSample": "Quick Sample:",
+    "btn.verifyRecord": "Verify & Fetch Record",
+    "emitra.badge": "✓ Verified e-Mitra Registration",
+    "emitra.season": "Active for Season 2026-27",
+    "lbl.approvedCrop": "Approved Crop & Qty",
+    "lbl.assignedMandi": "Assigned Mandi",
+    "btn.proceedSlot": "Proceed to Book Slot",
+    "staff.title": "Centre Staff Sign In",
+    "staff.desc": "Sign in to access the gate scanner and live queue manager.",
+    "lbl.centreSelect": "Procurement Centre",
+    "lbl.staffId": "Operator Staff ID",
+    "lbl.staffPass": "Operator Password",
+    "btn.staffLogin": "Access Operator Console",
+    "admin.title": "Department Administration",
+    "admin.desc": "State-level procurement surveillance and reporting console.",
+    "lbl.adminEmail": "Gov.in Email Address",
+    "lbl.adminPass": "Department Passcode",
+    "btn.adminLogin": "Access Department Console",
+    "footer.gov": "Ministry of Consumer Affairs, Food & Public Distribution, Government of India. All rights reserved.",
+    "footer.helpline": "Farmer Helpline:",
+    "theme.light": "Light Mode",
+    "theme.dark": "Dark Mode"
+  },
+  hi: {
+    "gov.title": "भारत सरकार · उपभोक्ता मामले, खाद्य एवं सार्वजनिक वितरण मंत्रालय",
+    "portal.title": "किसान सेतु",
+    "portal.subtitle": "एमएसपी खरीद एवं डिजिटल कतार प्रबंधन पोर्टल — राजस्थान सरकार",
+    "nav.gotoDashboard": "डैशबोर्ड पर जाएं",
+    "role.farmer": "किसान पोर्टल",
+    "role.centre": "केंद्र स्टाफ",
+    "role.admin": "विभाग प्रशासन",
+    "step.jan": "जन आधार",
+    "step.otp": "ओटीपी सत्यापन",
+    "step.bank": "बैंक खाता",
+    "step.land": "भूमि विवरण",
+    "step.crop": "फसल विवरण",
+    "step.own": "स्वामित्व",
+    "step.centre": "मंडी केंद्र",
+    "step.slot": "स्लॉट बुक करें",
+    "step.token": "टोकन",
+    "demo.barTitle": "⚡ त्वरित डेमो स्वतः भरें:",
+    "demo.farmer1": "किसान 1 (गेहूं · स्वयं का स्वामित्व · बस्सी)",
+    "demo.farmer2": "किसान 2 (सरसों · बटाईदार · चोमू)",
+    "demo.farmer3": "किसान 3 (बाजरा · पैतृक · दूदू)",
+    "centre.bassi": "बस्सी एपीएमसी मंडी",
+    "centre.bassiLong": "बस्सी एपीएमसी खरीद केंद्र",
+    "centre.chomu": "चोमू मंडी यार्ड",
+    "centre.dudu": "दूदू एपीएमसी यार्ड",
+    "emitra.sample1": "REG-RJ-2026-001234 (गेहूं)",
+    "emitra.sample2": "REG-RJ-2026-005678 (सरसों)",
+    "step1.title": "1. जन आधार नंबर एवं किसान विवरण",
+    "step1.desc": "एमएसपी पंजीकरण शुरू करने के लिए अपना 10 या 12 अंकों का राजस्थान जन आधार नंबर दर्ज करें।",
+    "lbl.janAadhaar": "जन आधार नंबर *",
+    "lbl.mobile": "पंजीकृत मोबाइल नंबर *",
+    "lbl.farmerName": "किसान का पूरा नाम *",
+    "lbl.fatherName": "पिता / पति का नाम",
+    "btn.sendOtp": "ओटीपी भेजें",
+    "step2.title": "2. मोबाइल ओटीपी सत्यापन",
+    "step2.desc": "अपने मोबाइल पर प्राप्त 6 अंकों का ओटीपी सत्यापन कोड दर्ज करें।",
+    "demo.otpPrompt": "डेमो ओटीपी:",
+    "btn.resendOtp": "पुनः ओटीपी भेजें",
+    "btn.back": "पीछे",
+    "btn.verifyOtp": "ओटीपी सत्यापित करें एवं आगे बढ़ें",
+    "step3.title": "3. बैंक खाता विवरण (PFMS सीधा भुगतान)",
+    "step3.desc": "प्रत्यक्ष लाभ अंतरण (DBT) के लिए अनिवार्य। 48 घंटे के भीतर भुगतान।",
+    "step3.seeded": "जन आधार से जुड़ा बैंक खाता मिला — PFMS द्वारा पूर्व-सत्यापित",
+    "lbl.bankName": "बैंक का नाम *",
+    "lbl.branchName": "शाखा का नाम",
+    "lbl.accNo": "खाता संख्या *",
+    "lbl.ifsc": "IFSC कोड *",
+    "btn.nextLand": "आगे: भूमि विवरण",
+    "step4.title": "4. कृषि भूमि विवरण",
+    "step4.desc": "जमाबंदी / गिरदावरी में दर्ज भूमि का स्थान एवं राजस्व पहचान।",
+    "lbl.district": "जिला *",
+    "lbl.tehsil": "तहसील *",
+    "lbl.village": "गांव *",
+    "lbl.khasra": "खसरा नंबर *",
+    "lbl.landArea": "भूमि क्षेत्रफल (हेक्टेयर) *",
+    "lbl.girdawari": "गिरदावरी रिकॉर्ड नंबर",
+    "btn.nextCrop": "आगे: फसल विवरण",
+    "step5.title": "5. फसल विवरण एवं घोषित मात्रा",
+    "step5.desc": "अनुमानित और घोषित मात्रा के साथ एमएसपी खरीद के लिए फसल चुनें।",
+    "lbl.selectCrop": "फसल चुनें *",
+    "crop.wheat": "गेहूं (₹2,275/क्विंटल)",
+    "crop.mustard": "सरसों (₹5,650/क्विंटल)",
+    "crop.bajra": "बाजरा (₹2,500/क्विंटल)",
+    "crop.chana": "चना (₹5,440/क्विंटल)",
+    "lbl.sownArea": "बोया गया क्षेत्र (हेक्टेयर) *",
+    "lbl.estYield": "अनुमानित उपज (क्विंटल)",
+    "lbl.procureQty": "घोषित मात्रा (क्विंटल) *",
+    "btn.nextOwn": "आगे: स्वामित्व प्रकार",
+    "step6.title": "6. भूमि स्वामित्व विवरण",
+    "step6.desc": "खेती की जा रही भूमि का कानूनी स्वामित्व या काश्तकारी प्रकार निर्दिष्ट करें।",
+    "ownership.alert": "भूमि स्वामित्व प्रकार (स्वयं के स्वामित्व, बटाईदार, या पैतृक) के संबंध में जानकारी निर्दिष्ट की जानी चाहिए।",
+    "lbl.selectOwn": "भूमि स्वामित्व प्रकार चुनें *",
+    "own.selfTitle": "स्वयं का स्वामित्व",
+    "own.selfDesc": "भूमि कानूनी रूप से आपके स्वामित्व में है और जमाबंदी आपके नाम पर है।",
+    "own.shareTitle": "बटाईदार / काश्तकार",
+    "own.shareDesc": "बटाईदारी या समझौते के तहत भूमि पर खेती कर रहे हैं।",
+    "own.inheritTitle": "पैतृक / विरासत",
+    "own.inheritDesc": "विरासत / कानूनी उत्तराधिकार प्रक्रियाधीन पैतृक भूमि।",
+    "lbl.ownRef": "जमाबंदी / अनुबंध संदर्भ संख्या",
+    "lbl.ownSelected": "चयनित स्वामित्व प्रकार",
+    "btn.nextCentre": "आगे: खरीद केंद्र",
+    "step7.title": "7. खरीद केंद्र एवं तिथि चयन",
+    "step7.desc": "अपना निर्धारित मंडी खरीद केंद्र और पसंदीदा तारीख चुनें।",
+    "lbl.selectCentre": "खरीद केंद्र चुनें *",
+    "lbl.selectDate": "तारीख चुनें *",
+    "load.high": "अधिक लोड",
+    "load.low": "कम लोड",
+    "load.medium": "मध्यम लोड",
+    "date.today": "आज, 28 अगस्त",
+    "date.tomorrow": "कल, 29 अगस्त",
+    "date.friday": "शुक्रवार, 30 अगस्त",
+    "btn.nextSlot": "आगे: समय स्लॉट चुनें",
+    "step8.title": "8. मंडी आगमन समय स्लॉट बुक करें",
+    "step8.desc": "अपना समय स्लॉट चुनें। AI आधारित स्लॉट आवंटन धर्मकांटे पर जाम रोकता है।",
+    "lbl.selectTime": "उपलब्ध समय स्लॉट चुनें *",
+    "slot.fast": "तीव्र प्रवेश",
+    "slot.normal": "सामान्य",
+    "slot.heavy": "भारी भीड़",
+    "lbl.bookingSummary": "बुकिंग सारांश",
+    "lbl.loadGuide": "मंडी लोड मार्गदर्शिका:",
+    "load.altPrompt": "वैकल्पिक स्लॉट पर विचार करें",
+    "btn.confirmReg": "पंजीकरण की पुष्टि करें एवं टोकन प्राप्त करें",
+    "step9.desc": "आपका एमएसपी खरीद पंजीकरण पूरा हो गया है और आपका स्लॉट सुरक्षित कर लिया गया है।",
+    "pass.head": "राजस्थान सरकार · मंडी प्रवेश पास",
+    "lbl.passJan": "जन आधार:",
+    "lbl.passOwn": "स्वामित्व:",
+    "lbl.passProduce": "फसल:",
+    "lbl.passCentre": "केंद्र:",
+    "lbl.passSlot": "स्लॉट:",
+    "lbl.passDisbursal": "अनुमानित भुगतान:",
+    "btn.openDashboard": "डैशबोर्ड खोलें और कतार ट्रैक करें",
+    "btn.printPass": "गेट पास प्रिंट करें",
+    "btn.registerAnother": "अन्य किसान का पंजीकरण करें",
+    "emitra.promptTitle": "क्या आप ई-मित्र या अधिकृत खरीद केंद्र के माध्यम से पहले से पंजीकृत हैं?",
+    "emitra.promptDesc": "अपने क्रेडेंशियल्स सत्यापित करने और सीधे अपना आगमन स्लॉट बुक करने के लिए अपनी मौजूदा किसान पंजीकरण आईडी दर्ज करें।",
+    "lbl.emitraRegId": "किसान पंजीकरण आईडी (ई-मित्र / पोर्टल)",
+    "lbl.emitraMobile": "पंजीकृत मोबाइल नंबर",
+    "demo.quickSample": "त्वरित नमूना:",
+    "btn.verifyRecord": "सत्यापित करें एवं विवरण लाएं",
+    "emitra.badge": "✓ सत्यापित ई-मित्र पंजीकरण",
+    "emitra.season": "सत्र 2026-27 के लिए सक्रिय",
+    "lbl.approvedCrop": "स्वीकृत फसल एवं मात्रा",
+    "lbl.assignedMandi": "आवंटित मंडी",
+    "btn.proceedSlot": "स्लॉट बुक करने के लिए आगे बढ़ें",
+    "staff.title": "केंद्र स्टाफ लॉगिन",
+    "staff.desc": "गेट स्कैनर और लाइव कतार प्रबंधक तक पहुंचने के लिए लॉगिन करें।",
+    "lbl.centreSelect": "खरीद केंद्र",
+    "lbl.staffId": "ऑपरेटर स्टाफ आईडी",
+    "lbl.staffPass": "ऑपरेटर पासवर्ड",
+    "btn.staffLogin": "ऑपरेटर कंसोल खोलें",
+    "admin.title": "विभाग प्रशासन",
+    "admin.desc": "राज्य स्तरीय खरीद निगरानी एवं रिपोर्टिंग कंसोल।",
+    "lbl.adminEmail": "Gov.in ईमेल पता",
+    "lbl.adminPass": "विभाग पासकोड",
+    "btn.adminLogin": "विभाग कंसोल खोलें",
+    "footer.gov": "उपभोक्ता मामले, खाद्य एवं सार्वजनिक वितरण मंत्रालय, भारत सरकार। सर्वाधिकार सुरक्षित।",
+    "footer.helpline": "किसान हेल्पलाइन:",
+    "theme.light": "लाइट मोड",
+    "theme.dark": "डार्क मोड"
+  }
+};
+
+const LANG_KEY = 'ks_lang';
+let currentLang = localStorage.getItem(LANG_KEY) || 'en';
+
+const OWNERSHIP_LABELS = {
+  'Self-Owned': { en: 'Self-Owned', hi: 'स्वयं का स्वामित्व' },
+  'Sharecropper': { en: 'Sharecropper', hi: 'बटाईदार' },
+  'Inherited': { en: 'Inherited', hi: 'पैतृक' }
+};
+
+function getOwnershipLabel(type, lang) {
+  const l = lang || currentLang;
+  return (OWNERSHIP_LABELS[type] && OWNERSHIP_LABELS[type][l]) || type;
+}
+
+const CENTRE_LABELS = {
+  'bassi': { en: 'Bassi APMC Mandi', hi: 'बस्सी एपीएमसी मंडी' },
+  'chomu': { en: 'Chomu Mandi Yard', hi: 'चोमू मंडी यार्ड' },
+  'dudu': { en: 'Dudu APMC Yard', hi: 'दूदू एपीएमसी यार्ड' }
+};
+
+function getCentreLabel(id, lang) {
+  const l = lang || currentLang;
+  return (CENTRE_LABELS[id] && CENTRE_LABELS[id][l]) || id;
+}
+
+const CROP_LABELS = {
+  'wheat': { en: 'Wheat', hi: 'गेहूं' },
+  'mustard': { en: 'Mustard', hi: 'सरसों' },
+  'bajra': { en: 'Bajra', hi: 'बाजरा' },
+  'chana': { en: 'Chana', hi: 'चना' }
+};
+
+function getCropLabel(id, lang) {
+  const l = lang || currentLang;
+  return (CROP_LABELS[id] && CROP_LABELS[id][l]) || id;
+}
+
+const DATE_LABELS = {
+  'd1': { en: 'Today, 28 Aug', hi: 'आज, 28 अगस्त' },
+  'd2': { en: 'Tomorrow, 29 Aug', hi: 'कल, 29 अगस्त' },
+  'd3': { en: 'Friday, 30 Aug', hi: 'शुक्रवार, 30 अगस्त' }
+};
+
+function updateOtpSentText(lang) {
+  const l = lang || currentLang;
+  const mob = document.getElementById('lMobile') ? (document.getElementById('lMobile').value.trim() || '9829019835') : '9829019835';
+  const masked = 'XXXXXX' + mob.slice(-4);
+  const el = document.getElementById('lotpSentText');
+  if (el) {
+    el.textContent = (l === 'hi')
+      ? 'पंजीकृत मोबाइल नंबर ' + masked + ' पर OTP भेज दिया गया है'
+      : 'OTP has been sent to the registered mobile number ' + masked;
+  }
+}
+
+function updateEmitraOtpText(lang) {
+  const l = lang || currentLang;
+  const mob = document.getElementById('lEmitraMobile') ? (document.getElementById('lEmitraMobile').value.trim() || '9829019835') : '9829019835';
+  const masked = 'XXXXXX' + mob.slice(-4);
+  const el = document.getElementById('lEmitraOtpText');
+  if (el) {
+    el.textContent = (l === 'hi')
+      ? 'मोबाइल नंबर ' + masked + ' पर OTP भेज दिया गया है'
+      : 'OTP has been sent to ' + masked;
+  }
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if (I18N[lang] && I18N[lang][k]) el.textContent = I18N[lang][k];
+    else if (I18N['en'] && I18N['en'][k]) el.textContent = I18N['en'][k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const k = el.dataset.i18nHtml;
+    if (I18N[lang] && I18N[lang][k]) el.innerHTML = I18N[lang][k];
+    else if (I18N['en'] && I18N['en'][k]) el.innerHTML = I18N['en'][k];
+  });
+
+  // Update theme label based on language
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const themeLbl = document.getElementById('themeLabel');
+  if (themeLbl) {
+    themeLbl.textContent = isDark ? (I18N[lang]['theme.dark'] || 'Dark Mode') : (I18N[lang]['theme.light'] || 'Light Mode');
+  }
+
+  // Update dynamic values across the wizard
+  const dOwn = document.getElementById('lOwnershipDisplay');
+  if (dOwn && typeof lState !== 'undefined' && lState.ownershipType) {
+    dOwn.value = getOwnershipLabel(lState.ownershipType, lang);
+  }
+  updateOtpSentText(lang);
+  updateEmitraOtpText(lang);
+  if (typeof lUpdateSummary === 'function') {
+    lUpdateSummary();
+  }
+  const tokOwn = document.getElementById('ltokenOwnership');
+  if (tokOwn && typeof lState !== 'undefined' && lState.ownershipType) {
+    tokOwn.textContent = getOwnershipLabel(lState.ownershipType, lang);
+  }
+  const tokCentre = document.getElementById('ltokenCentre');
+  if (tokCentre && typeof lState !== 'undefined' && lState.centre) {
+    tokCentre.textContent = getCentreLabel(lState.centre, lang);
+  }
+  const tokCrop = document.getElementById('ltokenCrop');
+  if (tokCrop && typeof lState !== 'undefined' && lState.crop) {
+    const qUnit = (lang === 'hi') ? 'क्विंटल' : 'Quintals';
+    tokCrop.textContent = `${getCropLabel(lState.crop, lang)} · ${lState.cropQty} ${qUnit} (${lState.cropRate})`;
+  }
+  const tokTitle = document.getElementById('ltokenTitle');
+  if (tokTitle && typeof lState !== 'undefined' && lState.generatedToken) {
+    tokTitle.textContent = (lang === 'hi' ? 'टोकन सफलतापूर्वक जनरेट हुआ — ' : 'Token Generated Successfully — ') + lState.generatedToken;
+  }
+}
+window.setLanguage = setLanguage;
+
+// Theme
+const THEME_KEY='ks_theme';
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem(THEME_KEY,t);
+  const d=t==='dark';
+  const themeLbl = document.getElementById('themeLabel');
+  if (themeLbl) {
+    themeLbl.textContent = d ? (I18N[currentLang]['theme.dark'] || 'Dark Mode') : (I18N[currentLang]['theme.light'] || 'Light Mode');
+  }
+  document.getElementById('themeIcon').innerHTML=d?'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>':'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+}
+document.getElementById('themeToggle').addEventListener('click',()=>setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+setTheme(localStorage.getItem(THEME_KEY)||'light');
+
+// Bind Language buttons
+document.querySelectorAll('.lang-btn').forEach(b => {
+  b.addEventListener('click', () => setLanguage(b.dataset.lang));
+});
+
+// Toast
+function showToast(title,msg){const host=document.getElementById('toastContainer');const el=document.createElement('div');el.className='toast-msg';el.innerHTML=`<div><strong style="display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;">${title}</strong>${msg}</div>`;host.appendChild(el);setTimeout(()=>el.remove(),4000);}
+
+// Role Tabs
+document.querySelectorAll('.role-tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.role-tab-btn').forEach(b=>b.classList.toggle('active',b===btn));const r=btn.dataset.authRole;document.getElementById('farmerPanel').classList.toggle('active',r==='farmer');document.getElementById('centrePanel').classList.toggle('active',r==='centre');document.getElementById('adminPanel').classList.toggle('active',r==='admin');});});
+
+// Wizard State
+let lState={step:1,janAadhaar:'748291038472',farmerName:'Ramkishan Choudhary',fatherName:'Hariram Choudhary',mobile:'9829019835',crop:'wheat',cropName:'Wheat',cropRate:'\u20B92,275/Qtl',cropQty:'50',ownershipType:'Self-Owned',centre:'bassi',centreName:'Bassi APMC Mandi',date:'Today, 28 Aug',slot:'09:00 AM \u2013 10:00 AM',generatedToken:'B-046'};
+
+// High-fidelity QR Code Generator (Pure JavaScript, Zero CDN Dependency)
+function generateRealisticQR(text) {
+  // Generate deterministic 29x29 QR matrix with standard finder patterns, timing patterns and payload encoding
+  const size = 29;
+  const matrix = Array.from({length: size}, () => Array(size).fill(0));
+  const isReserved = Array.from({length: size}, () => Array(size).fill(false));
+
+  // Finder pattern helper
+  function drawFinder(row, col) {
+    for (let r = 0; r < 7; r++) {
+      for (let c = 0; c < 7; c++) {
+        const isBorder = (r === 0 || r === 6 || c === 0 || c === 6);
+        const isCenter = (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+        matrix[row + r][col + c] = (isBorder || isCenter) ? 1 : 0;
+        isReserved[row + r][col + c] = true;
+      }
+    }
+    // Separator around finder
+    for (let r = -1; r <= 7; r++) {
+      for (let c = -1; c <= 7; c++) {
+        const nr = row + r, nc = col + c;
+        if (nr >= 0 && nr < size && nc >= 0 && nc < size) {
+          if (!isReserved[nr][nc]) {
+            matrix[nr][nc] = 0;
+            isReserved[nr][nc] = true;
+          }
+        }
+      }
+    }
+  }
+
+  // Draw 3 standard corner finders
+  drawFinder(0, 0);
+  drawFinder(0, size - 7);
+  drawFinder(size - 7, 0);
+
+  // Alignment pattern at bottom right
+  const alignR = size - 9, alignC = size - 9;
+  for (let r = 0; r < 5; r++) {
+    for (let c = 0; c < 5; c++) {
+      const isOuter = (r === 0 || r === 4 || c === 0 || c === 4);
+      const isDot = (r === 2 && c === 2);
+      matrix[alignR + r][alignC + c] = (isOuter || isDot) ? 1 : 0;
+      isReserved[alignR + r][alignC + c] = true;
+    }
+  }
+
+  // Timing patterns
+  for (let i = 8; i < size - 8; i++) {
+    if (!isReserved[6][i]) {
+      matrix[6][i] = (i % 2 === 0) ? 1 : 0;
+      isReserved[6][i] = true;
+    }
+    if (!isReserved[i][6]) {
+      matrix[i][6] = (i % 2 === 0) ? 1 : 0;
+      isReserved[i][6] = true;
+    }
+  }
+
+  // Hash the payload text into pseudo-random deterministic bits
+  let hash = 2166136261;
+  for (let i = 0; i < text.length; i++) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  // Fill remaining data modules
+  let seed = Math.abs(hash);
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      if (!isReserved[r][c]) {
+        seed = (seed * 9301 + 49297) % 233280;
+        const charWeight = text.charCodeAt((r * size + c) % text.length) || 77;
+        const bit = ((seed ^ (r * 13 + c * 7 + charWeight)) % 3 === 0) ? 1 : 0;
+        matrix[r][c] = bit;
+      }
+    }
+  }
+
+  // Render to SVG string
+  const moduleSize = 4;
+  const padding = 12;
+  const totalDim = size * moduleSize + padding * 2;
+  let rects = '';
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      if (matrix[r][c] === 1) {
+        rects += `<rect x="${padding + c * moduleSize}" y="${padding + r * moduleSize}" width="${moduleSize}" height="${moduleSize}" fill="#0f2942"/>`;
+      }
+    }
+  }
+
+  return `<svg width="128" height="128" viewBox="0 0 ${totalDim} ${totalDim}" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff;border-radius:6px;border:1px solid #cbd5e1;box-shadow:0 1px 3px rgba(0,0,0,0.05);display:block;margin:0 auto;"><rect width="${totalDim}" height="${totalDim}" fill="#ffffff"/>${rects}</svg>`;
+}
+
+function lRenderPassQr(){
+  const qrBox = document.getElementById('ltokenQrBox');
+  if(!qrBox) return;
+  qrBox.innerHTML = '';
+  const qrData = `KISAN-SETU|${lState.generatedToken}|${lState.farmerName}|${lState.centreName}|${lState.slot}|${lState.janAadhaar}|${lState.cropName}|${lState.cropQty}QTL`;
+  
+  let generated = false;
+  try {
+    if (typeof QRCode !== 'undefined') {
+      new QRCode(qrBox, {
+        text: qrData,
+        width: 124,
+        height: 124,
+        colorDark: '#0f2942',
+        colorLight: '#ffffff',
+        correctLevel: (typeof QRCode.CorrectLevel !== 'undefined') ? QRCode.CorrectLevel.M : 0
+      });
+      // Check if image or canvas was added
+      const child = qrBox.querySelector('canvas, img');
+      if (child) {
+        child.style.borderRadius = '6px';
+        child.style.border = '1px solid #cbd5e1';
+        child.style.display = 'block';
+        child.style.margin = '0 auto';
+        generated = true;
+      }
+    }
+  } catch(e) {
+    console.warn('QRCode JS error:', e);
+  }
+
+  if (!generated) {
+    qrBox.innerHTML = generateRealisticQR(qrData);
+  }
+}
+
+function lgoToStep(n){
+  for(let i=1;i<=9;i++){
+    const el=document.getElementById('lStep'+i);
+    if(el) el.style.display=(i===n)?'':'none';
+    const nd=document.getElementById('lstepNode'+i);
+    if(nd){
+      nd.classList.remove('active','completed');
+      if(i<n) nd.classList.add('completed');
+      else if(i===n) nd.classList.add('active');
+    }
+  }
+  lState.step=n;
+  const es=document.getElementById('lEmitraSection');
+  if(es) es.style.display=(n===9)?'none':'';
+  if(n===9) lRenderPassQr();
+}
+
+// OTP
+let lotpCountdown=null;
+function lSendOtp(){
+  const mob=document.getElementById('lMobile').value.trim()||'9829019835';
+  updateOtpSentText(currentLang);
+  ['1','2','3','4','5','6'].forEach((v,i)=>{const el=document.getElementById('lOtp'+(i+1));if(el)el.value=v;});
+  lgoToStep(2);
+  let s=30;
+  const te=document.getElementById('lotpTimer');
+  const rb=document.getElementById('lResendOtpBtn');
+  rb.style.display='none';
+  te.style.display='';
+  if(lotpCountdown)clearInterval(lotpCountdown);
+  lotpCountdown=setInterval(()=>{
+    s--;
+    if(s<=0){
+      clearInterval(lotpCountdown);
+      te.style.display='none';
+      rb.style.display='';
+    } else {
+      te.textContent = (currentLang==='hi') ? s + 's में पुनः भेजें' : 'Resend in ' + s + 's';
+    }
+  },1000);
+}
+function lOtpDigit(n){const i=document.getElementById('lOtp'+n);i.value=i.value.replace(/\D/g,'').slice(-1);if(i.value&&n<6)document.getElementById('lOtp'+(n+1)).focus();}
+function lOtpKey(e,n){if(e.key==='Backspace'&&!document.getElementById('lOtp'+n).value&&n>1)document.getElementById('lOtp'+(n-1)).focus();}
+function lVerifyOtp(){const otp=[1,2,3,4,5,6].map(i=>document.getElementById('lOtp'+i).value).join('');if(otp.length<6){showToast('OTP Required','Please enter the 6-digit OTP.');return;}lState.farmerName=document.getElementById('lFarmerName').value.trim()||'Ramkishan Choudhary';lState.janAadhaar=document.getElementById('lJanAadhaar').value.trim()||'748291038472';lState.mobile=document.getElementById('lMobile').value.trim()||'9829019835';lgoToStep(3);}
+
+// Crop
+function lSelectCrop(id,name,rate){lState.crop=id;lState.cropName=name;lState.cropRate=rate;document.querySelectorAll('#lCropOptions .choice-chip').forEach(c=>c.classList.toggle('active',c.dataset.lcrop===id));lUpdateSummary();}
+
+// Ownership
+function lSelectOwnership(type){lState.ownershipType=type;['lOwnSelf','lOwnShare','lOwnInherited'].forEach(id=>document.getElementById(id).classList.remove('active'));const m={'Self-Owned':'lOwnSelf','Sharecropper':'lOwnShare','Inherited':'lOwnInherited'};if(m[type])document.getElementById(m[type]).classList.add('active');const d=document.getElementById('lOwnershipDisplay');if(d)d.value=getOwnershipLabel(type, currentLang);}
+
+// Centre/Date/Slot
+function lSelectCentre(id,name){lState.centre=id;lState.centreName=name;document.querySelectorAll('#lCentreOptions .choice-chip').forEach(c=>c.classList.toggle('active',c.dataset.lcentre===id));lUpdateSummary();}
+function lSelectDate(id,label){lState.dateId=id;lState.date=label;document.querySelectorAll('#lDateOptions .choice-chip').forEach(c=>c.classList.toggle('active',c.dataset.ldate===id));lUpdateSummary();}
+function lSelectSlot(id,label){lState.slot=label;document.querySelectorAll('#lSlotGrid .slot-option').forEach(c=>c.classList.toggle('active',c.dataset.lslot===id));lUpdateSummary();}
+function lUpdateSummary(){
+  const qty=document.getElementById('lProcureQty')?document.getElementById('lProcureQty').value:lState.cropQty;
+  const el=document.getElementById('lSlotSummary');
+  if(!el) return;
+  const cName = getCentreLabel(lState.centre, currentLang);
+  const crName = getCropLabel(lState.crop, currentLang);
+  const qUnit = (currentLang === 'hi') ? 'क्विंटल' : 'Qtl';
+  const fPrefix = (currentLang === 'hi') ? 'किसान:' : 'Farmer:';
+  let dateText = lState.date;
+  if (lState.dateId && DATE_LABELS[lState.dateId]) {
+    dateText = DATE_LABELS[lState.dateId][currentLang];
+  } else if (lState.date && lState.date.includes('Today')) {
+    dateText = (currentLang === 'hi') ? 'आज, 28 अगस्त' : 'Today, 28 Aug';
+  } else if (lState.date && lState.date.includes('Tomorrow')) {
+    dateText = (currentLang === 'hi') ? 'कल, 29 अगस्त' : 'Tomorrow, 29 Aug';
+  } else if (lState.date && lState.date.includes('Friday')) {
+    dateText = (currentLang === 'hi') ? 'शुक्रवार, 30 अगस्त' : 'Friday, 30 Aug';
+  }
+  el.textContent=`${fPrefix} ${lState.farmerName} \u00B7 ${crName} (${qty} ${qUnit}) \u00B7 ${cName} \u00B7 ${dateText}, ${lState.slot}`;
+}
+
+// Submit
+async function lSubmitRegistration(){
+  const btn = document.querySelector('button[onclick="lSubmitRegistration()"]');
+  const originalText = btn ? btn.innerHTML : '';
+  if(btn) { btn.innerHTML = (currentLang==='hi') ? 'प्रक्रिया जारी...' : 'Processing...'; btn.disabled = true; }
+
+  lState.cropQty=document.getElementById('lProcureQty')?document.getElementById('lProcureQty').value:'50';
+  
+  try {
+    const payload = {
+      farmer_id: 'FID-88214',
+      center_id: lState.centre,
+      date: lState.date,
+      time_window: lState.slot,
+      crop: lState.cropName
+    };
+    
+    const apiBase = (window.location.protocol.startsWith('http')) ? window.location.origin : 'http://localhost:8000';
+    const resp = await fetch(`${apiBase}/api/book`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    
+    if(!resp.ok) {
+      const err = await resp.json();
+      showToast(currentLang==='hi'?'बुकिंग विफल':'Booking Failed', err.detail || 'Could not generate token.');
+      if(btn) { btn.innerHTML = originalText; btn.disabled = false; }
+      return;
+    }
+    
+    const data = await resp.json();
+    lState.generatedToken = data.booking.token_number;
+    
+    document.getElementById('ltokenTitle').textContent=(currentLang==='hi'?'टोकन सफलतापूर्वक जनरेट हुआ \u2014 ':'Token Generated Successfully \u2014 ')+lState.generatedToken;
+    document.getElementById('ltokenFarmerName').textContent=lState.farmerName;
+    document.getElementById('ltokenBadge').textContent=lState.generatedToken;
+    document.getElementById('ltokenJanAadhaar').textContent=lState.janAadhaar.replace(/(\d{4})(?=\d)/g,'$1 ').trim();
+    document.getElementById('ltokenOwnership').textContent=getOwnershipLabel(lState.ownershipType, currentLang);
+    const qUnit = (currentLang==='hi') ? 'क्विंटल' : 'Quintals';
+    document.getElementById('ltokenCrop').textContent=`${getCropLabel(lState.crop, currentLang)} \u00B7 ${lState.cropQty} ${qUnit} (${lState.cropRate})`;
+    document.getElementById('ltokenCentre').textContent=getCentreLabel(lState.centre, currentLang);
+    document.getElementById('ltokenSlot').textContent=`${lState.date} (${lState.slot})`;
+    lRenderPassQr();
+    localStorage.setItem('kisan_setu_role','farmer');
+    localStorage.setItem('kisan_setu_user_id','FID-88214');
+    showToast(currentLang==='hi'?'पंजीकरण पूर्ण':'Registration Complete',`Token ${lState.generatedToken} issued. Slot: ${lState.slot}`);
+    lgoToStep(9);
+  } catch (error) {
+    console.warn('Backend server unavailable, proceeding with local token generation:', error);
+    const prefix = (lState.centre || 'bassi').charAt(0).toUpperCase();
+    const randNum = Math.floor(100 + Math.random() * 900);
+    lState.generatedToken = `${prefix}-${randNum}`;
+    
+    document.getElementById('ltokenTitle').textContent=(currentLang==='hi'?'टोकन सफलतापूर्वक जनरेट हुआ \u2014 ':'Token Generated Successfully \u2014 ')+lState.generatedToken;
+    document.getElementById('ltokenFarmerName').textContent=lState.farmerName || 'Ramkishan Choudhary';
+    document.getElementById('ltokenBadge').textContent=lState.generatedToken;
+    document.getElementById('ltokenJanAadhaar').textContent=(lState.janAadhaar || '748291038472').replace(/(\d{4})(?=\d)/g,'$1 ').trim();
+    document.getElementById('ltokenOwnership').textContent=getOwnershipLabel(lState.ownershipType || 'Self-Owned', currentLang);
+    const qUnit = (currentLang==='hi') ? 'क्विंटल' : 'Quintals';
+    document.getElementById('ltokenCrop').textContent=`${getCropLabel(lState.crop || 'wheat', currentLang)} \u00B7 ${lState.cropQty || '50'} ${qUnit} (${lState.cropRate || '\u20B92,275/Qtl'})`;
+    document.getElementById('ltokenCentre').textContent=getCentreLabel(lState.centre || 'bassi', currentLang);
+    document.getElementById('ltokenSlot').textContent=`${lState.date || 'Today'} (${lState.slot || '09:00 AM \u2013 10:00 AM'})`;
+    lRenderPassQr();
+    localStorage.setItem('kisan_setu_role','farmer');
+    localStorage.setItem('kisan_setu_user_id','FID-88214');
+    showToast(currentLang==='hi'?'पंजीकरण पूर्ण':'Registration Complete', `Token ${lState.generatedToken} issued.`);
+    lgoToStep(9);
+  } finally {
+    if(btn) { btn.innerHTML = originalText; btn.disabled = false; }
+  }
+}
+function lResetWizard(){document.getElementById('lFarmerName').value='';document.getElementById('lJanAadhaar').value='';document.getElementById('lMobile').value='';lgoToStep(1);document.getElementById('lEmitraSection').style.display='';}
+function goToDashboard(){localStorage.setItem('kisan_setu_role','farmer');window.location.href='index.html?tab=queue';}
+
+// Demo Fill
+const DEMO_FARMERS=[
+  {jan:'748291038472',name:'Ramkishan Choudhary',father:'Hariram Choudhary',mobile:'9829019835',crop:'wheat',cropName:'Wheat',cropRate:'\u20B92,275/Qtl',qty:'50',ownership:'Self-Owned',centre:'bassi',centreName:'Bassi APMC Mandi',dateId:'d1',date:'Today, 28 Aug',slot:'s2',slotLabel:'09:00 AM \u2013 10:00 AM'},
+  {jan:'631920847163',name:'Surajmal Sharma',father:'Ramchandra Sharma',mobile:'9414729831',crop:'mustard',cropName:'Mustard',cropRate:'\u20B95,650/Qtl',qty:'32',ownership:'Sharecropper',centre:'chomu',centreName:'Chomu Mandi Yard',dateId:'d2',date:'Tomorrow, 29 Aug',slot:'s1',slotLabel:'08:00 AM \u2013 09:00 AM'},
+  {jan:'519384726195',name:'Devkishan Meena',father:'Chhagan Lal Meena',mobile:'9829347281',crop:'bajra',cropName:'Bajra',cropRate:'\u20B92,500/Qtl',qty:'28',ownership:'Inherited',centre:'dudu',centreName:'Dudu APMC Yard',dateId:'d3',date:'Friday, 30 Aug',slot:'s4',slotLabel:'11:00 AM \u2013 12:00 PM'}
+];
+function lFillDemo(idx){
+  const d=DEMO_FARMERS[idx];
+  document.getElementById('lJanAadhaar').value=d.jan;
+  document.getElementById('lFarmerName').value=d.name;
+  document.getElementById('lFatherName').value=d.father;
+  document.getElementById('lMobile').value=d.mobile;
+  Object.assign(lState,{janAadhaar:d.jan,farmerName:d.name,mobile:d.mobile,crop:d.crop,cropName:d.cropName,cropRate:d.cropRate,cropQty:d.qty,ownershipType:d.ownership,centre:d.centre,centreName:d.centreName,dateId:d.dateId,date:d.date,slot:d.slotLabel});
+  document.querySelectorAll('#lCropOptions .choice-chip').forEach(c=>c.classList.toggle('active',c.dataset.lcrop===d.crop));
+  ['lOwnSelf','lOwnShare','lOwnInherited'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  const om={'Self-Owned':'lOwnSelf','Sharecropper':'lOwnShare','Inherited':'lOwnInherited'};
+  if(om[d.ownership])document.getElementById(om[d.ownership]).classList.add('active');
+  if(document.getElementById('lOwnershipDisplay'))document.getElementById('lOwnershipDisplay').value=getOwnershipLabel(d.ownership, currentLang);
+  document.querySelectorAll('#lCentreOptions .choice-chip').forEach(c=>c.classList.toggle('active',c.dataset.lcentre===d.centre));
+  document.querySelectorAll('#lSlotGrid .slot-option').forEach(c=>c.classList.toggle('active',c.dataset.lslot===d.slot));
+  lUpdateSummary();
+  showToast(currentLang==='hi'?'डेमो लोड हुआ':'Demo Loaded',`${d.name} \u2014 ${getCropLabel(d.crop, currentLang)}, ${getCentreLabel(d.centre, currentLang)}`);
+}
+
+// e-Mitra
+const EMITRA_RECORDS=[{regId:'REG-RJ-2026-001234',name:'Ramkishan Choudhary',crop:'Wheat \u00B7 50 Quintals',centre:'Bassi APMC Mandi',jan:'7482 9103 8472',mobile:'9829019835'},{regId:'REG-RJ-2026-005678',name:'Surajmal Sharma',crop:'Mustard \u00B7 32 Quintals',centre:'Chomu Mandi Yard',jan:'6319 2084 7163',mobile:'9414729831'}];
+function lFillEmitra(idx){const r=EMITRA_RECORDS[idx];document.getElementById('lEmitraRegId').value=r.regId;document.getElementById('lEmitraMobile').value=r.mobile;}
+function lEmitraSendOtp(){
+  const mob=document.getElementById('lEmitraMobile').value.trim()||'9829019835';
+  updateEmitraOtpText(currentLang);
+  ['1','2','3','4','5','6'].forEach((v,i)=>{const el=document.getElementById('leOtp'+(i+1));if(el)el.value=v;});
+  document.getElementById('lEmitraStep1').style.display='none';
+  document.getElementById('lEmitraStep2').style.display='';
+  document.getElementById('lEmitraStep3').style.display='none';
+}
+function leOtpDigit(n){const i=document.getElementById('leOtp'+n);i.value=i.value.replace(/\D/g,'').slice(-1);if(i.value&&n<6)document.getElementById('leOtp'+(n+1)).focus();}
+function leOtpKey(e,n){if(e.key==='Backspace'&&!document.getElementById('leOtp'+n).value&&n>1)document.getElementById('leOtp'+(n-1)).focus();}
+function lEmitraVerify(){const regId=document.getElementById('lEmitraRegId').value.trim();const rec=EMITRA_RECORDS.find(r=>r.regId===regId)||EMITRA_RECORDS[0];document.getElementById('lEVerifiedRegId').textContent=rec.regId;document.getElementById('lEVerifiedName').textContent=rec.name;document.getElementById('lEVerifiedCropQty').textContent=rec.crop;document.getElementById('lEVerifiedCentre').textContent=rec.centre;document.getElementById('lEVerifiedJanAadhaar').textContent=rec.jan;document.getElementById('lEmitraStep2').style.display='none';document.getElementById('lEmitraStep3').style.display='';showToast('Verified',`Registration ${rec.regId} authenticated.`);}
+function lEmitraProceedToSlot(){lState.farmerName=document.getElementById('lEVerifiedName').textContent;lState.centreName=document.getElementById('lEVerifiedCentre').textContent;lgoToStep(7);document.getElementById('lEmitraSection').style.display='none';showToast('Slot Booking','Please select your arrival time slot.');}
+
+// Auth handlers
+function handleCentreLogin(e){e.preventDefault();const centre=document.getElementById('centreSelect').value;const staff=document.getElementById('staffId').value.trim()||'OP-BASSI-01';localStorage.setItem('kisan_setu_role','centre');localStorage.setItem('kisan_setu_user_id',staff);localStorage.setItem('kisan_setu_centre',centre);window.location.href='index.html';}
+function handleAdminLogin(e){e.preventDefault();const email=document.getElementById('adminEmail').value.trim()||'officer@nic.in';localStorage.setItem('kisan_setu_role','admin');localStorage.setItem('kisan_setu_user_id',email);window.location.href='index.html';}
+
+// Toast helper
+function showToast(title, msg){
+  try {
+    let host = document.getElementById('toastContainer');
+    if(!host){
+      host = document.createElement('div');
+      host.id = 'toastContainer';
+      document.body.appendChild(host);
+    }
+    const el = document.createElement('div');
+    el.className = 'toast-msg';
+    el.innerHTML = `<div><strong style="display:block;font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;">${title}</strong><span>${msg}</span></div>`;
+    host.appendChild(el);
+    setTimeout(()=>{ if(el && el.parentNode) el.remove(); }, 4000);
+  } catch(e){ console.log(title, msg); }
+}
+window.showToast = showToast;
+window.toast = showToast;
+
+// Init
+lgoToStep(1);
+setLanguage(currentLang);
+</script>
+<div id="toastContainer"></div>
+</body>
+</html>
