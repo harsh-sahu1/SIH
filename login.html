@@ -196,202 +196,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 .form-view{display:none;}
 .form-view.active{display:block;animation:fadeInUp .18s ease;}
 
-/* Login Page Grid Layout with Side OTP Prompt */
-.login-page-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 350px;
-  gap: 28px;
-  align-items: start;
-}
-@media (max-width: 980px) {
-  .login-page-grid {
-    grid-template-columns: 1fr;
-  }
-  .side-otp-container {
-    position: static;
-    margin-bottom: 24px;
-  }
-}
-
-/* Side OTP Prompt Card */
-.side-otp-container {
-  position: sticky;
-  top: 24px;
-}
-.side-otp-card {
-  background: var(--bg-surface);
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
-  padding: 24px 20px;
-  box-shadow: var(--shadow-card);
-  position: relative;
-  overflow: hidden;
-}
-.side-otp-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #16a34a, #22c55e, #10b981);
-}
-.side-otp-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-.side-otp-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
-  background: var(--primary-light);
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-}
-.side-otp-title-wrap h4 {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 2px;
-}
-.side-otp-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  font-weight: 700;
-  color: #15803d;
-  background: rgba(34,197,94,0.12);
-  padding: 2px 7px;
-  border-radius: 20px;
-  letter-spacing: .04em;
-}
-.pulse-circle {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 0 2px rgba(34,197,94,0.4);
-  animation: otpPulse 1.8s infinite;
-}
-@keyframes otpPulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-}
-.side-otp-desc {
-  font-size: 12.5px;
-  color: var(--text-muted);
-  line-height: 1.45;
-  margin-bottom: 16px;
-}
-.side-otp-display-box {
-  background: var(--bg-subtle);
-  border: 1.5px dashed var(--primary-border);
-  border-radius: 10px;
-  padding: 16px 12px;
-  text-align: center;
-  margin-bottom: 14px;
-}
-.side-otp-label {
-  font-size: 10.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  letter-spacing: .06em;
-  margin-bottom: 6px;
-}
-.side-otp-digits {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: 6px;
-  color: var(--primary);
-  display: block;
-  margin-bottom: 10px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-.side-otp-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-}
-.side-otp-btn {
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: all .15s;
-  font-family: inherit;
-}
-.side-otp-btn-fill {
-  background: var(--primary);
-  color: #fff;
-  border: none;
-}
-.side-otp-btn-fill:hover {
-  background: var(--primary-hover);
-}
-.side-otp-btn-refresh {
-  background: transparent;
-  color: var(--text-main);
-  border: 1px solid var(--border-strong);
-}
-.side-otp-btn-refresh:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-.side-otp-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11.5px;
-  color: var(--text-faint);
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-}
-.side-otp-timer-val {
-  font-weight: 700;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--text-main);
-}
-.side-otp-tip {
-  margin-top: 12px;
-  background: rgba(15, 41, 66, 0.04);
-  border-radius: 6px;
-  padding: 9px 10px;
-  font-size: 11.5px;
-  color: var(--text-muted);
-  display: flex;
-  gap: 7px;
-  line-height: 1.4;
-}
-[data-theme="dark"] .side-otp-card {
-  background: var(--bg-surface);
-  border-color: var(--border-strong);
-}
-[data-theme="dark"] .side-otp-display-box {
-  background: var(--bg-subtle);
-  border-color: rgba(74, 222, 128, 0.3);
-}
-[data-theme="dark"] .side-otp-digits {
-  color: #4ade80;
-}
-[data-theme="dark"] .side-otp-title-wrap h4 {
-  color: var(--text-main);
-}
-[data-theme="dark"] .side-otp-tip {
-  background: rgba(255, 255, 255, 0.04);
-}
-
 /* Toast */
 #toastContainer{position:fixed;bottom:24px;right:24px;z-index:1000;display:flex;flex-direction:column;gap:10px;}
 .toast-msg{background:#0f172a;color:#fff;border-radius:6px;padding:12px 18px;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.2);display:flex;align-items:center;gap:10px;border-left:4px solid var(--primary);animation:toastSlide .25s ease;}
@@ -452,13 +256,9 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
     </button>
   </div>
 
-  <!-- Main Login Grid with Side OTP Prompt -->
-  <div class="login-page-grid">
-    <div class="login-main-column">
-
-      <!-- ======== FARMER PORTAL: 9-STEP WIZARD ======== -->
-      <div id="farmerPanel" class="form-view active">
-        <div class="wizard-card">
+  <!-- ======== FARMER PORTAL: 9-STEP WIZARD ======== -->
+  <div id="farmerPanel" class="form-view active">
+    <div class="wizard-card">
 
       <!-- Progress -->
       <div class="wizard-progress" id="loginWizardProgress">
@@ -517,7 +317,7 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
           <input type="text" maxlength="1" class="otp-digit-input" id="lOtp5" oninput="lOtpDigit(5)" onkeydown="lOtpKey(event,5)">
           <input type="text" maxlength="1" class="otp-digit-input" id="lOtp6" oninput="lOtpDigit(6)" onkeydown="lOtpKey(event,6)">
         </div>
-        <div style="font-size:12px;color:var(--text-faint);margin-bottom:24px;">(<span data-i18n="demo.otpPrompt">Demo OTP:</span> <strong id="demoOtpVal" style="font-family:'JetBrains Mono',monospace;color:var(--primary);">------</strong>) &middot; <a href="javascript:void(0)" onclick="autoFillOtp()" style="color:var(--primary);text-decoration:none;font-weight:600;" data-i18n="lnk.autoFill">Use Side Prompt OTP &rarr;</a> &middot; <span id="lotpTimer">Resend in 30s</span><button id="lResendOtpBtn" style="display:none;background:none;border:none;color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;" onclick="lSendOtp()" data-i18n="btn.resendOtp">Resend OTP</button></div>
+        <div style="font-size:12px;color:var(--text-faint);margin-bottom:24px;">(<span data-i18n="demo.otpPrompt">Demo OTP:</span> <strong>123456</strong>) &middot; <span id="lotpTimer">Resend in 30s</span><button id="lResendOtpBtn" style="display:none;background:none;border:none;color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;" onclick="lSendOtp()" data-i18n="btn.resendOtp">Resend OTP</button></div>
         <div style="display:flex;gap:12px;justify-content:center;">
           <button type="button" class="btn btn-outline" onclick="lgoToStep(1)" data-i18n="btn.back">Back</button>
           <button type="button" class="btn btn-primary" onclick="lVerifyOtp()"><span data-i18n="btn.verifyOtp">Verify OTP &amp; Proceed</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
@@ -759,7 +559,7 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
               <input type="text" maxlength="1" class="otp-digit-input" id="leOtp5" oninput="leOtpDigit(5)" onkeydown="leOtpKey(event,5)">
               <input type="text" maxlength="1" class="otp-digit-input" id="leOtp6" oninput="leOtpDigit(6)" onkeydown="leOtpKey(event,6)">
             </div>
-            <div style="font-size:12px;color:var(--text-faint);margin-bottom:18px;">(<span data-i18n="demo.otpPrompt">Demo OTP:</span> <strong id="demoEmitraOtpVal" style="font-family:'JetBrains Mono',monospace;color:var(--primary);">------</strong>) &middot; <a href="javascript:void(0)" onclick="autoFillOtp()" style="color:var(--primary);text-decoration:none;font-weight:600;" data-i18n="lnk.autoFill">Use Side Prompt OTP &rarr;</a></div>
+            <div style="font-size:12px;color:var(--text-faint);margin-bottom:18px;">(<span data-i18n="demo.otpPrompt">Demo OTP:</span> <strong>123456</strong>)</div>
             <div style="display:flex;gap:10px;justify-content:center;">
               <button type="button" class="btn btn-outline" onclick="document.getElementById('lEmitraStep1').style.display='';document.getElementById('lEmitraStep2').style.display='none';" data-i18n="btn.back">Back</button>
               <button type="button" class="btn btn-primary" onclick="lEmitraVerify()"><span data-i18n="btn.verifyRecord">Verify &amp; Fetch Record</span> &rarr;</button>
@@ -800,13 +600,6 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
         <div class="form-field"><label data-i18n="lbl.centreSelect">Procurement Centre</label><select id="centreSelect" class="form-input"><option value="bassi" data-i18n="centre.bassiLong">Bassi APMC Procurement Centre</option><option value="chomu" data-i18n="centre.chomu">Chomu Mandi Yard</option><option value="dudu" data-i18n="centre.dudu">Dudu APMC Yard</option></select></div>
         <div class="form-field"><label data-i18n="lbl.staffId">Operator Staff ID</label><input type="text" id="staffId" class="form-input" placeholder="OP-BASSI-01" value="OP-BASSI-01"></div>
         <div class="form-field"><label data-i18n="lbl.staffPass">Operator Password</label><input type="password" class="form-input" value="operator2026"></div>
-        <div class="form-field">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <label style="margin:0;" data-i18n="lbl.centreOtp">2FA Security OTP</label>
-            <a href="javascript:void(0)" onclick="autoFillOtp()" style="font-size:11.5px;color:var(--primary);text-decoration:none;font-weight:600;" data-i18n="lnk.autoFill">Use Side Prompt OTP &rarr;</a>
-          </div>
-          <input type="text" id="centreOtpInput" class="form-input" style="font-family:'JetBrains Mono',monospace;font-size:16px;letter-spacing:3px;" placeholder="Enter 6-digit OTP" maxlength="6" autocomplete="off" required>
-        </div>
         <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px;"><span data-i18n="btn.staffLogin">Access Operator Console</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
       </form>
     </div>
@@ -820,67 +613,10 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
       <form onsubmit="handleAdminLogin(event)">
         <div class="form-field"><label data-i18n="lbl.adminEmail">Gov.in Email Address</label><input type="email" id="adminEmail" class="form-input" placeholder="officer@nic.in" value="procurement.officer@nic.in"></div>
         <div class="form-field"><label data-i18n="lbl.adminPass">Department Passcode</label><input type="password" class="form-input" value="nicadmin2026"></div>
-        <div class="form-field">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <label style="margin:0;" data-i18n="lbl.adminOtp">2FA Department OTP</label>
-            <a href="javascript:void(0)" onclick="autoFillOtp()" style="font-size:11.5px;color:var(--primary);text-decoration:none;font-weight:600;" data-i18n="lnk.autoFill">Use Side Prompt OTP &rarr;</a>
-          </div>
-          <input type="text" id="adminOtpInput" class="form-input" style="font-family:'JetBrains Mono',monospace;font-size:16px;letter-spacing:3px;" placeholder="Enter 6-digit OTP" maxlength="6" autocomplete="off" required>
-        </div>
         <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px;"><span data-i18n="btn.adminLogin">Access Department Console</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
       </form>
     </div>
   </div>
-
-    </div><!-- /.login-main-column -->
-
-    <!-- SIDE OTP SECURITY PROMPT -->
-    <aside class="side-otp-container" id="sideOtpWidget">
-      <div class="side-otp-card">
-        <div class="side-otp-header">
-          <div class="side-otp-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="side-otp-title-wrap">
-            <h4 data-i18n="otp.promptTitle">Gov-2FA Security Prompt</h4>
-            <span class="side-otp-badge"><span class="pulse-circle"></span> <span data-i18n="otp.liveOtp">LIVE OTP</span></span>
-          </div>
-        </div>
-        
-        <p class="side-otp-desc" data-i18n="otp.promptDesc">
-          A dynamic one-time authentication code is generated for your session. You must enter this exact OTP into the login form to proceed.
-        </p>
-
-        <div class="side-otp-display-box">
-          <div class="side-otp-label" data-i18n="otp.currentOtp">Session Security OTP</div>
-          <span class="side-otp-digits" id="sideOtpDigits">------</span>
-          <div class="side-otp-actions">
-            <button type="button" class="side-otp-btn side-otp-btn-fill" onclick="autoFillOtp()">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span data-i18n="otp.btnAutoFill">Auto-Fill OTP</span>
-            </button>
-            <button type="button" class="side-otp-btn side-otp-btn-refresh" onclick="generateNewRandomOtp(true)">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-              <span data-i18n="otp.btnNew">New OTP</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="side-otp-footer">
-          <span><span data-i18n="otp.expiresIn">Auto-refreshes in:</span> <strong id="sideOtpTimerVal" class="side-otp-timer-val">60s</strong></span>
-          <button type="button" class="side-otp-btn side-otp-btn-refresh" style="padding:3px 8px;font-size:11px;" onclick="copyOtpToClipboard()">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            <span data-i18n="otp.btnCopy">Copy</span>
-          </button>
-        </div>
-
-        <div class="side-otp-tip">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span data-i18n="otp.promptTip">Entering an incorrect OTP will block authentication and trigger a security toast alert.</span>
-        </div>
-      </div>
-    </aside>
-  </div><!-- /.login-page-grid -->
 
 </div>
 
@@ -1026,18 +762,6 @@ const I18N = {
     "lbl.adminEmail": "Gov.in Email Address",
     "lbl.adminPass": "Department Passcode",
     "btn.adminLogin": "Access Department Console",
-    "otp.promptTitle": "Gov-2FA Security Prompt",
-    "otp.liveOtp": "LIVE OTP",
-    "otp.promptDesc": "A dynamic one-time authentication code is generated for your session. You must enter this exact OTP into the login form to proceed.",
-    "otp.currentOtp": "Session Security OTP",
-    "otp.btnAutoFill": "Auto-Fill OTP",
-    "otp.btnNew": "New OTP",
-    "otp.expiresIn": "Auto-refreshes in:",
-    "otp.btnCopy": "Copy",
-    "otp.promptTip": "Entering an incorrect OTP will block authentication and trigger a security toast alert.",
-    "lbl.centreOtp": "2FA Security OTP",
-    "lbl.adminOtp": "2FA Department OTP",
-    "lnk.autoFill": "Use Side Prompt OTP →",
     "footer.gov": "Ministry of Consumer Affairs, Food & Public Distribution, Government of India. All rights reserved.",
     "footer.helpline": "Farmer Helpline:",
     "theme.light": "Light Mode",
@@ -1178,18 +902,6 @@ const I18N = {
     "lbl.adminEmail": "Gov.in ईमेल पता",
     "lbl.adminPass": "विभाग पासकोड",
     "btn.adminLogin": "विभाग कंसोल खोलें",
-    "otp.promptTitle": "सरकारी 2FA सुरक्षा प्रॉम्प्ट",
-    "otp.liveOtp": "लाइव OTP",
-    "otp.promptDesc": "आपके लॉगिन सत्र के लिए एक सुरक्षित रैंडम OTP जनरेट किया गया है। लॉगिन करने के लिए आपको यह कोड दर्ज करना होगा।",
-    "otp.currentOtp": "सत्र सुरक्षा OTP",
-    "otp.btnAutoFill": "OTP ऑटो-भरें",
-    "otp.btnNew": "नया OTP",
-    "otp.expiresIn": "स्वतः नवीनीकरण:",
-    "otp.btnCopy": "कॉपी करें",
-    "otp.promptTip": "गलत OTP दर्ज करने पर लॉगिन अस्वीकार होगा और सुरक्षा अलर्ट प्रदर्शित होगा।",
-    "lbl.centreOtp": "2FA सुरक्षा OTP",
-    "lbl.adminOtp": "2FA विभाग OTP",
-    "lnk.autoFill": "साइड प्रॉम्प्ट OTP भरें →",
     "footer.gov": "उपभोक्ता मामले, खाद्य एवं सार्वजनिक वितरण मंत्रालय, भारत सरकार। सर्वाधिकार सुरक्षित।",
     "footer.helpline": "किसान हेल्पलाइन:",
     "theme.light": "लाइट मोड",
@@ -1340,101 +1052,8 @@ document.querySelectorAll('.lang-btn').forEach(b => {
 // Toast
 function showToast(title,msg){const host=document.getElementById('toastContainer');const el=document.createElement('div');el.className='toast-msg';el.innerHTML=`<div><strong style="display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;">${title}</strong>${msg}</div>`;host.appendChild(el);setTimeout(()=>el.remove(),4000);}
 
-// ================= LIVE SIDE OTP PROMPT MANAGER =================
-let currentRandomOtp = '';
-let sideOtpExpirySec = 60;
-let sideOtpTimerInterval = null;
-
-function generateNewRandomOtp(notify = false) {
-  const code = Math.floor(100000 + Math.random() * 900000).toString();
-  currentRandomOtp = code;
-  
-  const digitsEl = document.getElementById('sideOtpDigits');
-  if (digitsEl) digitsEl.textContent = code.split('').join(' ');
-
-  const demoOtpEl = document.getElementById('demoOtpVal');
-  if (demoOtpEl) demoOtpEl.textContent = code;
-  const demoEmitraOtpEl = document.getElementById('demoEmitraOtpVal');
-  if (demoEmitraOtpEl) demoEmitraOtpEl.textContent = code;
-
-  sideOtpExpirySec = 60;
-  if (sideOtpTimerInterval) clearInterval(sideOtpTimerInterval);
-  updateSideOtpTimerDisplay();
-  sideOtpTimerInterval = setInterval(() => {
-    sideOtpExpirySec--;
-    if (sideOtpExpirySec <= 0) {
-      generateNewRandomOtp(false);
-    } else {
-      updateSideOtpTimerDisplay();
-    }
-  }, 1000);
-
-  if (notify) {
-    showToast(currentLang === 'hi' ? 'नया सुरक्षा OTP' : 'New Security OTP', (currentLang === 'hi' ? 'नया सत्र OTP जनरेट हुआ: ' : 'New session OTP generated: ') + code);
-  }
-}
-
-function updateSideOtpTimerDisplay() {
-  const timerEl = document.getElementById('sideOtpTimerVal');
-  if (timerEl) {
-    timerEl.textContent = sideOtpExpirySec + 's';
-  }
-}
-
-function autoFillOtp() {
-  if (!currentRandomOtp) generateNewRandomOtp();
-  const activeRoleBtn = document.querySelector('.role-tab-btn.active');
-  const role = activeRoleBtn ? activeRoleBtn.dataset.authRole : 'farmer';
-
-  if (role === 'farmer') {
-    if (lState.currentStep === 2) {
-      currentRandomOtp.split('').forEach((digit, idx) => {
-        const inp = document.getElementById('lOtp' + (idx + 1));
-        if (inp) inp.value = digit;
-      });
-      showToast(currentLang === 'hi' ? 'OTP भरा गया' : 'OTP Auto-Filled', (currentLang === 'hi' ? 'सत्र OTP दर्ज किया गया: ' : '6-digit OTP populated: ') + currentRandomOtp);
-    } else if (document.getElementById('lEmitraStep2') && document.getElementById('lEmitraStep2').style.display !== 'none') {
-      currentRandomOtp.split('').forEach((digit, idx) => {
-        const inp = document.getElementById('leOtp' + (idx + 1));
-        if (inp) inp.value = digit;
-      });
-      showToast(currentLang === 'hi' ? 'OTP भरा गया' : 'OTP Auto-Filled', (currentLang === 'hi' ? 'e-मित्र OTP दर्ज किया गया: ' : 'e-Mitra OTP populated: ') + currentRandomOtp);
-    } else {
-      showToast(currentLang === 'hi' ? 'चरण 2 आवश्यक' : 'Step 2 Required', currentLang === 'hi' ? 'OTP दर्ज करने के लिए चरण 2 पर जाएं।' : 'Proceed to Step 2 to enter this OTP.');
-    }
-  } else if (role === 'centre') {
-    const inp = document.getElementById('centreOtpInput');
-    if (inp) {
-      inp.value = currentRandomOtp;
-      inp.focus();
-      showToast(currentLang === 'hi' ? 'OTP भरा गया' : 'OTP Auto-Filled', (currentLang === 'hi' ? 'केंद्र स्टाफ 2FA कोड भरा गया: ' : 'Centre Staff 2FA code filled: ') + currentRandomOtp);
-    }
-  } else if (role === 'admin') {
-    const inp = document.getElementById('adminOtpInput');
-    if (inp) {
-      inp.value = currentRandomOtp;
-      inp.focus();
-      showToast(currentLang === 'hi' ? 'OTP भरा गया' : 'OTP Auto-Filled', (currentLang === 'hi' ? 'विभाग 2FA कोड भरा गया: ' : 'Department 2FA code filled: ') + currentRandomOtp);
-    }
-  }
-}
-
-function copyOtpToClipboard() {
-  if (!currentRandomOtp) generateNewRandomOtp();
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(currentRandomOtp).then(() => {
-      showToast(currentLang === 'hi' ? 'कॉपी किया गया' : 'Copied', `OTP ${currentRandomOtp} ` + (currentLang === 'hi' ? 'क्लिपबोर्ड पर कॉपी हो गया!' : 'copied to clipboard!'));
-    }).catch(() => autoFillOtp());
-  } else {
-    autoFillOtp();
-  }
-}
-window.generateNewRandomOtp = generateNewRandomOtp;
-window.autoFillOtp = autoFillOtp;
-window.copyOtpToClipboard = copyOtpToClipboard;
-
 // Role Tabs
-document.querySelectorAll('.role-tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.role-tab-btn').forEach(b=>b.classList.toggle('active',b===btn));const r=btn.dataset.authRole;document.getElementById('farmerPanel').classList.toggle('active',r==='farmer');document.getElementById('centrePanel').classList.toggle('active',r==='centre');document.getElementById('adminPanel').classList.toggle('active',r==='admin');generateNewRandomOtp(false);});});
+document.querySelectorAll('.role-tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.role-tab-btn').forEach(b=>b.classList.toggle('active',b===btn));const r=btn.dataset.authRole;document.getElementById('farmerPanel').classList.toggle('active',r==='farmer');document.getElementById('centrePanel').classList.toggle('active',r==='centre');document.getElementById('adminPanel').classList.toggle('active',r==='admin');});});
 
 // Wizard State
 let lState={step:1,janAadhaar:'748291038472',farmerName:'Ramkishan Choudhary',fatherName:'Hariram Choudhary',mobile:'9829019835',crop:'wheat',cropName:'Wheat',cropRate:'\u20B92,275/Qtl',cropQty:'50',ownershipType:'Self-Owned',centre:'bassi',centreName:'Bassi APMC Mandi',date:'Today, 28 Aug',slot:'09:00 AM \u2013 10:00 AM',generatedToken:'B-046'};
@@ -1590,13 +1209,10 @@ function lgoToStep(n){
 // OTP
 let lotpCountdown=null;
 function lSendOtp(){
-  generateNewRandomOtp(true);
   const mob=document.getElementById('lMobile').value.trim()||'9829019835';
   updateOtpSentText(currentLang);
-  ['1','2','3','4','5','6'].forEach((v,i)=>{const el=document.getElementById('lOtp'+(i+1));if(el)el.value='';});
+  ['1','2','3','4','5','6'].forEach((v,i)=>{const el=document.getElementById('lOtp'+(i+1));if(el)el.value=v;});
   lgoToStep(2);
-  const o1=document.getElementById('lOtp1');
-  if(o1) setTimeout(()=>o1.focus(), 150);
   let s=30;
   const te=document.getElementById('lotpTimer');
   const rb=document.getElementById('lResendOtpBtn');
@@ -1616,19 +1232,7 @@ function lSendOtp(){
 }
 function lOtpDigit(n){const i=document.getElementById('lOtp'+n);i.value=i.value.replace(/\D/g,'').slice(-1);if(i.value&&n<6)document.getElementById('lOtp'+(n+1)).focus();}
 function lOtpKey(e,n){if(e.key==='Backspace'&&!document.getElementById('lOtp'+n).value&&n>1)document.getElementById('lOtp'+(n-1)).focus();}
-function lVerifyOtp(){
-  const otp=[1,2,3,4,5,6].map(i=>document.getElementById('lOtp'+i).value).join('');
-  if(otp.length<6){showToast(currentLang==='hi'?'OTP आवश्यक':'OTP Required',currentLang==='hi'?'कृपया 6 अंकों का OTP दर्ज करें।':'Please enter the 6-digit OTP.');return;}
-  if(otp !== currentRandomOtp){
-    showToast(currentLang==='hi'?'अमान्य OTP':'Invalid OTP',currentLang==='hi'?'दर्ज OTP सुरक्षा प्रॉम्प्ट से मेल नहीं खाता (' + currentRandomOtp + ' दर्ज करें)।':'Entered OTP does not match security prompt code (' + currentRandomOtp + ').');
-    return;
-  }
-  showToast(currentLang==='hi'?'सत्यापित हुआ':'Verified',currentLang==='hi'?'OTP सफलतापूर्वक सत्यापित हुआ।':'OTP successfully verified.');
-  lState.farmerName=document.getElementById('lFarmerName').value.trim()||'Ramkishan Choudhary';
-  lState.janAadhaar=document.getElementById('lJanAadhaar').value.trim()||'748291038472';
-  lState.mobile=document.getElementById('lMobile').value.trim()||'9829019835';
-  lgoToStep(3);
-}
+function lVerifyOtp(){const otp=[1,2,3,4,5,6].map(i=>document.getElementById('lOtp'+i).value).join('');if(otp.length<6){showToast('OTP Required','Please enter the 6-digit OTP.');return;}lState.farmerName=document.getElementById('lFarmerName').value.trim()||'Ramkishan Choudhary';lState.janAadhaar=document.getElementById('lJanAadhaar').value.trim()||'748291038472';lState.mobile=document.getElementById('lMobile').value.trim()||'9829019835';lgoToStep(3);}
 
 // Crop
 function lSelectCrop(id,name,rate){lState.crop=id;lState.cropName=name;lState.cropRate=rate;document.querySelectorAll('#lCropOptions .choice-chip').forEach(c=>c.classList.toggle('active',c.dataset.lcrop===id));lUpdateSummary();}
@@ -1764,76 +1368,21 @@ function lFillDemo(idx){
 const EMITRA_RECORDS=[{regId:'REG-RJ-2026-001234',name:'Ramkishan Choudhary',crop:'Wheat \u00B7 50 Quintals',centre:'Bassi APMC Mandi',jan:'7482 9103 8472',mobile:'9829019835'},{regId:'REG-RJ-2026-005678',name:'Surajmal Sharma',crop:'Mustard \u00B7 32 Quintals',centre:'Chomu Mandi Yard',jan:'6319 2084 7163',mobile:'9414729831'}];
 function lFillEmitra(idx){const r=EMITRA_RECORDS[idx];document.getElementById('lEmitraRegId').value=r.regId;document.getElementById('lEmitraMobile').value=r.mobile;}
 function lEmitraSendOtp(){
-  generateNewRandomOtp(true);
   const mob=document.getElementById('lEmitraMobile').value.trim()||'9829019835';
   updateEmitraOtpText(currentLang);
-  ['1','2','3','4','5','6'].forEach((v,i)=>{const el=document.getElementById('leOtp'+(i+1));if(el)el.value='';});
+  ['1','2','3','4','5','6'].forEach((v,i)=>{const el=document.getElementById('leOtp'+(i+1));if(el)el.value=v;});
   document.getElementById('lEmitraStep1').style.display='none';
   document.getElementById('lEmitraStep2').style.display='';
   document.getElementById('lEmitraStep3').style.display='none';
-  const o1=document.getElementById('leOtp1');
-  if(o1) setTimeout(()=>o1.focus(), 150);
 }
 function leOtpDigit(n){const i=document.getElementById('leOtp'+n);i.value=i.value.replace(/\D/g,'').slice(-1);if(i.value&&n<6)document.getElementById('leOtp'+(n+1)).focus();}
 function leOtpKey(e,n){if(e.key==='Backspace'&&!document.getElementById('leOtp'+n).value&&n>1)document.getElementById('leOtp'+(n-1)).focus();}
-function lEmitraVerify(){
-  const otp=[1,2,3,4,5,6].map(i=>document.getElementById('leOtp'+i).value).join('');
-  if(otp.length<6){showToast(currentLang==='hi'?'OTP आवश्यक':'OTP Required',currentLang==='hi'?'कृपया 6 अंकों का OTP दर्ज करें।':'Please enter the 6-digit OTP.');return;}
-  if(otp !== currentRandomOtp){
-    showToast(currentLang==='hi'?'अमान्य OTP':'Invalid OTP',currentLang==='hi'?'दर्ज OTP सुरक्षा प्रॉम्प्ट से मेल नहीं खाता (' + currentRandomOtp + ' दर्ज करें)।':'Entered OTP does not match security prompt code (' + currentRandomOtp + ').');
-    return;
-  }
-  const regId=document.getElementById('lEmitraRegId').value.trim();
-  const rec=EMITRA_RECORDS.find(r=>r.regId===regId)||EMITRA_RECORDS[0];
-  document.getElementById('lEVerifiedRegId').textContent=rec.regId;
-  document.getElementById('lEVerifiedName').textContent=rec.name;
-  document.getElementById('lEVerifiedCropQty').textContent=rec.crop;
-  document.getElementById('lEVerifiedCentre').textContent=rec.centre;
-  document.getElementById('lEVerifiedJanAadhaar').textContent=rec.jan;
-  document.getElementById('lEmitraStep2').style.display='none';
-  document.getElementById('lEmitraStep3').style.display='';
-  showToast(currentLang==='hi'?'सत्यापित हुआ':'Verified',`Registration ${rec.regId} ` + (currentLang==='hi'?'सत्यापित हुआ।':'authenticated.'));
-}
-function lEmitraProceedToSlot(){lState.farmerName=document.getElementById('lEVerifiedName').textContent;lState.centreName=document.getElementById('lEVerifiedCentre').textContent;lgoToStep(7);document.getElementById('lEmitraSection').style.display='none';showToast(currentLang==='hi'?'स्लॉट बुकिंग':'Slot Booking',currentLang==='hi'?'कृपया अपना आगमन स्लॉट चुनें।':'Please select your arrival time slot.');}
+function lEmitraVerify(){const regId=document.getElementById('lEmitraRegId').value.trim();const rec=EMITRA_RECORDS.find(r=>r.regId===regId)||EMITRA_RECORDS[0];document.getElementById('lEVerifiedRegId').textContent=rec.regId;document.getElementById('lEVerifiedName').textContent=rec.name;document.getElementById('lEVerifiedCropQty').textContent=rec.crop;document.getElementById('lEVerifiedCentre').textContent=rec.centre;document.getElementById('lEVerifiedJanAadhaar').textContent=rec.jan;document.getElementById('lEmitraStep2').style.display='none';document.getElementById('lEmitraStep3').style.display='';showToast('Verified',`Registration ${rec.regId} authenticated.`);}
+function lEmitraProceedToSlot(){lState.farmerName=document.getElementById('lEVerifiedName').textContent;lState.centreName=document.getElementById('lEVerifiedCentre').textContent;lgoToStep(7);document.getElementById('lEmitraSection').style.display='none';showToast('Slot Booking','Please select your arrival time slot.');}
 
 // Auth handlers
-function handleCentreLogin(e){
-  e.preventDefault();
-  const centre=document.getElementById('centreSelect').value;
-  const staff=document.getElementById('staffId').value.trim()||'OP-BASSI-01';
-  const otp=(document.getElementById('centreOtpInput')?document.getElementById('centreOtpInput').value.trim():'');
-  if(!otp || otp.length < 6){
-    showToast(currentLang==='hi'?'2FA सुरक्षा कोड आवश्यक':'2FA Security Required', currentLang==='hi'?'कृपया साइड सुरक्षा प्रॉम्प्ट से 6-अंकीय OTP दर्ज करें।':'Please enter the 6-digit OTP from the side security prompt.');
-    if(document.getElementById('centreOtpInput')) document.getElementById('centreOtpInput').focus();
-    return;
-  }
-  if(otp !== currentRandomOtp){
-    showToast(currentLang==='hi'?'सुरक्षा सत्यापन विफल':'Security Verification Failed', currentLang==='hi'?'अमान्य OTP! कृपया साइड प्रॉम्प्ट में प्रदर्शित कोड (' + currentRandomOtp + ') दर्ज करें।':'Invalid OTP! Please enter the exact OTP shown in the side prompt (' + currentRandomOtp + ').');
-    return;
-  }
-  localStorage.setItem('kisan_setu_role','centre');
-  localStorage.setItem('kisan_setu_user_id',staff);
-  localStorage.setItem('kisan_setu_centre',centre);
-  window.location.href='index.html';
-}
-
-function handleAdminLogin(e){
-  e.preventDefault();
-  const email=document.getElementById('adminEmail').value.trim()||'officer@nic.in';
-  const otp=(document.getElementById('adminOtpInput')?document.getElementById('adminOtpInput').value.trim():'');
-  if(!otp || otp.length < 6){
-    showToast(currentLang==='hi'?'2FA सुरक्षा कोड आवश्यक':'2FA Security Required', currentLang==='hi'?'कृपया साइड सुरक्षा प्रॉम्प्ट से 6-अंकीय OTP दर्ज करें।':'Please enter the 6-digit OTP from the side security prompt.');
-    if(document.getElementById('adminOtpInput')) document.getElementById('adminOtpInput').focus();
-    return;
-  }
-  if(otp !== currentRandomOtp){
-    showToast(currentLang==='hi'?'सुरक्षा सत्यापन विफल':'Security Verification Failed', currentLang==='hi'?'अमान्य OTP! कृपया साइड प्रॉम्प्ट में प्रदर्शित कोड (' + currentRandomOtp + ') दर्ज करें।':'Invalid OTP! Please enter the exact OTP shown in the side prompt (' + currentRandomOtp + ').');
-    return;
-  }
-  localStorage.setItem('kisan_setu_role','admin');
-  localStorage.setItem('kisan_setu_user_id',email);
-  window.location.href='index.html';
-}
+function handleCentreLogin(e){e.preventDefault();const centre=document.getElementById('centreSelect').value;const staff=document.getElementById('staffId').value.trim()||'OP-BASSI-01';localStorage.setItem('kisan_setu_role','centre');localStorage.setItem('kisan_setu_user_id',staff);localStorage.setItem('kisan_setu_centre',centre);window.location.href='index.html';}
+function handleAdminLogin(e){e.preventDefault();const email=document.getElementById('adminEmail').value.trim()||'officer@nic.in';localStorage.setItem('kisan_setu_role','admin');localStorage.setItem('kisan_setu_user_id',email);window.location.href='index.html';}
 
 // Toast helper
 function showToast(title, msg){
@@ -1855,7 +1404,6 @@ window.showToast = showToast;
 window.toast = showToast;
 
 // Init
-generateNewRandomOtp();
 lgoToStep(1);
 setLanguage(currentLang);
 </script>
