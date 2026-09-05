@@ -1857,8 +1857,572 @@ footer.main-footer {
 }
 .calc-tooltip.open { display: block; }
 
+/* ==========================================================================
+   FEEDBACK MANAGEMENT SYSTEM STYLES (PS32 KISAN SETU)
+   ========================================================================== */
 
+/* Sub-nav toggle inside views */
+.fb-subnav {
+  display: inline-flex;
+  gap: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.fb-subnav-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+.fb-subnav-btn.active {
+  background: var(--bg-surface);
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
 
+/* Farmer Feedback Wizard Card */
+.fb-wizard-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+  max-width: 680px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+.fb-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.fb-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+.fb-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+/* Auto-linked Centre & Token Pill */
+.fb-linked-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-light);
+  border: 1px solid var(--primary-border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 12px 0 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Progress Indicator */
+.fb-progress-wrap {
+  margin-bottom: 22px;
+}
+.fb-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.fb-progress-bar {
+  height: 6px;
+  background: var(--bg-subtle);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.fb-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, #22c55e 100%);
+  border-radius: 4px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Question Section */
+.fb-step-pane {
+  display: none;
+  animation: fbFadeIn 0.25s ease-out;
+}
+.fb-step-pane.active {
+  display: block;
+}
+@keyframes fbFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fb-q-num {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.fb-q-text {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+.fb-q-optional {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+/* Option Cards (Touch-friendly & Mobile First) */
+.fb-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.fb-option-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  min-height: 52px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+.fb-option-card:hover {
+  border-color: var(--primary);
+  background: var(--bg-subtle);
+  transform: translateY(-1px);
+}
+.fb-option-card.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 700;
+  box-shadow: 0 0 0 1px var(--primary);
+}
+.fb-option-card .fb-opt-emoji {
+  font-size: 20px;
+  line-height: 1;
+  flex: none;
+}
+.fb-option-card .fb-opt-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  margin-left: auto;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.fb-option-card.active .fb-opt-radio {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+.fb-option-card.active .fb-opt-radio::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* Star Rating Component */
+.fb-star-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  margin-bottom: 20px;
+}
+.fb-stars-row {
+  display: flex;
+  gap: 10px;
+}
+.fb-star-btn {
+  background: none;
+  border: none;
+  font-size: 38px;
+  color: #d1d5db;
+  cursor: pointer;
+  transition: transform 0.12s, color 0.12s;
+  padding: 4px;
+}
+.fb-star-btn:hover,
+.fb-star-btn.hovered,
+.fb-star-btn.active {
+  color: #f59e0b;
+  transform: scale(1.15);
+}
+.fb-star-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  min-height: 20px;
+}
+
+/* Suggestion Textarea */
+.fb-textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  margin-bottom: 22px;
+  transition: border-color 0.15s ease;
+}
+.fb-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+/* Wizard Nav Buttons */
+.fb-nav-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+.fb-nav-btns .btn {
+  min-width: 110px;
+}
+
+/* Success Box */
+.fb-success-box {
+  display: none;
+  text-align: center;
+  padding: 36px 20px;
+  animation: fbFadeIn 0.3s ease;
+}
+.fb-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--success);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.fb-badge-id {
+  display: inline-block;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 12px 0 20px;
+}
+
+/* My Feedback List */
+.fb-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fb-history-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.fb-history-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+.fb-history-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.fb-history-stars {
+  color: #f59e0b;
+  font-size: 15px;
+}
+
+/* Centre Staff & Admin Feedback Analytics Cards */
+.centre-feedback-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.centre-metric-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.centre-metric-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.centre-metric-val {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Most Reported Issues Pills */
+.issues-pill-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 20px;
+}
+.issue-count-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+.issue-count-pill .issue-badge {
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+/* Extra Payment Warning Flag (Non-accusatory admin review) */
+.flag-extra-payment {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+[data-theme="dark"] .flag-extra-payment {
+  background: rgba(220, 38, 38, 0.15);
+  border-color: rgba(220, 38, 38, 0.35);
+  color: #f87171;
+}
+
+/* Admin Feedback Filter Bar */
+.admin-fb-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 18px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+.admin-fb-filters select,
+.admin-fb-filters input {
+  padding: 7px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+}
+.admin-fb-filters select:focus {
+  border-color: var(--primary);
+}
+
+/* Comparison Table */
+.comparison-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+  background: var(--bg-surface);
+}
+.comparison-table th {
+  background: var(--bg-subtle);
+  padding: 10px 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.comparison-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+}
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Modal for viewing all 10 responses */
+.fb-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+}
+.fb-modal-backdrop.open {
+  display: flex;
+}
+.fb-modal-content {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  max-width: 620px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+  animation: fbFadeIn 0.2s ease;
+}
+.fb-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+.fb-modal-close:hover {
+  color: var(--text-main);
+}
+.fb-qa-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.fb-qa-item:last-child {
+  border-bottom: none;
+}
+.fb-qa-q {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+.fb-qa-a {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Dark Mode overrides */
+[data-theme="dark"] .fb-wizard-card,
+[data-theme="dark"] .centre-metric-card,
+[data-theme="dark"] .fb-history-card,
+[data-theme="dark"] .comparison-table,
+[data-theme="dark"] .fb-modal-content,
+[data-theme="dark"] .admin-fb-filters {
+  background: var(--bg-surface);
+  border-color: var(--border-strong);
+}
+[data-theme="dark"] .fb-option-card {
+  background: var(--bg-subtle);
+  border-color: var(--border-strong);
+}
+[data-theme="dark"] .fb-option-card:hover {
+  background: rgba(22, 163, 74, 0.15);
+}
+[data-theme="dark"] .fb-option-card.active {
+  background: rgba(22, 163, 74, 0.22);
+  color: #4ade80;
+  border-color: #4ade80;
+}
+[data-theme="dark"] .fb-textarea {
+  background: var(--bg-input);
+  border-color: var(--border-strong);
+  color: var(--text-main);
+}
+[data-theme="dark"] .comparison-table th {
+  background: var(--bg-subtle);
+}
+[data-theme="dark"] .fb-subnav-btn.active {
+  background: var(--bg-subtle);
+  color: #4ade80;
+}
 
 </style>
 </head>
@@ -1995,6 +2559,10 @@ footer.main-footer {
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
             <span data-i18n="tab.qr">Gate QR Pass</span>
           </button>
+          <button class="tab-btn" data-ftab="feedback">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span data-i18n="tab.feedback">Centre Feedback</span>
+          </button>
         </nav>
 
         <!-- Centre Tabs -->
@@ -2015,6 +2583,10 @@ footer.main-footer {
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             <span data-i18n="tab.hooks">SMS Notification Logs</span>
           </button>
+          <button class="tab-btn" data-ctab="feedback">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span data-i18n="tab.centreFeedback">Farmer Feedback</span>
+          </button>
         </nav>
 
         <!-- Admin Tabs -->
@@ -2034,6 +2606,10 @@ footer.main-footer {
           <button class="tab-btn" data-atab="hooks">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             <span data-i18n="tab.hooks">System Audit Trail</span>
+          </button>
+          <button class="tab-btn" data-atab="feedback">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span data-i18n="tab.adminFeedback">Feedback Management</span>
           </button>
         </nav>
 
@@ -2527,6 +3103,419 @@ footer.main-footer {
             </div>
           </div>
 
+          <!-- 13. FARMER: FEEDBACK WIZARD & HISTORY -->
+          <div class="view-panel" data-view="farmer:feedback">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+              <div>
+                <h4 style="margin: 0; font-size: 18px; font-weight: 700; color: var(--text-main);" data-i18n="fb.farmerTitle">Procurement Centre Experience Feedback</h4>
+                <p style="margin: 4px 0 0; font-size: 13px; color: var(--text-muted);" data-i18n="fb.farmerSub">Share your experience at the procurement centre to help improve mandi services.</p>
+              </div>
+              <div class="fb-subnav">
+                <button class="fb-subnav-btn active" id="fbTabSubmitBtn" onclick="fbSwitchView('submit')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                  <span data-i18n="fb.tabSubmit">Submit Feedback</span>
+                </button>
+                <button class="fb-subnav-btn" id="fbTabHistoryBtn" onclick="fbSwitchView('history')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span data-i18n="fb.tabHistory">My Submissions</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Auto-linked procurement chip -->
+            <div class="procurement-chip" id="fbProcurementChip">
+              <span class="chip-item"><strong>Mandi:</strong> <span id="fbLinkedCenter">Bassi APMC Mandi</span></span>
+              <span class="chip-item"><strong>Token:</strong> <span id="fbLinkedToken">B-046</span></span>
+              <span class="chip-item"><strong>Farmer ID:</strong> <span id="fbLinkedFarmer">FID-88214</span></span>
+              <span class="chip-item"><strong>Booking:</strong> <span id="fbLinkedBooking">BK-BASSI-B-046</span></span>
+            </div>
+
+            <!-- VIEW A: Feedback Wizard -->
+            <div id="fbWizardSection">
+              <div class="fb-wizard-card" id="fbWizardCard">
+                <!-- Progress Header -->
+                <div class="fb-progress-wrap">
+                  <div class="fb-step-info">
+                    <span id="fbStepCounterText" style="font-weight: 700; color: var(--primary);">Question 1 of 10</span>
+                    <span id="fbRequiredBadge" style="font-size: 11px; color: var(--text-muted);">Required</span>
+                  </div>
+                  <div class="fb-progress-track">
+                    <div class="fb-progress-fill" id="fbProgressFill" style="width: 10%;"></div>
+                  </div>
+                </div>
+
+                <!-- STEP 1: Staff Behaviour -->
+                <div class="fb-step-container" data-step="1" id="fbStep1">
+                  <div class="fb-question-title" data-i18n="fb.q1Title">1. How was the behavior of the centre staff?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q1Sub">Evaluate the courtesy and helpfulness of operators and gate staff.</div>
+                  <div class="fb-options-list">
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Very Polite', 1)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optVeryPolite">Very Polite</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Polite', 1)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optPolite">Polite</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Normal', 1)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optNormal">Normal</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Rude', 1)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optRude">Rude</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Very Rude', 1)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optVeryRude">Very Rude</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- STEP 2: Quality Checking -->
+                <div class="fb-step-container" data-step="2" id="fbStep2" style="display:none;">
+                  <div class="fb-question-title" data-i18n="fb.q2Title">2. Was your crop quality checked transparently in your presence?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q2Sub">Checking moisture, foreign matter, and fair FAQ quality standards.</div>
+                  <div class="fb-options-list">
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('quality_checking', 'Yes', 2)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optYes">Yes</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('quality_checking', 'Partially', 2)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optPartially">Partially</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('quality_checking', 'No', 2)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optNo">No</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- STEP 3: Rejection Reason -->
+                <div class="fb-step-container" data-step="3" id="fbStep3" style="display:none;">
+                  <div class="fb-question-title" data-i18n="fb.q3Title">3. If any produce was rejected or downgraded, was a clear reason provided?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q3Sub">Clear communication on quality discrepancies and deduction parameters.</div>
+                  <div class="fb-options-list">
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('rejection_reason', 'Yes', 3)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optYes">Yes</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('rejection_reason', 'No', 3)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optNo">No</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('rejection_reason', 'Crop not rejected', 3)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optCropNotRejected">Crop was not rejected</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- STEP 4: Weighing Process -->
+                <div class="fb-step-container" data-step="4" id="fbStep4" style="display:none;">
+                  <div class="fb-question-title" data-i18n="fb.q4Title">4. Did you receive a correct weight receipt and clear digital scale view?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q4Sub">Electronic weighbridge display visibility and instant printout receipt.</div>
+                  <div class="fb-options-list">
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('weighing_process', 'Yes', 4)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optYes">Yes</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('weighing_process', 'Partially', 4)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optPartially">Partially</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('weighing_process', 'No', 4)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optNo">No</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- STEP 5: Next Step Guidance -->
+                <div class="fb-step-container" data-step="5" id="fbStep5" style="display:none;">
+                  <div class="fb-question-title" data-i18n="fb.q5Title">5. Were you informed clearly about payment timelines and next steps?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q5Sub">Explanation of PFMS direct bank transfer timeline (within 48 hours).</div>
+                  <div class="fb-options-list">
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('next_step_guidance', 'Yes', 5)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optYes">Yes</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('next_step_guidance', 'Partially', 5)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optPartially">Partially</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('next_step_guidance', 'No', 5)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optNo">No</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- STEP 6: Basic Facilities -->
+                <div class="fb-step-container" data-step="6" id="fbStep6" style="display:none;">
+                  <div class="fb-question-title" data-i18n="fb.q6Title">6. How were the basic facilities (drinking water, rest shade, clean washroom)?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q6Sub">Condition of farmer waiting amenities at the Mandi premises.</div>
+                  <div class="fb-options-list">
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('basic_facilities', 'All facilities available', 6)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optAllFacilities">All facilities available</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('basic_facilities', 'Some facilities available', 6)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optSomeFacilities">Some facilities available</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('basic_facilities', 'No facilities', 6)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optNoFacilities">No facilities</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- STEP 7: Extra Payment -->
+                <div class="fb-step-container" data-step="7" id="fbStep7" style="display:none;">
+                  <div class="fb-question-title" data-i18n="fb.q7Title">7. Were you asked for any extra payment, illegal commission or unofficial charges?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q7Sub">Strict anti-bribery governance. Your submission is confidential and protected.</div>
+                  <div class="fb-options-list">
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('extra_payment', 'No', 7)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optNo">No</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('extra_payment', 'Yes', 7)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optYes" style="color: var(--danger); font-weight: 700;">Yes</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('extra_payment', 'Prefer not to answer', 7)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optPreferNot">Prefer not to answer</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- STEP 8: Overall Experience (Rating) -->
+                <div class="fb-step-container" data-step="8" id="fbStep8" style="display:none;">
+                  <div class="fb-question-title" data-i18n="fb.q8Title">8. Overall how would you rate your mandi procurement experience?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q8Sub">Select 1 to 5 stars (1 = Poor, 5 = Excellent).</div>
+                  <div class="fb-rating-stars" style="margin: 20px 0 10px;">
+                    <button type="button" class="fb-star-btn" data-val="1" onclick="fbSetRating(1)">★</button>
+                    <button type="button" class="fb-star-btn" data-val="2" onclick="fbSetRating(2)">★</button>
+                    <button type="button" class="fb-star-btn" data-val="3" onclick="fbSetRating(3)">★</button>
+                    <button type="button" class="fb-star-btn" data-val="4" onclick="fbSetRating(4)">★</button>
+                    <button type="button" class="fb-star-btn" data-val="5" onclick="fbSetRating(5)">★</button>
+                  </div>
+                  <div id="fbRatingDesc" style="font-size: 14px; font-weight: 700; color: var(--primary); min-height: 22px;">Tap a star to rate</div>
+                </div>
+
+                <!-- STEP 9: Future Preference -->
+                <div class="fb-step-container" data-step="9" id="fbStep9" style="display:none;">
+                  <div class="fb-question-title" data-i18n="fb.q9Title">9. Would you choose this centre again for government procurement?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q9Sub">Help us measure farmer satisfaction and centre reliability.</div>
+                  <div class="fb-options-list">
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('future_preference', 'Definitely Yes', 9)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optDefYes">Definitely Yes</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('future_preference', 'Maybe', 9)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optMaybe">Maybe</span>
+                    </button>
+                    <button type="button" class="fb-option-card" onclick="fbSelectOption('future_preference', 'No', 9)">
+                      <span class="option-indicator"></span>
+                      <span data-i18n="fb.optNo">No</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- STEP 10: Suggestions (Optional) -->
+                <div class="fb-step-container" data-step="10" id="fbStep10" style="display:none;">
+                  <div class="fb-question-title" data-i18n="fb.q10Title">10. Any additional suggestions or feedback for improvement? (Optional)</div>
+                  <div class="fb-question-sub" data-i18n="fb.q10Sub">Let us know if you experienced any specific issues or have ideas to improve mandi operations.</div>
+                  <textarea id="fbSuggestionsInput" class="fb-textarea" rows="4" placeholder="Share your experience or suggestions here..."></textarea>
+                </div>
+
+                <!-- Wizard Actions -->
+                <div class="fb-wizard-actions">
+                  <button type="button" class="btn btn-outline" id="fbPrevBtn" onclick="fbGoStep(-1)" disabled>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                    <span data-i18n="fb.btnBack">Back</span>
+                  </button>
+                  <button type="button" class="btn btn-primary" id="fbNextBtn" onclick="fbGoStep(1)">
+                    <span id="fbNextBtnLabel" data-i18n="fb.btnNext">Next</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Success Card -->
+              <div class="fb-success-box" id="fbSuccessScreen" style="display:none;">
+                <div class="fb-success-icon">✓</div>
+                <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 800; color: var(--text-main);" data-i18n="fb.successTitle">Feedback Submitted Successfully!</h3>
+                <p style="font-size: 13.5px; color: var(--text-muted); max-width: 440px; margin: 0 auto 16px;" data-i18n="fb.successDesc">
+                  Your feedback has been recorded and safely transmitted. Thank you for contributing to transparent and farmer-friendly procurement.
+                </p>
+                <div style="font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 20px;">
+                  Reference Feedback ID: <span id="fbSuccessId" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--navy); background: var(--bg-subtle); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border);">FB-XXXXX</span>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                  <button type="button" class="btn btn-primary" onclick="fbSwitchView('history')" data-i18n="fb.btnViewMy">View My Submissions</button>
+                  <button type="button" class="btn btn-outline" onclick="fbResetWizard()" data-i18n="fb.btnNew">Submit Another</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- VIEW B: Farmer History Cards -->
+            <div id="fbHistorySection" style="display:none;">
+              <div id="fbFarmerHistoryList">
+                <!-- Dynamically rendered -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 14. CENTRE STAFF: FEEDBACK & QUALITY MONITORING -->
+          <div class="view-panel" data-view="centre:feedback">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+              <div>
+                <h4 style="margin: 0; font-size: 18px; font-weight: 700; color: var(--text-main);" data-i18n="fb.centreTitle">Centre Farmer Feedback & Quality Monitoring</h4>
+                <p style="margin: 4px 0 0; font-size: 13px; color: var(--text-muted);" data-i18n="fb.centreSub">Real-time farmer sentiment and process satisfaction for this Mandi centre.</p>
+              </div>
+              <span class="centre-chip" id="centreStaffMandiBadge" style="background: var(--primary-bg); color: var(--primary); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; border: 1px solid rgba(22,163,74,0.3);">
+                Bassi APMC Mandi
+              </span>
+            </div>
+
+            <!-- PII redaction policy banner -->
+            <div style="background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span><strong>Privacy Protected:</strong> All farmer phone numbers, Jan Aadhaar, and national identity credentials are redacted to guarantee honest, unbiased evaluations.</span>
+            </div>
+
+            <!-- Centre KPI Metrics -->
+            <div class="centre-feedback-metrics">
+              <div class="centre-metric-card">
+                <div class="centre-metric-label" data-i18n="fb.kpiAvgRating">Average Rating</div>
+                <div class="centre-metric-val" id="centreKpiAvgRating" style="color: #f59e0b;">- ★</div>
+              </div>
+              <div class="centre-metric-card">
+                <div class="centre-metric-label" data-i18n="fb.kpiTotalFeedbacks">Total Feedbacks</div>
+                <div class="centre-metric-val" id="centreKpiTotalCount">-</div>
+              </div>
+              <div class="centre-metric-card">
+                <div class="centre-metric-label" data-i18n="fb.kpiPositive">Positive Experience</div>
+                <div class="centre-metric-val" id="centreKpiPositivePct" style="color: var(--success);">-</div>
+              </div>
+              <div class="centre-metric-card">
+                <div class="centre-metric-label" data-i18n="fb.kpiNeedImprove">Needs Improvement</div>
+                <div class="centre-metric-val" id="centreKpiImprovementPct" style="color: var(--warning);">-</div>
+              </div>
+            </div>
+
+            <!-- Most Reported Issues -->
+            <div style="margin-bottom: 22px;">
+              <div style="font-size: 13px; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.04em;" data-i18n="fb.mostReportedTitle">Most Reported Improvement Areas</div>
+              <div class="issues-pill-wrap" id="centreTopIssuesWrap">
+                <span style="font-size: 12.5px; color: var(--text-muted);">Loading feedback insights...</span>
+              </div>
+            </div>
+
+            <!-- Centre Feedback Table / Cards -->
+            <div style="font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 12px;" data-i18n="fb.recentFeedbacksTitle">Recent Farmer Evaluations</div>
+            <div id="centreFeedbackList" style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- 15. ADMIN / AGENCY: STATEWIDE FEEDBACK MANAGEMENT & ANALYTICS -->
+          <div class="view-panel" data-view="admin:feedback">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+              <div>
+                <h4 style="margin: 0; font-size: 18px; font-weight: 700; color: var(--text-main);" data-i18n="fb.adminTitle">Statewide Procurement Feedback & Governance Console</h4>
+                <p style="margin: 4px 0 0; font-size: 13px; color: var(--text-muted);" data-i18n="fb.adminSub">Real-time farmer sentiment analysis, Mandi operational comparison, and administrative review flags.</p>
+              </div>
+            </div>
+
+            <!-- Admin Overview KPI Cards -->
+            <div class="centre-feedback-metrics" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+              <div class="centre-metric-card">
+                <div class="centre-metric-label" data-i18n="fb.kpiStatewideRating">Statewide Rating</div>
+                <div class="centre-metric-val" id="adminKpiAvgRating" style="color: #f59e0b;">- ★</div>
+              </div>
+              <div class="centre-metric-card">
+                <div class="centre-metric-label" data-i18n="fb.kpiStatewideTotal">Total Feedbacks</div>
+                <div class="centre-metric-val" id="adminKpiTotalFeedbacks">-</div>
+              </div>
+              <div class="centre-metric-card">
+                <div class="centre-metric-label" data-i18n="fb.kpiPositiveRate">Positive Rate</div>
+                <div class="centre-metric-val" id="adminKpiPositiveRate" style="color: var(--success);">-</div>
+              </div>
+              <div class="centre-metric-card" style="border-left: 3px solid var(--danger);">
+                <div class="centre-metric-label" data-i18n="fb.kpiExtraAlerts">Extra Payment Inquiries</div>
+                <div class="centre-metric-val" id="adminKpiExtraPaymentAlerts" style="color: var(--danger);">-</div>
+              </div>
+              <div class="centre-metric-card">
+                <div class="centre-metric-label" data-i18n="fb.kpiTopMandi">Top Mandi</div>
+                <div class="centre-metric-val" id="adminKpiTopMandi" style="font-size: 18px; color: var(--primary);">-</div>
+              </div>
+            </div>
+
+            <!-- Centre Comparison Section -->
+            <div style="margin: 24px 0 12px; display: flex; justify-content: space-between; align-items: center;">
+              <h5 style="margin: 0; font-size: 14px; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.04em;" data-i18n="fb.centreComparisonTitle">Procurement Centre Performance Comparison</h5>
+              <span style="font-size: 12px; color: var(--text-muted);" data-i18n="fb.liveComparisonLabel">Live Data Comparison</span>
+            </div>
+            <div class="comparison-table-wrap">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="fb.thCentre">Mandi Centre</th>
+                    <th data-i18n="fb.thTotal">Total Reviews</th>
+                    <th data-i18n="fb.thRating">Avg Rating</th>
+                    <th data-i18n="fb.thPositive">Positive %</th>
+                    <th data-i18n="fb.thFacilities">Facilities Score</th>
+                    <th data-i18n="fb.thExtraAlert">Extra Payment Alert</th>
+                    <th data-i18n="fb.thStatus">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="adminCentreComparisonTbody">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Interactive Filters -->
+            <div class="admin-fb-filters">
+              <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                <span data-i18n="fb.filterTitle">Filter Feedback:</span>
+              </div>
+              <select id="adminFilterCenter" onchange="applyAdminFeedbackFilters()">
+                <option value="all">All Centres</option>
+                <option value="bassi">Bassi APMC Mandi</option>
+                <option value="chomu">Chomu Yard</option>
+                <option value="dudu">Dudu Mandi</option>
+              </select>
+              <select id="adminFilterRating" onchange="applyAdminFeedbackFilters()">
+                <option value="all">All Ratings</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+              </select>
+              <select id="adminFilterExtraPayment" onchange="applyAdminFeedbackFilters()">
+                <option value="all">All Submissions</option>
+                <option value="Yes">⚠️ Extra Payment Reported Only</option>
+                <option value="No">Standard (No Extra Payment)</option>
+              </select>
+              <button class="btn btn-outline btn-sm" onclick="resetAdminFeedbackFilters()" style="margin-left: auto;" data-i18n="fb.btnReset">Reset</button>
+            </div>
+
+            <!-- Admin Feedback List -->
+            <div style="font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 12px;" data-i18n="fb.statewideSubmissionsTitle">Statewide Feedback Audit Stream</div>
+            <div id="adminFeedbackList" style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -2548,6 +3537,28 @@ footer.main-footer {
 </footer>
 
 <div id="toastContainer"></div>
+
+<!-- Feedback Detail Modal (10 QA Responses) -->
+<div class="fb-modal-backdrop" id="fbDetailModal" onclick="if(event.target===this)closeFeedbackDetailModal()">
+  <div class="fb-modal-content">
+    <button class="fb-modal-close" onclick="closeFeedbackDetailModal()">&times;</button>
+    <div style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
+        <h4 style="margin: 0; font-size: 17px; font-weight: 800; color: var(--navy);" id="modalFbId">FB-XXXXX</h4>
+        <span class="badge" id="modalFbCentre" style="background: var(--bg-subtle); border: 1px solid var(--border); font-size: 11px; padding: 2px 8px; border-radius: 4px;">Bassi APMC</span>
+        <span id="modalFbExtraFlag"></span>
+      </div>
+      <div style="font-size: 12px; color: var(--text-muted); display: flex; gap: 14px; flex-wrap: wrap;">
+        <span><strong>Farmer:</strong> <span id="modalFbFarmer">FID-88214</span></span>
+        <span><strong>Token:</strong> <span id="modalFbToken">B-046</span></span>
+        <span><strong>Date:</strong> <span id="modalFbDate">2026-09-06</span></span>
+      </div>
+    </div>
+    <div id="modalFbQaList">
+      <!-- 10 QA items rendered dynamically -->
+    </div>
+  </div>
+</div>
 
 <script>
 /* ================= BACKEND INTEGRATION CONFIG ================= */
@@ -2704,7 +3715,82 @@ const I18N = {
     "footer.brand": "Kisan Setu Portal",
     "footer.dept": "Department of Consumer Affairs · Ministry of Consumer Affairs, Food & Public Distribution",
     "footer.helpline": "National Farmer Helpline",
-    "footer.tollFree": "Toll Free"
+    "footer.tollFree": "Toll Free",
+    "tab.feedback": "Centre Feedback",
+    "tab.centreFeedback": "Farmer Feedback",
+    "tab.adminFeedback": "Feedback Management",
+    "fb.farmerTitle": "Procurement Centre Experience Feedback",
+    "fb.farmerSub": "Share your experience at the procurement centre to help improve mandi services.",
+    "fb.tabSubmit": "Submit Feedback",
+    "fb.tabHistory": "My Submissions",
+    "fb.q1Title": "1. How was the behavior of the centre staff?",
+    "fb.q1Sub": "Evaluate the courtesy and helpfulness of operators and gate staff.",
+    "fb.optVeryPolite": "Very Polite",
+    "fb.optPolite": "Polite",
+    "fb.optNormal": "Normal",
+    "fb.optRude": "Rude",
+    "fb.optVeryRude": "Very Rude",
+    "fb.q2Title": "2. Was your crop quality checked transparently in your presence?",
+    "fb.q2Sub": "Checking moisture, foreign matter, and fair FAQ quality standards.",
+    "fb.optYes": "Yes",
+    "fb.optPartially": "Partially",
+    "fb.optNo": "No",
+    "fb.q3Title": "3. If any produce was rejected or downgraded, was a clear reason provided?",
+    "fb.q3Sub": "Clear communication on quality discrepancies and deduction parameters.",
+    "fb.optCropNotRejected": "Crop was not rejected",
+    "fb.q4Title": "4. Did you receive a correct weight receipt and clear digital scale view?",
+    "fb.q4Sub": "Electronic weighbridge display visibility and instant printout receipt.",
+    "fb.q5Title": "5. Were you informed clearly about payment timelines and next steps?",
+    "fb.q5Sub": "Explanation of PFMS direct bank transfer timeline (within 48 hours).",
+    "fb.q6Title": "6. How were the basic facilities (drinking water, rest shade, clean washroom)?",
+    "fb.q6Sub": "Condition of farmer waiting amenities at the Mandi premises.",
+    "fb.optAllFacilities": "All facilities available",
+    "fb.optSomeFacilities": "Some facilities available",
+    "fb.optNoFacilities": "No facilities",
+    "fb.q7Title": "7. Were you asked for any extra payment, illegal commission or unofficial charges?",
+    "fb.q7Sub": "Strict anti-bribery governance. Your submission is confidential and protected.",
+    "fb.optPreferNot": "Prefer not to answer",
+    "fb.q8Title": "8. Overall how would you rate your mandi procurement experience?",
+    "fb.q8Sub": "Select 1 to 5 stars (1 = Poor, 5 = Excellent).",
+    "fb.q9Title": "9. Would you choose this centre again for government procurement?",
+    "fb.q9Sub": "Help us measure farmer satisfaction and centre reliability.",
+    "fb.optDefYes": "Definitely Yes",
+    "fb.optMaybe": "Maybe",
+    "fb.q10Title": "10. Any additional suggestions or feedback for improvement? (Optional)",
+    "fb.q10Sub": "Let us know if you experienced any specific issues or have ideas to improve mandi operations.",
+    "fb.btnBack": "Back",
+    "fb.btnNext": "Next",
+    "fb.successTitle": "Feedback Submitted Successfully!",
+    "fb.successDesc": "Your feedback has been recorded and safely transmitted. Thank you for contributing to transparent and farmer-friendly procurement.",
+    "fb.btnViewMy": "View My Submissions",
+    "fb.btnNew": "Submit Another",
+    "fb.centreTitle": "Centre Farmer Feedback & Quality Monitoring",
+    "fb.centreSub": "Real-time farmer sentiment and process satisfaction for this Mandi centre.",
+    "fb.kpiAvgRating": "Average Rating",
+    "fb.kpiTotalFeedbacks": "Total Feedbacks",
+    "fb.kpiPositive": "Positive Experience",
+    "fb.kpiNeedImprove": "Needs Improvement",
+    "fb.mostReportedTitle": "Most Reported Improvement Areas",
+    "fb.recentFeedbacksTitle": "Recent Farmer Evaluations",
+    "fb.adminTitle": "Statewide Procurement Feedback & Governance Console",
+    "fb.adminSub": "Real-time farmer sentiment analysis, Mandi operational comparison, and administrative review flags.",
+    "fb.kpiStatewideRating": "Statewide Rating",
+    "fb.kpiStatewideTotal": "Total Feedbacks",
+    "fb.kpiPositiveRate": "Positive Rate",
+    "fb.kpiExtraAlerts": "Extra Payment Inquiries",
+    "fb.kpiTopMandi": "Top Mandi",
+    "fb.centreComparisonTitle": "Procurement Centre Performance Comparison",
+    "fb.liveComparisonLabel": "Live Data Comparison",
+    "fb.thCentre": "Mandi Centre",
+    "fb.thTotal": "Total Reviews",
+    "fb.thRating": "Avg Rating",
+    "fb.thPositive": "Positive %",
+    "fb.thFacilities": "Facilities Score",
+    "fb.thExtraAlert": "Extra Payment Alert",
+    "fb.thStatus": "Status",
+    "fb.filterTitle": "Filter Feedback:",
+    "fb.btnReset": "Reset",
+    "fb.statewideSubmissionsTitle": "Statewide Feedback Audit Stream"
   },
   hi: {
     "header.subtitle": "एमएसपी खरीद एवं डिजिटल कतार प्रबंधन पोर्टल",
@@ -2820,7 +3906,82 @@ const I18N = {
     "footer.brand": "किसान सेतु पोर्टल",
     "footer.dept": "उपभोक्ता मामले विभाग · उपभोक्ता मामले, खाद्य और सार्वजनिक वितरण मंत्रालय",
     "footer.helpline": "राष्ट्रीय किसान हेल्पलाइन",
-    "footer.tollFree": "टोल फ्री"
+    "footer.tollFree": "टोल फ्री",
+    "tab.feedback": "केंद्र फीडबैक",
+    "tab.centreFeedback": "किसान फीडबैक",
+    "tab.adminFeedback": "फीडबैक प्रबंधन",
+    "fb.farmerTitle": "खरीद केंद्र अनुभव फीडबैक",
+    "fb.farmerSub": "मंडी सेवाओं को बेहतर बनाने के लिए खरीद केंद्र पर अपने अनुभव साझा करें।",
+    "fb.tabSubmit": "फीडबैक दर्ज करें",
+    "fb.tabHistory": "मेरे फीडबैक",
+    "fb.q1Title": "1. केंद्र कर्मचारियों का व्यवहार कैसा था?",
+    "fb.q1Sub": "ऑपरेटरों और गेट कर्मचारियों की विनम्रता और सहयोग का मूल्यांकन करें।",
+    "fb.optVeryPolite": "बहुत विनम्र",
+    "fb.optPolite": "विनम्र",
+    "fb.optNormal": "सामान्य",
+    "fb.optRude": "रूखा",
+    "fb.optVeryRude": "बहुत खराब",
+    "fb.q2Title": "2. क्या आपकी फसल की गुणवत्ता जांच आपके सामने पारदर्शी तरीके से हुई?",
+    "fb.q2Sub": "नमी, अवांछित तत्व और उचित FAQ गुणवत्ता मानकों की जांच।",
+    "fb.optYes": "हाँ",
+    "fb.optPartially": "आंशिक रूप से",
+    "fb.optNo": "नहीं",
+    "fb.q3Title": "3. यदि फसल खारिज/डाउनग्रेड की गई, तो क्या स्पष्ट कारण बताया गया?",
+    "fb.q3Sub": "गुणवत्ता अंतर और कटौती मापदंडों पर स्पष्ट संचार।",
+    "fb.optCropNotRejected": "फसल खारिज नहीं हुई",
+    "fb.q4Title": "4. क्या आपको सही वजन रसीद मिली और तराजू साफ दिखाई दिया?",
+    "fb.q4Sub": "इलेक्ट्रॉनिक वे-ब्रिज डिस्प्ले की दृश्यता और तुरंत प्रिंट रसीद।",
+    "fb.q5Title": "5. क्या आपको भुगतान समय-सीमा और अगले चरणों की स्पष्ट जानकारी दी गई?",
+    "fb.q5Sub": "PFMS सीधे बैंक ट्रांसफर समय-सीमा (48 घंटों के भीतर) का विवरण।",
+    "fb.q6Title": "6. मंडी में बुनियादी सुविधाएं (पीने का पानी, छाया, शौचालय) कैसी थीं?",
+    "fb.q6Sub": "मंडी परिसर में किसान प्रतीक्षा सुविधाओं की स्थिति।",
+    "fb.optAllFacilities": "सभी सुविधाएं उपलब्ध",
+    "fb.optSomeFacilities": "कुछ सुविधाएं उपलब्ध",
+    "fb.optNoFacilities": "कोई सुविधा नहीं",
+    "fb.q7Title": "7. क्या आपसे कोई अतिरिक्त शुल्क, अनधिकृत कमीशन या पैसे मांगे गए?",
+    "fb.q7Sub": "सख्त भ्रष्टाचार-मुक्त प्रशासन। आपकी प्रतिक्रिया पूरी तरह गोपनीय और सुरक्षित है।",
+    "fb.optPreferNot": "बताना नहीं चाहते",
+    "fb.q8Title": "8. कुल मिलाकर मंडी में खरीद का आपका अनुभव कैसा रहा?",
+    "fb.q8Sub": "1 से 5 स्टार चुनें (1 = खराब, 5 = उत्कृष्ट)।",
+    "fb.q9Title": "9. क्या आप भविष्य में सरकारी खरीद के लिए इसी केंद्र पर फिर आएंगे?",
+    "fb.q9Sub": "किसान संतुष्टि और केंद्र विश्वसनीयता मापने में मदद करें।",
+    "fb.optDefYes": "ज़रूर हाँ",
+    "fb.optMaybe": "शायद",
+    "fb.q10Title": "10. सुधार के लिए कोई अतिरिक्त सुझाव या टिप्पणी? (वैकल्पिक)",
+    "fb.q10Sub": "यदि कोई विशेष समस्या आई हो या मंडी सुधार के विचार हों तो साझा करें।",
+    "fb.btnBack": "पीछे",
+    "fb.btnNext": "आगे बढ़ें",
+    "fb.successTitle": "फीडबैक सफलतापूर्वक दर्ज हुआ!",
+    "fb.successDesc": "आपकी प्रतिक्रिया सुरक्षित रूप से दर्ज कर ली गई है। पारदर्शी और किसान-हितैषी खरीद में योगदान के लिए धन्यवाद।",
+    "fb.btnViewMy": "मेरे सबमिशन देखें",
+    "fb.btnNew": "नया फीडबैक दर्ज करें",
+    "fb.centreTitle": "केंद्र किसान फीडबैक एवं गुणवत्ता निगरानी",
+    "fb.centreSub": "इस मंडी केंद्र के लिए रियल-टाइम किसान संतुष्टि एवं प्रक्रिया समीक्षा।",
+    "fb.kpiAvgRating": "औसत रेटिंग",
+    "fb.kpiTotalFeedbacks": "कुल फीडबैक",
+    "fb.kpiPositive": "सकारात्मक अनुभव",
+    "fb.kpiNeedImprove": "सुधार अपेक्षित",
+    "fb.mostReportedTitle": "सर्वाधिक रिपोर्ट की गई समस्याएं",
+    "fb.recentFeedbacksTitle": "हाल के किसान मूल्यांकन",
+    "fb.adminTitle": "राज्यव्यापी खरीद फीडबैक एवं प्रशासनिक निगरानी",
+    "fb.adminSub": "वास्तविक समय में किसान भावना विश्लेषण, मंडी तुलना और प्रशासनिक समीक्षा अलर्ट।",
+    "fb.kpiStatewideRating": "राज्यव्यापी रेटिंग",
+    "fb.kpiStatewideTotal": "कुल फीडबैक",
+    "fb.kpiPositiveRate": "सकारात्मक दर",
+    "fb.kpiExtraAlerts": "अतिरिक्त भुगतान जांच",
+    "fb.kpiTopMandi": "शीर्ष प्रदर्शन मंडी",
+    "fb.centreComparisonTitle": "खरीद केंद्र प्रदर्शन तुलना",
+    "fb.liveComparisonLabel": "लाइव डेटा तुलना",
+    "fb.thCentre": "खरीद केंद्र",
+    "fb.thTotal": "कुल समीक्षाएं",
+    "fb.thRating": "औसत रेटिंग",
+    "fb.thPositive": "सकारात्मक %",
+    "fb.thFacilities": "सुविधा स्कोर",
+    "fb.thExtraAlert": "अतिरिक्त भुगतान अलर्ट",
+    "fb.thStatus": "स्थिति",
+    "fb.filterTitle": "फीडबैक फ़िल्टर:",
+    "fb.btnReset": "रीसेट",
+    "fb.statewideSubmissionsTitle": "राज्यव्यापी फीडबैक ऑडिट स्ट्रीम"
   }
 };
 
@@ -3043,6 +4204,9 @@ window.handleFarmerTab = function(tabKey) {
   showView('farmer', tabKey);
   if (tabKey === 'qr') renderPassQR();
   if (tabKey === 'queue') updateLiveQueueUI();
+  if (tabKey === 'feedback') {
+    if (typeof fbSwitchView === 'function') fbSwitchView('submit');
+  }
   const ws = document.getElementById('workspaceSection');
   if (ws) ws.scrollIntoView({ behavior: 'smooth' });
 };
@@ -3052,6 +4216,9 @@ window.handleCentreTab = function(tabKey) {
   document.querySelectorAll('#centreTabs .tab-btn').forEach(x => x.classList.toggle('active', x.dataset.ctab === tabKey));
   showView('centre', tabKey);
   try { if (typeof stopCamera === 'function') stopCamera(); } catch(e){}
+  if (tabKey === 'feedback') {
+    if (typeof loadCentreFeedback === 'function') loadCentreFeedback();
+  }
 };
 
 window.handleAdminTab = function(tabKey) {
@@ -3059,6 +4226,9 @@ window.handleAdminTab = function(tabKey) {
   document.querySelectorAll('#adminTabs .tab-btn').forEach(x => x.classList.toggle('active', x.dataset.atab === tabKey));
   showView('admin', tabKey);
   if (tabKey === 'analytics') renderAnalyticsChart();
+  if (tabKey === 'feedback') {
+    if (typeof loadAdminFeedback === 'function') loadAdminFeedback();
+  }
 };
 
 document.querySelectorAll('#farmerTabs .tab-btn').forEach(b => b.addEventListener('click', () => window.handleFarmerTab(b.dataset.ftab)));
@@ -4594,21 +5764,21 @@ if (openTab === 'register' || openTab === 'verify') {
   window.location.href = 'login.html';
 } else if (savedRole === 'centre') {
   setRole('centre');
-  if (openTab && ['queue', 'scan', 'weights', 'quality', 'audit', 'dispatch'].includes(openTab)) {
+  if (openTab && ['queue', 'scan', 'weights', 'quality', 'audit', 'dispatch', 'feedback'].includes(openTab)) {
     window.handleCentreTab(openTab);
   } else {
     window.handleCentreTab('queue');
   }
 } else if (savedRole === 'admin') {
   setRole('admin');
-  if (openTab && ['analytics', 'overview', 'balance', 'rates', 'complaints', 'reports'].includes(openTab)) {
+  if (openTab && ['analytics', 'overview', 'balance', 'rates', 'complaints', 'reports', 'feedback'].includes(openTab)) {
     window.handleAdminTab(openTab);
   } else {
     window.handleAdminTab('analytics');
   }
 } else {
   setRole('farmer');
-  if (openTab && ['queue', 'wa', 'payment', 'qr'].includes(openTab)) {
+  if (openTab && ['queue', 'wa', 'payment', 'qr', 'feedback'].includes(openTab)) {
     window.handleFarmerTab(openTab);
   } else {
     window.handleFarmerTab('queue');
@@ -4900,6 +6070,598 @@ window.renderLiveQueueTable = renderLiveQueueTable;
 window.renderQueueTable = renderLiveQueueTable;
 
 
+/* ==========================================================================
+   FEEDBACK MANAGEMENT SYSTEM (FARMER, CENTRE STAFF, ADMIN)
+   ========================================================================== */
+
+let fbState = {
+  step: 1,
+  answers: {
+    staff_behavior: null,
+    quality_checking: null,
+    rejection_reason: null,
+    weighing_process: null,
+    next_step_guidance: null,
+    basic_facilities: null,
+    extra_payment: null,
+    rating: null,
+    future_preference: null,
+    suggestions: ''
+  },
+  isSubmitting: false
+};
+
+const FB_RATING_LABELS = {
+  en: { 1: '1/5 · Very Poor', 2: '2/5 · Poor', 3: '3/5 · Average', 4: '4/5 · Good', 5: '5/5 · Excellent' },
+  hi: { 1: '1/5 · बहुत खराब', 2: '2/5 · खराब', 3: '3/5 · सामान्य', 4: '4/5 · अच्छा', 5: '5/5 · उत्कृष्ट' }
+};
+
+window.fbSelectOption = function(field, val, step) {
+  fbState.answers[field] = val;
+  const stepContainer = document.getElementById(`fbStep${step}`);
+  if (stepContainer) {
+    stepContainer.querySelectorAll('.fb-option-card').forEach(btn => {
+      const text = btn.innerText.trim();
+      const isActive = text.includes(val) || (btn.getAttribute('onclick') || '').includes(`'${val}'`);
+      btn.classList.toggle('active', isActive);
+    });
+  }
+};
+
+window.fbSetRating = function(val) {
+  fbState.answers.rating = val;
+  document.querySelectorAll('.fb-star-btn').forEach(btn => {
+    const starVal = parseInt(btn.dataset.val, 10);
+    btn.classList.toggle('active', starVal <= val);
+  });
+  const descEl = document.getElementById('fbRatingDesc');
+  if (descEl) {
+    const lang = currentLang === 'hi' ? 'hi' : 'en';
+    descEl.textContent = FB_RATING_LABELS[lang][val] || `${val} / 5 Stars`;
+  }
+};
+
+window.fbGoStep = function(delta) {
+  const currentStep = fbState.step;
+  const targetStep = currentStep + delta;
+
+  // Validation if advancing forward
+  if (delta > 0) {
+    if (currentStep === 1 && !fbState.answers.staff_behavior) {
+      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया केंद्र कर्मचारियों के व्यवहार का चयन करें।' : 'Please evaluate the staff behavior to proceed.');
+      return;
+    }
+    if (currentStep === 2 && !fbState.answers.quality_checking) {
+      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया फसल गुणवत्ता जांच का चयन करें।' : 'Please indicate if crop quality was checked in your presence.');
+      return;
+    }
+    if (currentStep === 3 && !fbState.answers.rejection_reason) {
+      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया फसल अस्वीकृति कारण विकल्प चुनें।' : 'Please choose an option regarding rejection reason.');
+      return;
+    }
+    if (currentStep === 4 && !fbState.answers.weighing_process) {
+      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया तौल प्रक्रिया विकल्प चुनें।' : 'Please select an option for the weighing process.');
+      return;
+    }
+    if (currentStep === 5 && !fbState.answers.next_step_guidance) {
+      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया अगले चरणों की जानकारी का चयन करें।' : 'Please indicate if next steps & payment guidance were provided.');
+      return;
+    }
+    if (currentStep === 6 && !fbState.answers.basic_facilities) {
+      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया बुनियादी सुविधाओं का मूल्यांकन करें।' : 'Please evaluate the basic mandi facilities.');
+      return;
+    }
+    if (currentStep === 7 && !fbState.answers.extra_payment) {
+      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया अतिरिक्त भुगतान का विकल्प चुनें।' : 'Please answer the extra payment question.');
+      return;
+    }
+    if (currentStep === 8 && !fbState.answers.rating) {
+      toast(currentLang === 'hi' ? 'रेटिंग आवश्यक है' : 'Rating Required', currentLang === 'hi' ? 'कृपया 1 से 5 स्टार तक रेटिंग चुनें।' : 'Please tap a star (1 to 5) to rate your overall experience.');
+      return;
+    }
+    if (currentStep === 9 && !fbState.answers.future_preference) {
+      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया भविष्य की प्राथमिकता का चयन करें।' : 'Please select if you would choose this centre again.');
+      return;
+    }
+    if (currentStep === 10) {
+      submitFarmerFeedback();
+      return;
+    }
+  }
+
+  if (targetStep < 1 || targetStep > 10) return;
+  fbState.step = targetStep;
+
+  // Show target container, hide others
+  for (let i = 1; i <= 10; i++) {
+    const el = document.getElementById(`fbStep${i}`);
+    if (el) el.style.display = (i === targetStep) ? 'block' : 'none';
+  }
+
+  // Update Progress Header
+  const counterText = document.getElementById('fbStepCounterText');
+  if (counterText) counterText.textContent = (currentLang === 'hi') ? `प्रश्न ${targetStep} / 10` : `Question ${targetStep} of 10`;
+
+  const reqBadge = document.getElementById('fbRequiredBadge');
+  if (reqBadge) {
+    if (targetStep === 10) {
+      reqBadge.textContent = currentLang === 'hi' ? 'वैकल्पिक' : 'Optional';
+      reqBadge.style.color = 'var(--text-muted)';
+    } else {
+      reqBadge.textContent = currentLang === 'hi' ? 'आवश्यक' : 'Required';
+      reqBadge.style.color = 'var(--primary)';
+    }
+  }
+
+  const fillEl = document.getElementById('fbProgressFill');
+  if (fillEl) fillEl.style.width = `${targetStep * 10}%`;
+
+  // Buttons state
+  const prevBtn = document.getElementById('fbPrevBtn');
+  if (prevBtn) prevBtn.disabled = (targetStep === 1);
+
+  const nextBtnLabel = document.getElementById('fbNextBtnLabel');
+  if (nextBtnLabel) {
+    if (targetStep === 10) {
+      nextBtnLabel.textContent = currentLang === 'hi' ? 'फीडबैक सबमिट करें' : 'Submit Feedback';
+    } else {
+      nextBtnLabel.textContent = currentLang === 'hi' ? 'आगे बढ़ें' : 'Next';
+    }
+  }
+};
+
+window.fbSwitchView = function(view) {
+  const submitBtn = document.getElementById('fbTabSubmitBtn');
+  const historyBtn = document.getElementById('fbTabHistoryBtn');
+  const wizardSec = document.getElementById('fbWizardSection');
+  const histSec = document.getElementById('fbHistorySection');
+
+  if (view === 'submit') {
+    if (submitBtn) submitBtn.classList.add('active');
+    if (historyBtn) historyBtn.classList.remove('active');
+    if (wizardSec) wizardSec.style.display = 'block';
+    if (histSec) histSec.style.display = 'none';
+  } else {
+    if (submitBtn) submitBtn.classList.remove('active');
+    if (historyBtn) historyBtn.classList.add('active');
+    if (wizardSec) wizardSec.style.display = 'none';
+    if (histSec) histSec.style.display = 'block';
+    loadFarmerMyFeedback();
+  }
+};
+
+window.fbResetWizard = function() {
+  fbState.step = 1;
+  fbState.isSubmitting = false;
+  fbState.answers = {
+    staff_behavior: null,
+    quality_checking: null,
+    rejection_reason: null,
+    weighing_process: null,
+    next_step_guidance: null,
+    basic_facilities: null,
+    extra_payment: null,
+    rating: null,
+    future_preference: null,
+    suggestions: ''
+  };
+
+  document.querySelectorAll('.fb-option-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.fb-star-btn').forEach(b => b.classList.remove('active'));
+  const descEl = document.getElementById('fbRatingDesc');
+  if (descEl) descEl.textContent = currentLang === 'hi' ? 'रेटिंग के लिए स्टार पर क्लिक करें' : 'Tap a star to rate';
+
+  const sugInput = document.getElementById('fbSuggestionsInput');
+  if (sugInput) sugInput.value = '';
+
+  const wizardCard = document.getElementById('fbWizardCard');
+  const successScreen = document.getElementById('fbSuccessScreen');
+  if (wizardCard) wizardCard.style.display = 'block';
+  if (successScreen) successScreen.style.display = 'none';
+
+  fbGoStep(0);
+};
+
+async function submitFarmerFeedback() {
+  if (fbState.isSubmitting) return;
+  fbState.isSubmitting = true;
+
+  const nextBtn = document.getElementById('fbNextBtn');
+  const nextBtnLabel = document.getElementById('fbNextBtnLabel');
+  if (nextBtn) nextBtn.disabled = true;
+  if (nextBtnLabel) nextBtnLabel.textContent = currentLang === 'hi' ? 'सबमिट हो रहा है...' : 'Submitting...';
+
+  const sugEl = document.getElementById('fbSuggestionsInput');
+  fbState.answers.suggestions = sugEl ? sugEl.value.trim() : '';
+
+  const payload = {
+    farmer_id: activeFarmerId || 'FID-88214',
+    token_id: 'B-046',
+    center_id: activeFarmerAssignedCentre || 'bassi',
+    crop: 'Mustard (Sarson)',
+    booking_id: activeFarmerBookingId || 'BK-BASSI-B-046',
+    staff_behavior: fbState.answers.staff_behavior,
+    quality_checking: fbState.answers.quality_checking,
+    rejection_reason: fbState.answers.rejection_reason,
+    weighing_process: fbState.answers.weighing_process,
+    next_step_guidance: fbState.answers.next_step_guidance,
+    basic_facilities: fbState.answers.basic_facilities,
+    extra_payment: fbState.answers.extra_payment,
+    rating: parseInt(fbState.answers.rating, 10),
+    future_preference: fbState.answers.future_preference,
+    suggestions: fbState.answers.suggestions
+  };
+
+  try {
+    const res = await fetch(`${API_BASE}/api/feedback`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if (data.ok) {
+      toast(currentLang === 'hi' ? 'फीडबैक सफल' : 'Feedback Recorded', currentLang === 'hi' ? `संदर्भ संख्या: ${data.feedback.id}` : `Reference ID: ${data.feedback.id}`);
+      const wizardCard = document.getElementById('fbWizardCard');
+      const successScreen = document.getElementById('fbSuccessScreen');
+      const successId = document.getElementById('fbSuccessId');
+      if (wizardCard) wizardCard.style.display = 'none';
+      if (successScreen) successScreen.style.display = 'block';
+      if (successId) successId.textContent = data.feedback.id;
+    } else {
+      toast(currentLang === 'hi' ? 'त्रुटि' : 'Error', data.detail || 'Could not submit feedback.');
+    }
+  } catch (err) {
+    console.error('Feedback submit error:', err);
+    toast(currentLang === 'hi' ? 'कनेक्शन त्रुटि' : 'Connection Error', 'Failed to reach server.');
+  } finally {
+    fbState.isSubmitting = false;
+    if (nextBtn) nextBtn.disabled = false;
+    if (nextBtnLabel) nextBtnLabel.textContent = currentLang === 'hi' ? 'फीडबैक सबमिट करें' : 'Submit Feedback';
+  }
+}
+
+async function loadFarmerMyFeedback() {
+  const host = document.getElementById('fbFarmerHistoryList');
+  if (!host) return;
+  host.innerHTML = `<div style="text-align: center; padding: 30px; color: var(--text-muted);">${currentLang === 'hi' ? 'सबमिशन लोड हो रहे हैं...' : 'Loading submissions...'}</div>`;
+
+  try {
+    const fid = activeFarmerId || 'FID-88214';
+    const res = await fetch(`${API_BASE}/api/feedback/my?farmer_id=${fid}`);
+    const data = await res.json();
+
+    if (!data.ok || !data.feedbacks || data.feedbacks.length === 0) {
+      host.innerHTML = `
+        <div style="text-align: center; padding: 40px 20px; background: var(--bg-surface); border: 1px dashed var(--border); border-radius: 8px;">
+          <div style="font-size: 32px; margin-bottom: 8px;">📝</div>
+          <h5 style="margin: 0 0 6px; font-weight: 700; color: var(--text-main);">${currentLang === 'hi' ? 'कोई सबमिशन नहीं मिला' : 'No Submissions Yet'}</h5>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 16px;">${currentLang === 'hi' ? 'आपने अभी तक कोई फीडबैक दर्ज नहीं किया है।' : 'You have not submitted any centre evaluations yet.'}</p>
+          <button class="btn btn-primary btn-sm" onclick="fbSwitchView('submit')">${currentLang === 'hi' ? 'फीडबैक दर्ज करें' : 'Submit Feedback Now'}</button>
+        </div>
+      `;
+      return;
+    }
+
+    host.innerHTML = data.feedbacks.map(item => {
+      const stars = '★'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+      const isExtra = item.extra_payment === 'Yes';
+      const extraBadge = isExtra
+        ? `<span class="flag-extra-payment" style="margin-left: 8px;">⚠️ ${currentLang === 'hi' ? 'अतिरिक्त भुगतान रिपोर्ट' : 'Extra Payment Reported'}</span>`
+        : '';
+      const centreTitle = item.center_name || (item.center_id === 'bassi' ? 'Bassi APMC Mandi' : (item.center_id === 'chomu' ? 'Chomu Yard' : 'Dudu Mandi'));
+
+      return `
+        <div class="fb-history-card">
+          <div class="fb-history-header">
+            <div>
+              <strong style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--navy);">${item.id}</strong>
+              <span style="margin: 0 6px; color: var(--text-muted);">·</span>
+              <span style="font-weight: 600; font-size: 13px; color: var(--text-main);">${centreTitle}</span>
+              ${extraBadge}
+            </div>
+            <div class="fb-history-stars">${stars}</div>
+          </div>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px;">
+            <span><strong>Token:</strong> ${item.token_id}</span>
+            <span><strong>Crop:</strong> ${item.crop}</span>
+            <span><strong>Staff:</strong> ${item.staff_behavior}</span>
+            <span><strong>Facilities:</strong> ${item.basic_facilities}</span>
+            <span><strong>Date:</strong> ${item.created_at ? item.created_at.slice(0, 10) : 'Recent'}</span>
+          </div>
+          ${item.suggestions ? `<div style="font-size: 12.5px; background: var(--bg-subtle); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); color: var(--text-main); margin-bottom: 10px;"><em>"${item.suggestions}"</em></div>` : ''}
+          <div style="text-align: right;">
+            <button class="btn btn-outline btn-sm" onclick="openFeedbackDetailModal('${item.id}')">${currentLang === 'hi' ? 'सभी 10 उत्तर देखें' : 'View All 10 Responses'}</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch (err) {
+    console.error('Error fetching my feedback:', err);
+    host.innerHTML = `<div style="padding: 20px; color: var(--danger); text-align: center;">Failed to load feedback history.</div>`;
+  }
+}
+
+// Centre Staff Functions
+async function loadCentreFeedback() {
+  const centreId = 'bassi'; // Assigned centre for logged in centre staff
+  const mandiName = centreId === 'bassi' ? 'Bassi APMC Mandi' : (centreId === 'chomu' ? 'Chomu Yard' : 'Dudu Mandi');
+
+  const badgeEl = document.getElementById('centreStaffMandiBadge');
+  if (badgeEl) badgeEl.textContent = mandiName;
+
+  try {
+    const res = await fetch(`${API_BASE}/api/feedback/centre/${centreId}`, {
+      headers: { 'X-Centre-Id': centreId }
+    });
+    const data = await res.json();
+    if (!data.ok) return;
+
+    // KPI stats
+    const avgEl = document.getElementById('centreKpiAvgRating');
+    const totEl = document.getElementById('centreKpiTotalCount');
+    const posEl = document.getElementById('centreKpiPositivePct');
+    const impEl = document.getElementById('centreKpiImprovementPct');
+    if (avgEl) avgEl.textContent = `${data.stats.avg_rating} ★`;
+    if (totEl) totEl.textContent = `${data.stats.total_feedbacks}`;
+    if (posEl) posEl.textContent = `${data.stats.positive_percentage}%`;
+    if (impEl) impEl.textContent = `${data.stats.needs_improvement_percentage}%`;
+
+    // Top issues
+    const issuesWrap = document.getElementById('centreTopIssuesWrap');
+    if (issuesWrap) {
+      if (!data.top_issues || data.top_issues.length === 0) {
+        issuesWrap.innerHTML = `<span style="font-size: 12.5px; color: var(--success); font-weight: 600;">✓ No recurring complaints reported. Excellent standard!</span>`;
+      } else {
+        issuesWrap.innerHTML = data.top_issues.map(iss => `
+          <div class="issue-count-pill">
+            <span>${iss.issue}</span>
+            <span class="issue-badge">${iss.count}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Feedback list
+    const listHost = document.getElementById('centreFeedbackList');
+    if (listHost) {
+      if (!data.feedbacks || data.feedbacks.length === 0) {
+        listHost.innerHTML = `<div style="padding: 30px; text-align: center; color: var(--text-muted); background: var(--bg-surface); border: 1px dashed var(--border); border-radius: 8px;">No farmer evaluations recorded yet for this centre.</div>`;
+        return;
+      }
+      listHost.innerHTML = data.feedbacks.map(fb => {
+        const stars = '★'.repeat(fb.rating) + '☆'.repeat(5 - fb.rating);
+        const dateStr = fb.created_at ? fb.created_at.slice(0, 16).replace('T', ' ') : 'Recent';
+        return `
+          <div class="fb-history-card">
+            <div class="fb-history-header">
+              <div>
+                <strong style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--navy);">${fb.id}</strong>
+                <span style="margin: 0 6px; color: var(--text-muted);">·</span>
+                <span style="font-size: 12px; color: var(--text-muted);">Token ${fb.token_id}</span>
+                <span style="margin: 0 6px; color: var(--text-muted);">·</span>
+                <span style="font-size: 12px; color: var(--text-muted);">${dateStr}</span>
+              </div>
+              <div class="fb-history-stars">${stars}</div>
+            </div>
+            <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px;">
+              <span><strong>Staff Behaviour:</strong> ${fb.staff_behavior}</span>
+              <span><strong>Weighing:</strong> ${fb.weighing_process}</span>
+              <span><strong>Facilities:</strong> ${fb.basic_facilities}</span>
+              <span><strong>Future Choice:</strong> ${fb.future_preference}</span>
+            </div>
+            ${fb.suggestions ? `<div style="font-size: 12.5px; background: var(--bg-subtle); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); color: var(--text-main); margin-bottom: 10px;"><em>"${fb.suggestions}"</em></div>` : ''}
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 11.5px; color: var(--text-muted);">Farmer PII Protected</span>
+              <button class="btn btn-outline btn-sm" onclick="openFeedbackDetailModal('${fb.id}')">Inspect 10 Responses</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  } catch (err) {
+    console.error('Centre feedback load error:', err);
+  }
+}
+
+// Admin / Agency Functions
+let adminFeedbackAllData = [];
+
+async function loadAdminFeedback() {
+  try {
+    const res = await fetch(`${API_BASE}/api/feedback/admin`);
+    const data = await res.json();
+    if (!data.ok) return;
+
+    adminFeedbackAllData = data.feedbacks || [];
+
+    // KPI cards
+    const avgEl = document.getElementById('adminKpiAvgRating');
+    const totEl = document.getElementById('adminKpiTotalFeedbacks');
+    const posEl = document.getElementById('adminKpiPositiveRate');
+    const extEl = document.getElementById('adminKpiExtraPaymentAlerts');
+    const topEl = document.getElementById('adminKpiTopMandi');
+
+    if (avgEl) avgEl.textContent = `${data.overview.statewide_avg_rating} ★`;
+    if (totEl) totEl.textContent = `${data.overview.total_feedbacks}`;
+    if (posEl) posEl.textContent = `${data.overview.positive_rate}%`;
+    if (extEl) extEl.textContent = `${data.overview.extra_payment_alerts}`;
+    if (topEl) topEl.textContent = `${data.overview.top_centre}`;
+
+    // Centre Comparison Table
+    const tbody = document.getElementById('adminCentreComparisonTbody');
+    if (tbody && data.centre_comparison) {
+      tbody.innerHTML = data.centre_comparison.map(c => {
+        let statusBadge = '<span class="pill low">High Performing</span>';
+        if (c.status === 'Needs Review' || c.extra_payment_alerts > 0) {
+          statusBadge = '<span class="pill high">⚠️ Needs Review</span>';
+        } else if (c.status === 'Moderate') {
+          statusBadge = '<span class="pill medium">Moderate Flow</span>';
+        }
+
+        const alertCell = c.extra_payment_alerts > 0
+          ? `<span class="flag-extra-payment">⚠️ ${c.extra_payment_alerts} Reported</span>`
+          : `<span style="color: var(--success); font-weight: 600;">0 clean</span>`;
+
+        return `
+          <tr>
+            <td><strong>${c.name}</strong></td>
+            <td>${c.total_feedbacks}</td>
+            <td><strong style="color: #f59e0b;">${c.avg_rating} ★</strong></td>
+            <td>${c.positive_percentage}%</td>
+            <td>${c.facilities_score} / 5</td>
+            <td>${alertCell}</td>
+            <td>${statusBadge}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    renderAdminFeedbackList(adminFeedbackAllData);
+  } catch (err) {
+    console.error('Admin feedback load error:', err);
+  }
+}
+
+function renderAdminFeedbackList(items) {
+  const listHost = document.getElementById('adminFeedbackList');
+  if (!listHost) return;
+
+  if (!items || items.length === 0) {
+    listHost.innerHTML = `<div style="padding: 30px; text-align: center; color: var(--text-muted); background: var(--bg-surface); border: 1px dashed var(--border); border-radius: 8px;">No submissions match the selected filters.</div>`;
+    return;
+  }
+
+  listHost.innerHTML = items.map(fb => {
+    const stars = '★'.repeat(fb.rating) + '☆'.repeat(5 - fb.rating);
+    const dateStr = fb.created_at ? fb.created_at.slice(0, 16).replace('T', ' ') : 'Recent';
+    const isExtra = fb.extra_payment === 'Yes';
+    const extraBadge = isExtra
+      ? `<span class="flag-extra-payment" style="margin-left: 8px;">⚠️ Extra Payment Reported · Requires administrative review</span>`
+      : '';
+    const centreName = fb.center_name || (fb.center_id === 'bassi' ? 'Bassi APMC Mandi' : (fb.center_id === 'chomu' ? 'Chomu Yard' : 'Dudu Mandi'));
+
+    return `
+      <div class="fb-history-card" style="${isExtra ? 'border-left: 4px solid var(--danger);' : ''}">
+        <div class="fb-history-header">
+          <div>
+            <strong style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--navy);">${fb.id}</strong>
+            <span style="margin: 0 6px; color: var(--text-muted);">·</span>
+            <span style="font-weight: 700; font-size: 13px; color: var(--text-main);">${centreName}</span>
+            ${extraBadge}
+          </div>
+          <div class="fb-history-stars">${stars}</div>
+        </div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px;">
+          <span><strong>Farmer ID:</strong> ${fb.farmer_id || 'FID-88214'}</span>
+          <span><strong>Token:</strong> ${fb.token_id}</span>
+          <span><strong>Date:</strong> ${dateStr}</span>
+          <span><strong>Staff:</strong> ${fb.staff_behavior}</span>
+          <span><strong>Facilities:</strong> ${fb.basic_facilities}</span>
+        </div>
+        ${fb.suggestions ? `<div style="font-size: 12.5px; background: var(--bg-subtle); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); color: var(--text-main); margin-bottom: 10px;"><em>"${fb.suggestions}"</em></div>` : ''}
+        <div style="display: flex; justify-content: flex-end;">
+          <button class="btn btn-outline btn-sm" onclick="openFeedbackDetailModal('${fb.id}')">View Full 10 Responses</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+window.applyAdminFeedbackFilters = function() {
+  const centreVal = document.getElementById('adminFilterCenter').value;
+  const ratingVal = document.getElementById('adminFilterRating').value;
+  const extraVal = document.getElementById('adminFilterExtraPayment').value;
+
+  let filtered = adminFeedbackAllData;
+  if (centreVal !== 'all') {
+    filtered = filtered.filter(f => f.center_id === centreVal);
+  }
+  if (ratingVal !== 'all') {
+    filtered = filtered.filter(f => f.rating === parseInt(ratingVal, 10));
+  }
+  if (extraVal !== 'all') {
+    filtered = filtered.filter(f => f.extra_payment === extraVal);
+  }
+
+  renderAdminFeedbackList(filtered);
+};
+
+window.resetAdminFeedbackFilters = function() {
+  const c = document.getElementById('adminFilterCenter');
+  const r = document.getElementById('adminFilterRating');
+  const e = document.getElementById('adminFilterExtraPayment');
+  if (c) c.value = 'all';
+  if (r) r.value = 'all';
+  if (e) e.value = 'all';
+  renderAdminFeedbackList(adminFeedbackAllData);
+};
+
+// Feedback Detail Modal
+window.openFeedbackDetailModal = async function(fbId) {
+  const modal = document.getElementById('fbDetailModal');
+  if (!modal) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/api/feedback/${fbId}`);
+    const data = await res.json();
+    if (!data.ok || !data.feedback) return;
+
+    const fb = data.feedback;
+    const modalId = document.getElementById('modalFbId');
+    const modalCentre = document.getElementById('modalFbCentre');
+    const modalFarmer = document.getElementById('modalFbFarmer');
+    const modalToken = document.getElementById('modalFbToken');
+    const modalDate = document.getElementById('modalFbDate');
+    const modalExtra = document.getElementById('modalFbExtraFlag');
+    const modalList = document.getElementById('modalFbQaList');
+
+    if (modalId) modalId.textContent = fb.id;
+    if (modalCentre) modalCentre.textContent = fb.center_name || fb.center_id;
+    if (modalFarmer) modalFarmer.textContent = fb.farmer_id || 'Anonymous';
+    if (modalToken) modalToken.textContent = fb.token_id || '-';
+    if (modalDate) modalDate.textContent = fb.created_at ? fb.created_at.slice(0, 10) : 'Recent';
+
+    if (modalExtra) {
+      modalExtra.innerHTML = fb.extra_payment === 'Yes'
+        ? `<span class="flag-extra-payment">⚠️ Extra Payment Reported</span>`
+        : '';
+    }
+
+    if (modalList) {
+      const qMap = [
+        { q: "1. Centre Staff Behavior", a: fb.staff_behavior },
+        { q: "2. Transparent Quality Checking", a: fb.quality_checking },
+        { q: "3. Rejection / Downgrade Reason", a: fb.rejection_reason },
+        { q: "4. Weighbridge Process & Digital View", a: fb.weighing_process },
+        { q: "5. Next Step & Payment Guidance", a: fb.next_step_guidance },
+        { q: "6. Basic Amenities (Water, Rest, Washroom)", a: fb.basic_facilities },
+        { q: "7. Extra Payment / Unauthorized Fees", a: fb.extra_payment, highlight: fb.extra_payment === 'Yes' },
+        { q: "8. Overall Experience Rating", a: `${fb.rating} / 5 Stars` },
+        { q: "9. Future Centre Preference", a: fb.future_preference },
+        { q: "10. Farmer Suggestions / Remarks", a: fb.suggestions || 'None provided' }
+      ];
+
+      modalList.innerHTML = qMap.map(item => `
+        <div class="fb-qa-item">
+          <div class="fb-qa-q">${item.q}</div>
+          <div class="fb-qa-a" style="${item.highlight ? 'color: var(--danger); font-weight: 800;' : ''}">${item.a || 'Not specified'}</div>
+        </div>
+      `).join('');
+    }
+
+    modal.classList.add('open');
+  } catch (err) {
+    console.error('Detail modal fetch error:', err);
+  }
+};
+
+window.closeFeedbackDetailModal = function() {
+  const modal = document.getElementById('fbDetailModal');
+  if (modal) modal.classList.remove('open');
+};
+
+
 /* ================= WEBSOCKET REAL-TIME SYNC ================= */
 let liveWs = null;
 function initWebSocket() {
@@ -4931,6 +6693,9 @@ function initWebSocket() {
         } else if (msg.event === 'queue_update') {
           renderLiveQueueTable();
           fetchAndRenderCentreLoad();
+        } else if (msg.event === 'feedback_submitted') {
+          if (currentRole === 'centre' && activeCentreTab === 'feedback') loadCentreFeedback();
+          if (currentRole === 'admin' && activeAdminTab === 'feedback') loadAdminFeedback();
         }
       } catch (err) {
         console.warn('WS parse error:', err);
