@@ -286,8 +286,8 @@
       <p class="app-subtitle">
         Escrow environment successfully authenticated. Proceed to the National Farmer Procurement & Virtual Queue Portal.
       </p>
-      <a href="index.html" class="app-btn" id="enterDashboardBtn">
-        Enter Mandi Portal →
+      <a href="login.html" class="app-btn" id="enterDashboardBtn">
+        Enter Kisan Setu Portal →
       </a>
     </div>
   </main>
@@ -330,7 +330,7 @@
           setTimeout(() => {
             // If query params specify a target or user prefers direct seamless navigation
             const urlParams = new URLSearchParams(window.location.search);
-            const targetUrl = urlParams.get('redirect') || 'index.html';
+            const targetUrl = urlParams.get('redirect') || 'login.html';
             window.location.href = targetUrl;
           }, FADE_DURATION_MS);
 

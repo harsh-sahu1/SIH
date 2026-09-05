@@ -416,7 +416,7 @@ async def serve_landing():
     landing_path = os.path.join(BASE_DIR, "landing.html")
     if os.path.exists(landing_path):
         return FileResponse(landing_path)
-    return HTMLResponse("<h3>Kisan Setu Portal</h3><a href='/index.html'>Open Dashboard</a>")
+    return HTMLResponse("<h3>Kisan Setu Portal</h3><a href='/login.html'>Open Portal</a>")
 
 
 @app.get("/landing.html", response_class=HTMLResponse)
