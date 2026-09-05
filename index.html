@@ -3107,17 +3107,17 @@ footer.main-footer {
           <div class="view-panel" data-view="farmer:feedback">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
               <div>
-                <h4 style="margin: 0; font-size: 18px; font-weight: 700; color: var(--text-main);" data-i18n="fb.farmerTitle">Procurement Centre Experience Feedback</h4>
-                <p style="margin: 4px 0 0; font-size: 13px; color: var(--text-muted);" data-i18n="fb.farmerSub">Share your experience at the procurement centre to help improve mandi services.</p>
+                <h4 style="margin: 0; font-size: 18px; font-weight: 700; color: var(--text-main);" data-i18n="fb.farmerTitle">Mandi Experience Feedback</h4>
+                <p style="margin: 4px 0 0; font-size: 13px; color: var(--text-muted);" data-i18n="fb.farmerSub">Tell us how your visit went today so we can make the Mandi better for you.</p>
               </div>
               <div class="fb-subnav">
                 <button class="fb-subnav-btn active" id="fbTabSubmitBtn" onclick="fbSwitchView('submit')">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
-                  <span data-i18n="fb.tabSubmit">Submit Feedback</span>
+                  <span data-i18n="fb.tabSubmit">Give Feedback</span>
                 </button>
                 <button class="fb-subnav-btn" id="fbTabHistoryBtn" onclick="fbSwitchView('history')">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <span data-i18n="fb.tabHistory">My Submissions</span>
+                  <span data-i18n="fb.tabHistory">My Feedback History</span>
                 </button>
               </div>
             </div>
@@ -3146,12 +3146,12 @@ footer.main-footer {
 
                 <!-- STEP 1: Staff Behaviour -->
                 <div class="fb-step-container" data-step="1" id="fbStep1">
-                  <div class="fb-question-title" data-i18n="fb.q1Title">1. How was the behavior of the centre staff?</div>
-                  <div class="fb-question-sub" data-i18n="fb.q1Sub">Evaluate the courtesy and helpfulness of operators and gate staff.</div>
+                  <div class="fb-question-title" data-i18n="fb.q1Title">1. How was the behaviour of the Mandi staff?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q1Sub">Were the staff and gate guards polite and helpful to you?</div>
                   <div class="fb-options-list">
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Very Polite', 1)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optVeryPolite">Very Polite</span>
+                      <span data-i18n="fb.optVeryPolite">Very Polite &amp; Helpful</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Polite', 1)">
                       <span class="option-indicator"></span>
@@ -3159,7 +3159,7 @@ footer.main-footer {
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Normal', 1)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optNormal">Normal</span>
+                      <span data-i18n="fb.optNormal">OK / Normal</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Rude', 1)">
                       <span class="option-indicator"></span>
@@ -3167,135 +3167,135 @@ footer.main-footer {
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('staff_behavior', 'Very Rude', 1)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optVeryRude">Very Rude</span>
+                      <span data-i18n="fb.optVeryRude">Very Rude / Bad</span>
                     </button>
                   </div>
                 </div>
 
                 <!-- STEP 2: Quality Checking -->
                 <div class="fb-step-container" data-step="2" id="fbStep2" style="display:none;">
-                  <div class="fb-question-title" data-i18n="fb.q2Title">2. Was your crop quality checked transparently in your presence?</div>
-                  <div class="fb-question-sub" data-i18n="fb.q2Sub">Checking moisture, foreign matter, and fair FAQ quality standards.</div>
+                  <div class="fb-question-title" data-i18n="fb.q2Title">2. Was your crop inspected properly in front of you?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q2Sub">Did they check your crop's moisture and quality while you watched?</div>
                   <div class="fb-options-list">
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('quality_checking', 'Yes', 2)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optYes">Yes</span>
+                      <span data-i18n="fb.optQ2Yes">Yes, fully in front of me</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('quality_checking', 'Partially', 2)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optPartially">Partially</span>
+                      <span data-i18n="fb.optQ2Partially">Partially / In between</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('quality_checking', 'No', 2)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optNo">No</span>
+                      <span data-i18n="fb.optQ2No">No, not in front of me</span>
                     </button>
                   </div>
                 </div>
 
                 <!-- STEP 3: Rejection Reason -->
                 <div class="fb-step-container" data-step="3" id="fbStep3" style="display:none;">
-                  <div class="fb-question-title" data-i18n="fb.q3Title">3. If any produce was rejected or downgraded, was a clear reason provided?</div>
-                  <div class="fb-question-sub" data-i18n="fb.q3Sub">Clear communication on quality discrepancies and deduction parameters.</div>
+                  <div class="fb-question-title" data-i18n="fb.q3Title">3. If any crop was cut or rejected, did they explain why?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q3Sub">Did staff clearly tell you the exact reason for any deduction?</div>
                   <div class="fb-options-list">
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('rejection_reason', 'Yes', 3)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optYes">Yes</span>
+                      <span data-i18n="fb.optQ3Yes">Yes, clearly explained</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('rejection_reason', 'No', 3)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optNo">No</span>
+                      <span data-i18n="fb.optQ3No">No, reason was not given</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('rejection_reason', 'Crop not rejected', 3)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optCropNotRejected">Crop was not rejected</span>
+                      <span data-i18n="fb.optCropNotRejected">My crop was not rejected</span>
                     </button>
                   </div>
                 </div>
 
                 <!-- STEP 4: Weighing Process -->
                 <div class="fb-step-container" data-step="4" id="fbStep4" style="display:none;">
-                  <div class="fb-question-title" data-i18n="fb.q4Title">4. Did you receive a correct weight receipt and clear digital scale view?</div>
-                  <div class="fb-question-sub" data-i18n="fb.q4Sub">Electronic weighbridge display visibility and instant printout receipt.</div>
+                  <div class="fb-question-title" data-i18n="fb.q4Title">4. Was the weighing fair and did you see the scale clearly?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q4Sub">Could you read the scale screen and receive your weight slip on time?</div>
                   <div class="fb-options-list">
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('weighing_process', 'Yes', 4)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optYes">Yes</span>
+                      <span data-i18n="fb.optQ4Yes">Yes, clear and got receipt</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('weighing_process', 'Partially', 4)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optPartially">Partially</span>
+                      <span data-i18n="fb.optQ4Partially">Partially / Unclear</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('weighing_process', 'No', 4)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optNo">No</span>
+                      <span data-i18n="fb.optQ4No">No, scale not visible</span>
                     </button>
                   </div>
                 </div>
 
                 <!-- STEP 5: Next Step Guidance -->
                 <div class="fb-step-container" data-step="5" id="fbStep5" style="display:none;">
-                  <div class="fb-question-title" data-i18n="fb.q5Title">5. Were you informed clearly about payment timelines and next steps?</div>
-                  <div class="fb-question-sub" data-i18n="fb.q5Sub">Explanation of PFMS direct bank transfer timeline (within 48 hours).</div>
+                  <div class="fb-question-title" data-i18n="fb.q5Title">5. Were you told clearly when your money will reach your bank?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q5Sub">Did they explain the 48-hour direct bank transfer and next steps?</div>
                   <div class="fb-options-list">
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('next_step_guidance', 'Yes', 5)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optYes">Yes</span>
+                      <span data-i18n="fb.optQ5Yes">Yes, fully explained</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('next_step_guidance', 'Partially', 5)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optPartially">Partially</span>
+                      <span data-i18n="fb.optQ5Partially">Partially explained</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('next_step_guidance', 'No', 5)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optNo">No</span>
+                      <span data-i18n="fb.optQ5No">No, was not informed</span>
                     </button>
                   </div>
                 </div>
 
                 <!-- STEP 6: Basic Facilities -->
                 <div class="fb-step-container" data-step="6" id="fbStep6" style="display:none;">
-                  <div class="fb-question-title" data-i18n="fb.q6Title">6. How were the basic facilities (drinking water, rest shade, clean washroom)?</div>
-                  <div class="fb-question-sub" data-i18n="fb.q6Sub">Condition of farmer waiting amenities at the Mandi premises.</div>
+                  <div class="fb-question-title" data-i18n="fb.q6Title">6. How were the basic Mandi facilities?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q6Sub">Drinking water, resting shed, and clean washrooms.</div>
                   <div class="fb-options-list">
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('basic_facilities', 'All facilities available', 6)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optAllFacilities">All facilities available</span>
+                      <span data-i18n="fb.optAllFacilities">Good (All facilities available)</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('basic_facilities', 'Some facilities available', 6)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optSomeFacilities">Some facilities available</span>
+                      <span data-i18n="fb.optSomeFacilities">Average (Only some facilities)</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('basic_facilities', 'No facilities', 6)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optNoFacilities">No facilities</span>
+                      <span data-i18n="fb.optNoFacilities">Poor (No proper facilities)</span>
                     </button>
                   </div>
                 </div>
 
                 <!-- STEP 7: Extra Payment -->
                 <div class="fb-step-container" data-step="7" id="fbStep7" style="display:none;">
-                  <div class="fb-question-title" data-i18n="fb.q7Title">7. Were you asked for any extra payment, illegal commission or unofficial charges?</div>
-                  <div class="fb-question-sub" data-i18n="fb.q7Sub">Strict anti-bribery governance. Your submission is confidential and protected.</div>
+                  <div class="fb-question-title" data-i18n="fb.q7Title">7. Did anyone ask you for extra money, commission, or bribe?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q7Sub">Government procurement is 100% free. Your answer is completely private.</div>
                   <div class="fb-options-list">
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('extra_payment', 'No', 7)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optNo">No</span>
+                      <span data-i18n="fb.optQ7No">No (Everything was free)</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('extra_payment', 'Yes', 7)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optYes" style="color: var(--danger); font-weight: 700;">Yes</span>
+                      <span data-i18n="fb.optQ7Yes" style="color: var(--danger); font-weight: 700;">Yes (Extra money was demanded)</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('extra_payment', 'Prefer not to answer', 7)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optPreferNot">Prefer not to answer</span>
+                      <span data-i18n="fb.optPreferNot">Prefer not to say</span>
                     </button>
                   </div>
                 </div>
 
                 <!-- STEP 8: Overall Experience (Rating) -->
                 <div class="fb-step-container" data-step="8" id="fbStep8" style="display:none;">
-                  <div class="fb-question-title" data-i18n="fb.q8Title">8. Overall how would you rate your mandi procurement experience?</div>
-                  <div class="fb-question-sub" data-i18n="fb.q8Sub">Select 1 to 5 stars (1 = Poor, 5 = Excellent).</div>
+                  <div class="fb-question-title" data-i18n="fb.q8Title">8. Overall, how was your Mandi experience today?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q8Sub">Tap 1 to 5 stars (1 = Bad, 5 = Great)</div>
                   <div class="fb-rating-stars" style="margin: 20px 0 10px;">
                     <button type="button" class="fb-star-btn" data-val="1" onclick="fbSetRating(1)">★</button>
                     <button type="button" class="fb-star-btn" data-val="2" onclick="fbSetRating(2)">★</button>
@@ -3308,29 +3308,29 @@ footer.main-footer {
 
                 <!-- STEP 9: Future Preference -->
                 <div class="fb-step-container" data-step="9" id="fbStep9" style="display:none;">
-                  <div class="fb-question-title" data-i18n="fb.q9Title">9. Would you choose this centre again for government procurement?</div>
-                  <div class="fb-question-sub" data-i18n="fb.q9Sub">Help us measure farmer satisfaction and centre reliability.</div>
+                  <div class="fb-question-title" data-i18n="fb.q9Title">9. Would you come back to this Mandi for future crop sales?</div>
+                  <div class="fb-question-sub" data-i18n="fb.q9Sub">Would you choose this centre again?</div>
                   <div class="fb-options-list">
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('future_preference', 'Definitely Yes', 9)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optDefYes">Definitely Yes</span>
+                      <span data-i18n="fb.optDefYes">Yes, definitely</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('future_preference', 'Maybe', 9)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optMaybe">Maybe</span>
+                      <span data-i18n="fb.optMaybe">Maybe / Not sure</span>
                     </button>
                     <button type="button" class="fb-option-card" onclick="fbSelectOption('future_preference', 'No', 9)">
                       <span class="option-indicator"></span>
-                      <span data-i18n="fb.optNo">No</span>
+                      <span data-i18n="fb.optQ9No">No, would prefer another centre</span>
                     </button>
                   </div>
                 </div>
 
                 <!-- STEP 10: Suggestions (Optional) -->
                 <div class="fb-step-container" data-step="10" id="fbStep10" style="display:none;">
-                  <div class="fb-question-title" data-i18n="fb.q10Title">10. Any additional suggestions or feedback for improvement? (Optional)</div>
-                  <div class="fb-question-sub" data-i18n="fb.q10Sub">Let us know if you experienced any specific issues or have ideas to improve mandi operations.</div>
-                  <textarea id="fbSuggestionsInput" class="fb-textarea" rows="4" placeholder="Share your experience or suggestions here..."></textarea>
+                  <div class="fb-question-title" data-i18n="fb.q10Title">10. Any suggestions or problems you want to share? (Optional)</div>
+                  <div class="fb-question-sub" data-i18n="fb.q10Sub">Tell us anything that can help make your next Mandi visit easier.</div>
+                  <textarea id="fbSuggestionsInput" class="fb-textarea" rows="4" placeholder="Tell us anything that could make your visit easier next time (water, shade, weighing, etc.)..."></textarea>
                 </div>
 
                 <!-- Wizard Actions -->
@@ -3716,54 +3716,68 @@ const I18N = {
     "footer.dept": "Department of Consumer Affairs · Ministry of Consumer Affairs, Food & Public Distribution",
     "footer.helpline": "National Farmer Helpline",
     "footer.tollFree": "Toll Free",
-    "tab.feedback": "Centre Feedback",
+    "tab.feedback": "Mandi Feedback",
     "tab.centreFeedback": "Farmer Feedback",
-    "tab.adminFeedback": "Feedback Management",
-    "fb.farmerTitle": "Procurement Centre Experience Feedback",
-    "fb.farmerSub": "Share your experience at the procurement centre to help improve mandi services.",
-    "fb.tabSubmit": "Submit Feedback",
-    "fb.tabHistory": "My Submissions",
-    "fb.q1Title": "1. How was the behavior of the centre staff?",
-    "fb.q1Sub": "Evaluate the courtesy and helpfulness of operators and gate staff.",
-    "fb.optVeryPolite": "Very Polite",
+    "tab.adminFeedback": "Feedback Overview",
+    "fb.farmerTitle": "Mandi Visit Feedback",
+    "fb.farmerSub": "Tell us how your visit went today so we can make the Mandi better for you.",
+    "fb.tabSubmit": "Give Feedback",
+    "fb.tabHistory": "My Past Feedback",
+    "fb.q1Title": "1. How was the behaviour of the Mandi staff?",
+    "fb.q1Sub": "Were the staff and gate guards polite and helpful to you?",
+    "fb.optVeryPolite": "Very Polite & Helpful",
     "fb.optPolite": "Polite",
-    "fb.optNormal": "Normal",
+    "fb.optNormal": "OK / Normal",
     "fb.optRude": "Rude",
-    "fb.optVeryRude": "Very Rude",
-    "fb.q2Title": "2. Was your crop quality checked transparently in your presence?",
-    "fb.q2Sub": "Checking moisture, foreign matter, and fair FAQ quality standards.",
+    "fb.optVeryRude": "Very Rude / Bad",
+    "fb.q2Title": "2. Was your crop inspected properly in front of you?",
+    "fb.q2Sub": "Did they check your crop's moisture and quality while you watched?",
+    "fb.optQ2Yes": "Yes, fully in front of me",
+    "fb.optQ2Partially": "Partially / In between",
+    "fb.optQ2No": "No, not in front of me",
+    "fb.q3Title": "3. If any crop was cut or rejected, did they explain why?",
+    "fb.q3Sub": "Did staff clearly tell you the exact reason for any deduction?",
+    "fb.optQ3Yes": "Yes, clearly explained",
+    "fb.optQ3No": "No, reason was not given",
+    "fb.optCropNotRejected": "My crop was not rejected",
+    "fb.q4Title": "4. Was the weighing fair and did you see the scale clearly?",
+    "fb.q4Sub": "Could you read the scale screen and receive your weight slip on time?",
+    "fb.optQ4Yes": "Yes, clear and got receipt",
+    "fb.optQ4Partially": "Partially / Unclear",
+    "fb.optQ4No": "No, scale not visible",
+    "fb.q5Title": "5. Were you told clearly when your money will reach your bank?",
+    "fb.q5Sub": "Did they explain the 48-hour direct bank transfer and next steps?",
+    "fb.optQ5Yes": "Yes, fully explained",
+    "fb.optQ5Partially": "Partially explained",
+    "fb.optQ5No": "No, was not informed",
+    "fb.q6Title": "6. How were the basic Mandi facilities?",
+    "fb.q6Sub": "Drinking water, resting shed, and clean washrooms.",
+    "fb.optAllFacilities": "Good (All facilities available)",
+    "fb.optSomeFacilities": "Average (Only some facilities)",
+    "fb.optNoFacilities": "Poor (No proper facilities)",
+    "fb.q7Title": "7. Did anyone ask you for extra money, commission, or bribe?",
+    "fb.q7Sub": "Government procurement is 100% free. Your answer is completely private.",
+    "fb.optQ7No": "No (Everything was free)",
+    "fb.optQ7Yes": "Yes (Extra money was demanded)",
+    "fb.optPreferNot": "Prefer not to say",
+    "fb.q8Title": "8. Overall, how was your Mandi experience today?",
+    "fb.q8Sub": "Tap 1 to 5 stars (1 = Bad, 5 = Great)",
+    "fb.q9Title": "9. Would you come back to this Mandi for future crop sales?",
+    "fb.q9Sub": "Would you choose this centre again?",
+    "fb.optDefYes": "Yes, definitely",
+    "fb.optMaybe": "Maybe / Not sure",
+    "fb.optQ9No": "No, would prefer another centre",
+    "fb.q10Title": "10. Any suggestions or problems you want to share? (Optional)",
+    "fb.q10Sub": "Tell us anything that can help make your next Mandi visit easier.",
+    "fb.btnBack": "Back",
+    "fb.btnNext": "Next",
     "fb.optYes": "Yes",
     "fb.optPartially": "Partially",
     "fb.optNo": "No",
-    "fb.q3Title": "3. If any produce was rejected or downgraded, was a clear reason provided?",
-    "fb.q3Sub": "Clear communication on quality discrepancies and deduction parameters.",
-    "fb.optCropNotRejected": "Crop was not rejected",
-    "fb.q4Title": "4. Did you receive a correct weight receipt and clear digital scale view?",
-    "fb.q4Sub": "Electronic weighbridge display visibility and instant printout receipt.",
-    "fb.q5Title": "5. Were you informed clearly about payment timelines and next steps?",
-    "fb.q5Sub": "Explanation of PFMS direct bank transfer timeline (within 48 hours).",
-    "fb.q6Title": "6. How were the basic facilities (drinking water, rest shade, clean washroom)?",
-    "fb.q6Sub": "Condition of farmer waiting amenities at the Mandi premises.",
-    "fb.optAllFacilities": "All facilities available",
-    "fb.optSomeFacilities": "Some facilities available",
-    "fb.optNoFacilities": "No facilities",
-    "fb.q7Title": "7. Were you asked for any extra payment, illegal commission or unofficial charges?",
-    "fb.q7Sub": "Strict anti-bribery governance. Your submission is confidential and protected.",
-    "fb.optPreferNot": "Prefer not to answer",
-    "fb.q8Title": "8. Overall how would you rate your mandi procurement experience?",
-    "fb.q8Sub": "Select 1 to 5 stars (1 = Poor, 5 = Excellent).",
-    "fb.q9Title": "9. Would you choose this centre again for government procurement?",
-    "fb.q9Sub": "Help us measure farmer satisfaction and centre reliability.",
-    "fb.optDefYes": "Definitely Yes",
-    "fb.optMaybe": "Maybe",
-    "fb.q10Title": "10. Any additional suggestions or feedback for improvement? (Optional)",
-    "fb.q10Sub": "Let us know if you experienced any specific issues or have ideas to improve mandi operations.",
-    "fb.btnBack": "Back",
-    "fb.btnNext": "Next",
-    "fb.successTitle": "Feedback Submitted Successfully!",
-    "fb.successDesc": "Your feedback has been recorded and safely transmitted. Thank you for contributing to transparent and farmer-friendly procurement.",
-    "fb.btnViewMy": "View My Submissions",
-    "fb.btnNew": "Submit Another",
+    "fb.successTitle": "Thank You! Feedback Received",
+    "fb.successDesc": "Your response is safely recorded. It helps us make Mandis transparent, fair, and hassle-free for all farmers.",
+    "fb.btnViewMy": "See My Feedback",
+    "fb.btnNew": "Give Feedback Again",
     "fb.centreTitle": "Centre Farmer Feedback & Quality Monitoring",
     "fb.centreSub": "Real-time farmer sentiment and process satisfaction for this Mandi centre.",
     "fb.kpiAvgRating": "Average Rating",
@@ -3907,54 +3921,68 @@ const I18N = {
     "footer.dept": "उपभोक्ता मामले विभाग · उपभोक्ता मामले, खाद्य और सार्वजनिक वितरण मंत्रालय",
     "footer.helpline": "राष्ट्रीय किसान हेल्पलाइन",
     "footer.tollFree": "टोल फ्री",
-    "tab.feedback": "केंद्र फीडबैक",
+    "tab.feedback": "मंडी फीडबैक",
     "tab.centreFeedback": "किसान फीडबैक",
-    "tab.adminFeedback": "फीडबैक प्रबंधन",
-    "fb.farmerTitle": "खरीद केंद्र अनुभव फीडबैक",
-    "fb.farmerSub": "मंडी सेवाओं को बेहतर बनाने के लिए खरीद केंद्र पर अपने अनुभव साझा करें।",
-    "fb.tabSubmit": "फीडबैक दर्ज करें",
-    "fb.tabHistory": "मेरे फीडबैक",
-    "fb.q1Title": "1. केंद्र कर्मचारियों का व्यवहार कैसा था?",
-    "fb.q1Sub": "ऑपरेटरों और गेट कर्मचारियों की विनम्रता और सहयोग का मूल्यांकन करें।",
-    "fb.optVeryPolite": "बहुत विनम्र",
-    "fb.optPolite": "विनम्र",
-    "fb.optNormal": "सामान्य",
-    "fb.optRude": "रूखा",
-    "fb.optVeryRude": "बहुत खराब",
-    "fb.q2Title": "2. क्या आपकी फसल की गुणवत्ता जांच आपके सामने पारदर्शी तरीके से हुई?",
-    "fb.q2Sub": "नमी, अवांछित तत्व और उचित FAQ गुणवत्ता मानकों की जांच।",
+    "tab.adminFeedback": "फीडबैक समीक्षा",
+    "fb.farmerTitle": "मंडी खरीद अनुभव फीडबैक",
+    "fb.farmerSub": "आज मंडी में आपका अनुभव कैसा रहा? अपनी राय दें ताकि व्यवस्था और बेहतर हो सके।",
+    "fb.tabSubmit": "फीडबैक दें",
+    "fb.tabHistory": "पुराने फीडबैक",
+    "fb.q1Title": "1. मंडी कर्मचारियों और गेट स्टाफ का व्यवहार कैसा था?",
+    "fb.q1Sub": "क्या कर्मचारियों ने आपसे आदर और सहयोग से बात की?",
+    "fb.optVeryPolite": "बहुत अच्छा और मददगार",
+    "fb.optPolite": "अच्छा / ठीक",
+    "fb.optNormal": "सामान्य / ठीक-ठाक",
+    "fb.optRude": "रूखा / बात नहीं सुनी",
+    "fb.optVeryRude": "बहुत खराब व्यवहार",
+    "fb.q2Title": "2. क्या आपकी फसल की जांच आपके सामने की गई?",
+    "fb.q2Sub": "क्या नमी और फसल की गुणवत्ता आपके देखते हुए जांची गई?",
+    "fb.optQ2Yes": "हाँ, पूरी तरह मेरे सामने हुई",
+    "fb.optQ2Partially": "थोड़ी बहुत / ठीक से नहीं",
+    "fb.optQ2No": "नहीं, मेरे सामने नहीं हुई",
+    "fb.q3Title": "3. अगर फसल काटी या रिजेक्ट की गई, तो क्या वजह बताई गई?",
+    "fb.q3Sub": "क्या कर्मचारियों ने वजन काटने या वापस करने का साफ कारण बताया?",
+    "fb.optQ3Yes": "हाँ, साफ-साफ कारण बताया",
+    "fb.optQ3No": "नहीं, कोई कारण नहीं बताया",
+    "fb.optCropNotRejected": "मेरी फसल काटी या खारिज नहीं हुई",
+    "fb.q4Title": "4. क्या तौल आपके सामने हुई और पर्ची हाथ में मिली?",
+    "fb.q4Sub": "क्या कांटे की स्क्रीन साफ दिखी और सही वजन की पर्ची तुरंत मिली?",
+    "fb.optQ4Yes": "हाँ, कांटा साफ दिखा और पर्ची मिली",
+    "fb.optQ4Partially": "कांटा साफ नहीं दिखा या पर्ची देर से मिली",
+    "fb.optQ4No": "नहीं, तौल साफ नहीं दिखी",
+    "fb.q5Title": "5. क्या खाते में पैसे आने का समय आपको साफ बताया गया?",
+    "fb.q5Sub": "क्या बताया गया कि फसल के पैसे बैंक खाते में कब तक (48 घंटे में) आ जाएंगे?",
+    "fb.optQ5Yes": "हाँ, पूरी बात साफ बताई",
+    "fb.optQ5Partially": "थोड़ी बहुत जानकारी दी",
+    "fb.optQ5No": "नहीं, कुछ नहीं बताया",
+    "fb.q6Title": "6. मंडी में पानी, छाया और बैठने की सुविधा कैसी थी?",
+    "fb.q6Sub": "पीने का साफ पानी, बैठने की छांव और शौचालय की व्यवस्था।",
+    "fb.optAllFacilities": "अच्छी (पानी, छाया और शौचालय सब उपलब्ध थे)",
+    "fb.optSomeFacilities": "कामचलाऊ (कुछ सुविधाएं थीं, कुछ नहीं)",
+    "fb.optNoFacilities": "खराब (पीने का पानी या छाया नहीं थी)",
+    "fb.q7Title": "7. क्या किसी ने कोई अतिरिक्त पैसा, दलाली या रिश्वत मांगी?",
+    "fb.q7Sub": "सरकारी खरीद पूरी तरह निःशुल्क है। आपका जवाब पूरी तरह गुप्त और सुरक्षित रहेगा।",
+    "fb.optQ7No": "नहीं (कोई फालतू पैसा नहीं मांगा)",
+    "fb.optQ7Yes": "हाँ (अतिरिक्त पैसा या रिश्वत मांगी गई)",
+    "fb.optPreferNot": "बताना नहीं चाहते",
+    "fb.q8Title": "8. कुल मिलाकर आज मंडी में आपका अनुभव कैसा रहा?",
+    "fb.q8Sub": "1 से 5 स्टार दबाएं (1 = बहुत खराब, 5 = बहुत बढ़िया)",
+    "fb.q9Title": "9. क्या आप अगली बार भी इसी मंडी में फसल बेचना चाहेंगे?",
+    "fb.q9Sub": "क्या आप दोबारा इसी खरीद केंद्र पर आना पसंद करेंगे?",
+    "fb.optDefYes": "हाँ, जरूर इसी केंद्र पर आएंगे",
+    "fb.optMaybe": "शायद / अभी तय नहीं",
+    "fb.optQ9No": "नहीं, किसी दूसरी मंडी जाएंगे",
+    "fb.q10Title": "10. क्या आप कोई सुझाव या परेशानी बताना चाहते हैं? (ऐच्छिक)",
+    "fb.q10Sub": "कोई भी बात जिससे अगली बार किसानों को और आसानी हो।",
+    "fb.btnBack": "पीछे",
+    "fb.btnNext": "आगे बढ़ें",
     "fb.optYes": "हाँ",
     "fb.optPartially": "आंशिक रूप से",
     "fb.optNo": "नहीं",
-    "fb.q3Title": "3. यदि फसल खारिज/डाउनग्रेड की गई, तो क्या स्पष्ट कारण बताया गया?",
-    "fb.q3Sub": "गुणवत्ता अंतर और कटौती मापदंडों पर स्पष्ट संचार।",
-    "fb.optCropNotRejected": "फसल खारिज नहीं हुई",
-    "fb.q4Title": "4. क्या आपको सही वजन रसीद मिली और तराजू साफ दिखाई दिया?",
-    "fb.q4Sub": "इलेक्ट्रॉनिक वे-ब्रिज डिस्प्ले की दृश्यता और तुरंत प्रिंट रसीद।",
-    "fb.q5Title": "5. क्या आपको भुगतान समय-सीमा और अगले चरणों की स्पष्ट जानकारी दी गई?",
-    "fb.q5Sub": "PFMS सीधे बैंक ट्रांसफर समय-सीमा (48 घंटों के भीतर) का विवरण।",
-    "fb.q6Title": "6. मंडी में बुनियादी सुविधाएं (पीने का पानी, छाया, शौचालय) कैसी थीं?",
-    "fb.q6Sub": "मंडी परिसर में किसान प्रतीक्षा सुविधाओं की स्थिति।",
-    "fb.optAllFacilities": "सभी सुविधाएं उपलब्ध",
-    "fb.optSomeFacilities": "कुछ सुविधाएं उपलब्ध",
-    "fb.optNoFacilities": "कोई सुविधा नहीं",
-    "fb.q7Title": "7. क्या आपसे कोई अतिरिक्त शुल्क, अनधिकृत कमीशन या पैसे मांगे गए?",
-    "fb.q7Sub": "सख्त भ्रष्टाचार-मुक्त प्रशासन। आपकी प्रतिक्रिया पूरी तरह गोपनीय और सुरक्षित है।",
-    "fb.optPreferNot": "बताना नहीं चाहते",
-    "fb.q8Title": "8. कुल मिलाकर मंडी में खरीद का आपका अनुभव कैसा रहा?",
-    "fb.q8Sub": "1 से 5 स्टार चुनें (1 = खराब, 5 = उत्कृष्ट)।",
-    "fb.q9Title": "9. क्या आप भविष्य में सरकारी खरीद के लिए इसी केंद्र पर फिर आएंगे?",
-    "fb.q9Sub": "किसान संतुष्टि और केंद्र विश्वसनीयता मापने में मदद करें।",
-    "fb.optDefYes": "ज़रूर हाँ",
-    "fb.optMaybe": "शायद",
-    "fb.q10Title": "10. सुधार के लिए कोई अतिरिक्त सुझाव या टिप्पणी? (वैकल्पिक)",
-    "fb.q10Sub": "यदि कोई विशेष समस्या आई हो या मंडी सुधार के विचार हों तो साझा करें।",
-    "fb.btnBack": "पीछे",
-    "fb.btnNext": "आगे बढ़ें",
-    "fb.successTitle": "फीडबैक सफलतापूर्वक दर्ज हुआ!",
-    "fb.successDesc": "आपकी प्रतिक्रिया सुरक्षित रूप से दर्ज कर ली गई है। पारदर्शी और किसान-हितैषी खरीद में योगदान के लिए धन्यवाद।",
-    "fb.btnViewMy": "मेरे सबमिशन देखें",
-    "fb.btnNew": "नया फीडबैक दर्ज करें",
+    "fb.successTitle": "धन्यवाद! आपकी राय दर्ज कर ली गई है",
+    "fb.successDesc": "आपकी राय सुरक्षित रूप से दर्ज हो गई है। इससे मंडी की व्यवस्था सुधारने और किसानों को बेहतर सेवा देने में मदद मिलेगी।",
+    "fb.btnViewMy": "मेरे फीडबैक देखें",
+    "fb.btnNew": "नया फीडबैक दें",
     "fb.centreTitle": "केंद्र किसान फीडबैक एवं गुणवत्ता निगरानी",
     "fb.centreSub": "इस मंडी केंद्र के लिए रियल-टाइम किसान संतुष्टि एवं प्रक्रिया समीक्षा।",
     "fb.kpiAvgRating": "औसत रेटिंग",
@@ -6092,8 +6120,8 @@ let fbState = {
 };
 
 const FB_RATING_LABELS = {
-  en: { 1: '1/5 · Very Poor', 2: '2/5 · Poor', 3: '3/5 · Average', 4: '4/5 · Good', 5: '5/5 · Excellent' },
-  hi: { 1: '1/5 · बहुत खराब', 2: '2/5 · खराब', 3: '3/5 · सामान्य', 4: '4/5 · अच्छा', 5: '5/5 · उत्कृष्ट' }
+  en: { 1: '1/5 · Very Bad', 2: '2/5 · Poor', 3: '3/5 · OK / Average', 4: '4/5 · Good', 5: '5/5 · Excellent' },
+  hi: { 1: '1/5 · बहुत खराब', 2: '2/5 · कमजोर', 3: '3/5 · ठीक-ठाक', 4: '4/5 · अच्छा', 5: '5/5 · बहुत बढ़िया' }
 };
 
 window.fbSelectOption = function(field, val, step) {
@@ -6128,39 +6156,39 @@ window.fbGoStep = function(delta) {
   // Validation if advancing forward
   if (delta > 0) {
     if (currentStep === 1 && !fbState.answers.staff_behavior) {
-      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया केंद्र कर्मचारियों के व्यवहार का चयन करें।' : 'Please evaluate the staff behavior to proceed.');
+      toast(currentLang === 'hi' ? 'जवाब जरूरी है' : 'Please Choose', currentLang === 'hi' ? 'कृपया बताएं कि कर्मचारियों का व्यवहार कैसा था।' : 'Please choose how the staff behaved.');
       return;
     }
     if (currentStep === 2 && !fbState.answers.quality_checking) {
-      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया फसल गुणवत्ता जांच का चयन करें।' : 'Please indicate if crop quality was checked in your presence.');
+      toast(currentLang === 'hi' ? 'जवाब जरूरी है' : 'Please Choose', currentLang === 'hi' ? 'कृपया बताएं कि फसल आपके सामने जांची गई या नहीं।' : 'Please select if your crop was checked in front of you.');
       return;
     }
     if (currentStep === 3 && !fbState.answers.rejection_reason) {
-      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया फसल अस्वीकृति कारण विकल्प चुनें।' : 'Please choose an option regarding rejection reason.');
+      toast(currentLang === 'hi' ? 'जवाब जरूरी है' : 'Please Choose', currentLang === 'hi' ? 'कृपया फसल कटौती या कारण का विकल्प चुनें।' : 'Please choose an option about crop deduction.');
       return;
     }
     if (currentStep === 4 && !fbState.answers.weighing_process) {
-      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया तौल प्रक्रिया विकल्प चुनें।' : 'Please select an option for the weighing process.');
+      toast(currentLang === 'hi' ? 'जवाब जरूरी है' : 'Please Choose', currentLang === 'hi' ? 'कृपया बताएं कि तौल ठीक से हुई या नहीं।' : 'Please choose an option for the weighing process.');
       return;
     }
     if (currentStep === 5 && !fbState.answers.next_step_guidance) {
-      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया अगले चरणों की जानकारी का चयन करें।' : 'Please indicate if next steps & payment guidance were provided.');
+      toast(currentLang === 'hi' ? 'जवाब जरूरी है' : 'Please Choose', currentLang === 'hi' ? 'कृपया बताएं कि पैसे मिलने का समय बताया गया या नहीं।' : 'Please tell us if payment timing was explained.');
       return;
     }
     if (currentStep === 6 && !fbState.answers.basic_facilities) {
-      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया बुनियादी सुविधाओं का मूल्यांकन करें।' : 'Please evaluate the basic mandi facilities.');
+      toast(currentLang === 'hi' ? 'जवाब जरूरी है' : 'Please Choose', currentLang === 'hi' ? 'कृपया पानी और छाया जैसी सुविधाओं का विकल्प चुनें।' : 'Please choose an option for basic facilities.');
       return;
     }
     if (currentStep === 7 && !fbState.answers.extra_payment) {
-      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया अतिरिक्त भुगतान का विकल्प चुनें।' : 'Please answer the extra payment question.');
+      toast(currentLang === 'hi' ? 'जवाब जरूरी है' : 'Please Choose', currentLang === 'hi' ? 'कृपया बताएं कि क्या किसी ने अतिरिक्त पैसे मांगे।' : 'Please tell us if anyone asked for extra money.');
       return;
     }
     if (currentStep === 8 && !fbState.answers.rating) {
-      toast(currentLang === 'hi' ? 'रेटिंग आवश्यक है' : 'Rating Required', currentLang === 'hi' ? 'कृपया 1 से 5 स्टार तक रेटिंग चुनें।' : 'Please tap a star (1 to 5) to rate your overall experience.');
+      toast(currentLang === 'hi' ? 'रेटिंग जरूरी है' : 'Rating Needed', currentLang === 'hi' ? 'कृपया 1 से 5 में से कोई स्टार चुनें।' : 'Please tap a star (1 to 5) to rate your visit.');
       return;
     }
     if (currentStep === 9 && !fbState.answers.future_preference) {
-      toast(currentLang === 'hi' ? 'उत्तर आवश्यक है' : 'Answer Required', currentLang === 'hi' ? 'कृपया भविष्य की प्राथमिकता का चयन करें।' : 'Please select if you would choose this centre again.');
+      toast(currentLang === 'hi' ? 'जवाब जरूरी है' : 'Please Choose', currentLang === 'hi' ? 'कृपया बताएं कि क्या आप दोबारा इस मंडी में आएंगे।' : 'Please choose if you would visit this Mandi again.');
       return;
     }
     if (currentStep === 10) {
@@ -6630,16 +6658,16 @@ window.openFeedbackDetailModal = async function(fbId) {
 
     if (modalList) {
       const qMap = [
-        { q: "1. Centre Staff Behavior", a: fb.staff_behavior },
-        { q: "2. Transparent Quality Checking", a: fb.quality_checking },
-        { q: "3. Rejection / Downgrade Reason", a: fb.rejection_reason },
-        { q: "4. Weighbridge Process & Digital View", a: fb.weighing_process },
-        { q: "5. Next Step & Payment Guidance", a: fb.next_step_guidance },
-        { q: "6. Basic Amenities (Water, Rest, Washroom)", a: fb.basic_facilities },
-        { q: "7. Extra Payment / Unauthorized Fees", a: fb.extra_payment, highlight: fb.extra_payment === 'Yes' },
-        { q: "8. Overall Experience Rating", a: `${fb.rating} / 5 Stars` },
-        { q: "9. Future Centre Preference", a: fb.future_preference },
-        { q: "10. Farmer Suggestions / Remarks", a: fb.suggestions || 'None provided' }
+        { q: "1. Staff Behaviour & Courtesy", a: fb.staff_behavior },
+        { q: "2. Crop Checking in Front of Farmer", a: fb.quality_checking },
+        { q: "3. Reason for Any Deduction / Rejection", a: fb.rejection_reason },
+        { q: "4. Scale Visibility & Weight Slip Received", a: fb.weighing_process },
+        { q: "5. Direct Bank Payment Timeline Explained", a: fb.next_step_guidance },
+        { q: "6. Water, Shade & Washroom Amenities", a: fb.basic_facilities },
+        { q: "7. Extra Payment / Bribe Demanded", a: fb.extra_payment, highlight: fb.extra_payment === 'Yes' },
+        { q: "8. Overall Mandi Visit Rating", a: `${fb.rating} / 5 Stars` },
+        { q: "9. Would Choose this Mandi Again", a: fb.future_preference },
+        { q: "10. Farmer Note / Suggestion", a: fb.suggestions || 'None provided' }
       ];
 
       modalList.innerHTML = qMap.map(item => `
