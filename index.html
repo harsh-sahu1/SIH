@@ -1043,47 +1043,443 @@ header.main-header {
 }
 
 /* ---------- Payment / Timeline View ---------- */
-.timeline {
+.payment-view-container {
   display: flex;
   flex-direction: column;
-  max-width: 480px;
+  gap: 22px;
+  max-width: 980px;
+  margin: 0 auto;
 }
-.timeline-step {
+
+.payment-hero-banner {
+  background: linear-gradient(135deg, rgba(22, 163, 74, 0.08) 0%, rgba(15, 41, 66, 0.03) 100%), var(--bg-surface);
+  border: 1.5px solid rgba(22, 163, 74, 0.28);
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 24px -2px rgba(15, 41, 66, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.pay-banner-top {
   display: flex;
-  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.pay-banner-info {
+  flex: 1;
+  min-width: 280px;
+}
+
+.pay-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.pay-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulseDot 1.8s infinite;
+}
+
+.pay-hero-heading {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0 0 5px 0;
+  letter-spacing: -0.02em;
+}
+
+.pay-hero-desc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.pay-amount-card {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: right;
+  min-width: 270px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.pay-amt-sub {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.pay-amt-num {
+  font-size: 30px;
+  font-weight: 800;
+  color: #15803d;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.pay-amt-rate {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.pay-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+
+.pay-metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pmi-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.pmi-val {
+  font-size: 13.5px;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.badge-dbt {
+  font-size: 10px;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  vertical-align: 1px;
+  margin-left: 4px;
+}
+
+.pay-progress-section {
+  margin-bottom: 18px;
+}
+
+.pay-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  margin-bottom: 7px;
+}
+
+.pay-progress-track {
+  height: 8px;
+  background: var(--bg-subtle);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.pay-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pay-action-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pay-timeline-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 20px -2px rgba(15, 41, 66, 0.05);
+}
+
+.pay-timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.pay-timeline-title {
+  font-size: 17.5px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+}
+
+.pay-timeline-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Enhanced Timeline Container & Nodes */
+.enhanced-timeline {
+  max-width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.enhanced-timeline .timeline-step {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 18px;
   position: relative;
   padding-bottom: 26px;
 }
-.timeline-step:last-child { padding-bottom: 0; }
-.timeline-icon {
-  width: 24px;
-  height: 24px;
+
+.enhanced-timeline .timeline-step:last-child {
+  padding-bottom: 0;
+}
+
+.enhanced-timeline .timeline-icon-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.enhanced-timeline .timeline-icon {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: var(--bg-subtle);
-  border: 2px solid var(--border-strong);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  z-index: 1;
-  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 2;
+  transition: all 0.25s ease;
 }
-.timeline-step.completed .timeline-icon {
-  background: var(--success);
-  border-color: var(--success);
+
+.enhanced-timeline .timeline-step.completed .timeline-icon {
+  background: #10b981;
   color: #ffffff;
+  border: 2px solid #059669;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.22);
 }
-.timeline-line {
+
+.enhanced-timeline .timeline-step.in-progress .timeline-icon {
+  background: #f59e0b;
+  color: #ffffff;
+  border: 2px solid #d97706;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.28);
+  animation: activeStepPulse 2s infinite;
+}
+
+.enhanced-timeline .timeline-step.pending .timeline-icon {
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 2px solid var(--border-strong);
+}
+
+.enhanced-timeline .timeline-line {
   position: absolute;
-  left: 11px;
-  top: 24px;
+  top: 32px;
   bottom: 0;
-  width: 2px;
+  width: 2.5px;
+  left: 15px;
   background: var(--border);
+  z-index: 1;
 }
-.timeline-step.completed .timeline-line { background: var(--success); }
-.timeline-content h5 { font-size: 14px; font-weight: 600; color: var(--text-main); }
-.timeline-content span { font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+
+.enhanced-timeline .timeline-step.completed .timeline-line {
+  background: #10b981;
+}
+
+.enhanced-timeline .timeline-step.in-progress .timeline-line {
+  background: linear-gradient(180deg, #f59e0b 0%, var(--border) 100%);
+}
+
+.enhanced-timeline .timeline-step-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  transition: all 0.2s ease;
+}
+
+.enhanced-timeline .timeline-step.completed .timeline-step-card {
+  border-left: 4px solid #10b981;
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.04) 0%, transparent 100%);
+}
+
+.enhanced-timeline .timeline-step.in-progress .timeline-step-card {
+  border-left: 4px solid #f59e0b;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.06) 0%, transparent 100%);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.09);
+}
+
+.enhanced-timeline .timeline-step.pending .timeline-step-card {
+  border-left: 4px solid var(--border-strong);
+  opacity: 0.85;
+}
+
+.enhanced-timeline .step-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.enhanced-timeline .step-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+
+.enhanced-timeline .step-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.enhanced-timeline .step-badge.success {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.enhanced-timeline .step-badge.active {
+  background: rgba(245, 158, 11, 0.14);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.enhanced-timeline .step-badge.pending {
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.enhanced-timeline .step-card-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.enhanced-timeline .step-card-detail {
+  font-size: 12.8px;
+  color: var(--text-main);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.enhanced-timeline .step-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.enhanced-timeline .step-tag {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg-subtle);
+  color: var(--navy);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+@keyframes activeStepPulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+  70% { box-shadow: 0 0 0 9px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+@keyframes pulseDot {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .payment-hero-banner {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.7) 100%), #1e293b;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+[data-theme="dark"] .pay-amount-card {
+  background: #0f172a;
+  border-color: #334155;
+}
+[data-theme="dark"] .pay-amt-num {
+  color: #4ade80;
+}
+[data-theme="dark"] .pay-timeline-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+[data-theme="dark"] .enhanced-timeline .timeline-step-card {
+  background: #0f172a;
+  border-color: #334155;
+}
+[data-theme="dark"] .enhanced-timeline .step-tag {
+  background: #1e293b;
+  color: #94a3b8;
+  border-color: #334155;
+}
+[data-theme="dark"] .jform-paper {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
 
 /* ---------- QR Gate Pass View ---------- */
 .pass-layout {
@@ -2519,7 +2915,7 @@ footer.main-footer {
             <div class="counter-meta">
               <div class="meta-item">
                 <div class="meta-label" data-i18n="counter.centre">Procurement Centre</div>
-                <div class="meta-value" data-i18n="counter.bassiVal">Bassi APMC Mandi</div>
+                <div class="meta-value" id="heroCentreDisplay">Bassi APMC Mandi</div>
               </div>
               <div class="meta-item">
                 <div class="meta-label" data-i18n="counter.wait">Average Wait Time</div>
@@ -2543,13 +2939,17 @@ footer.main-footer {
       <div class="dashboard-panel">
         <!-- Farmer Tabs -->
         <nav class="tab-navigation" id="farmerTabs">
+          <button class="tab-btn active" data-ftab="queue">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span data-i18n="tab.queue">Live Queue</span>
+          </button>
           <button class="tab-btn" data-ftab="wa">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             <span data-i18n="tab.wa">WhatsApp Assistant</span>
           </button>
-          <button class="tab-btn active" data-ftab="queue">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span data-i18n="tab.queue">Live Queue</span>
+          <button class="tab-btn" data-ftab="feedback">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span data-i18n="tab.feedback">Mandi Feedback</span>
           </button>
           <button class="tab-btn" data-ftab="payment">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
@@ -2558,10 +2958,6 @@ footer.main-footer {
           <button class="tab-btn" data-ftab="qr">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
             <span data-i18n="tab.qr">Gate QR Pass</span>
-          </button>
-          <button class="tab-btn" data-ftab="feedback">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span data-i18n="tab.feedback">Centre Feedback</span>
           </button>
         </nav>
 
@@ -2684,7 +3080,7 @@ footer.main-footer {
               <div class="queue-header-row">
                 <div>
                   <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;" data-i18n="queue.your">Your Assigned Token</div>
-                  <div class="token-large mono">B-046</div>
+                  <div class="token-large mono" id="queueAssignedToken">B-046</div>
                 </div>
                 <div class="wait-time-badge">
                   <div class="est-num mono" id="waitMinutesDisplay">~24 mins</div>
@@ -2703,7 +3099,7 @@ footer.main-footer {
 
               <div class="notice-box">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-                <span data-i18n="queue.alert">Automatic SMS reminder will fire when 3 tokens remain before your turn.</span>
+                <span data-i18n="queue.alert">Automatic SMS reminder will fire when 10 and 3 tokens remain before your turn.</span>
               </div>
 
 
@@ -2712,54 +3108,89 @@ footer.main-footer {
 
           <!-- 4. FARMER: PAYMENT -->
           <div class="view-panel" data-view="farmer:payment">
-            <div class="timeline" id="stagesContainer">
-              <div class="timeline-step completed">
-                <div class="timeline-icon">✓</div>
-                <div class="timeline-line"></div>
-                <div class="timeline-content">
-                  <h5>Farmer Registration Verified</h5>
-                  <span>26 Aug, 06:12 PM</span>
+            <div class="payment-view-container">
+
+              <!-- Top Hero Settlement Card -->
+              <div class="payment-hero-banner">
+                <div class="pay-banner-top">
+                  <div class="pay-banner-info">
+                    <div class="pay-status-pill">
+                      <span class="pay-pulse-dot"></span>
+                      <span id="payStatusPillText">PFMS Batch Dispatched • Direct Benefit Transfer (DBT) Active</span>
+                    </div>
+                    <h3 class="pay-hero-heading" id="payHeroHeading">MSP Settlement &amp; Payment Status</h3>
+                    <p class="pay-hero-desc" id="payHeroDesc">Government of Rajasthan • Food &amp; Civil Supplies Department • Direct PFMS Transfer</p>
+                  </div>
+                  <div class="pay-amount-card">
+                    <span class="pay-amt-sub" id="payAmtSub">Total Net MSP Disbursal</span>
+                    <div class="pay-amt-num mono" id="payAmtNum">₹1,13,750</div>
+                    <div class="pay-amt-rate" id="payAmtRate">50.00 Quintals × ₹2,275/Qtl (100% Guaranteed MSP)</div>
+                  </div>
+                </div>
+
+                <!-- Metrics Grid -->
+                <div class="pay-metrics-grid">
+                  <div class="pay-metric-item">
+                    <span class="pmi-label" id="pmiLabelAcc">Beneficiary Account</span>
+                    <span class="pmi-val"><b>SBI</b> ••••4650 <span class="badge-dbt">Aadhaar Linked</span></span>
+                  </div>
+                  <div class="pay-metric-item">
+                    <span class="pmi-label" id="pmiLabelIfsc">Bank IFSC Code</span>
+                    <span class="pmi-val mono">SBIN0001234</span>
+                  </div>
+                  <div class="pay-metric-item">
+                    <span class="pmi-label" id="pmiLabelSanction">Sanction Order Ref</span>
+                    <span class="pmi-val mono" id="paySanctionRef">SO-RAJ-2026-88214</span>
+                  </div>
+                  <div class="pay-metric-item">
+                    <span class="pmi-label" id="pmiLabelEta">Estimated Direct Credit</span>
+                    <span class="pmi-val" style="color:#15803d; font-weight:700;" id="payEtaVal">Within 24–48 Hours</span>
+                  </div>
+                </div>
+
+                <!-- Progress Tracker Bar -->
+                <div class="pay-progress-section">
+                  <div class="pay-progress-labels">
+                    <span class="pp-count" id="payStageCount"><b>Stage 4 of 6 Completed</b> (67%)</span>
+                    <span class="pp-stage-name" id="payStageNotice" style="color:#d97706; font-weight:600;">Bank Clearing &amp; Credit Processing</span>
+                  </div>
+                  <div class="pay-progress-track">
+                    <div class="pay-progress-bar" id="payProgressBar" style="width: 67%;"></div>
+                  </div>
+                </div>
+
+                <!-- Quick Action Buttons -->
+                <div class="pay-action-buttons">
+                  <button class="btn btn-primary btn-sm" onclick="showJFormModal()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <span id="btnJFormText">View / Print Form-J Slip</span>
+                  </button>
+                  <button class="btn btn-outline btn-sm" onclick="toast('SMS TRACKER DISPATCHED', 'PFMS tracker SMS sent to registered mobile +91 9829019835.')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span id="btnSmsAlertText">Send SMS Status Alert</span>
+                  </button>
+                  <button class="btn btn-outline btn-sm" onclick="window.handleFarmerTab('feedback')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span id="btnGrievanceText">Report Payment Grievance</span>
+                  </button>
                 </div>
               </div>
-              <div class="timeline-step completed">
-                <div class="timeline-icon">✓</div>
-                <div class="timeline-line"></div>
-                <div class="timeline-content">
-                  <h5>Procurement Slot Booked</h5>
-                  <span>26 Aug, 06:14 PM</span>
+
+              <!-- Enhanced Timeline Container -->
+              <div class="pay-timeline-card">
+                <div class="pay-timeline-header">
+                  <div>
+                    <h4 class="pay-timeline-title" id="payTimelineTitle">End-to-End Procurement &amp; Payment Audit Trail</h4>
+                    <p class="pay-timeline-sub" id="payTimelineSub">Immutable timestamped stages from e-Mitra verification to bank credit confirmation</p>
+                  </div>
+                  <span class="pill low"><i style="background:#10b981;"></i>Live Tracked</span>
+                </div>
+
+                <div class="timeline enhanced-timeline" id="stagesContainer">
+                  <!-- Rendered dynamically by renderStages() -->
                 </div>
               </div>
-              <div class="timeline-step completed">
-                <div class="timeline-icon">✓</div>
-                <div class="timeline-line"></div>
-                <div class="timeline-content">
-                  <h5>Weighbridge Gross &amp; Tare Weighed</h5>
-                  <span>27 Aug, 09:41 AM</span>
-                </div>
-              </div>
-              <div class="timeline-step completed">
-                <div class="timeline-icon">✓</div>
-                <div class="timeline-line"></div>
-                <div class="timeline-content">
-                  <h5>Assay Quality Certified (FAQ Grade A)</h5>
-                  <span>27 Aug, 10:05 AM</span>
-                </div>
-              </div>
-              <div class="timeline-step">
-                <div class="timeline-icon">5</div>
-                <div class="timeline-line"></div>
-                <div class="timeline-content">
-                  <h5>PFMS Direct Bank Transfer Dispatched</h5>
-                  <span>Pending</span>
-                </div>
-              </div>
-              <div class="timeline-step">
-                <div class="timeline-icon">6</div>
-                <div class="timeline-content">
-                  <h5>Credit Confirmed in Bank Account</h5>
-                  <span>Pending</span>
-                </div>
-              </div>
+
             </div>
           </div>
 
@@ -2769,7 +3200,7 @@ footer.main-footer {
               <div class="printable-pass">
                 <div class="pass-head" data-i18n="qr.head">National MSP Gate Pass</div>
                 <div class="pass-qr-box" id="passQrCode"></div>
-                <div class="pass-token mono">B-046</div>
+                <div class="pass-token mono" id="gatePassTokenDisplay">B-046</div>
                 <div class="pass-fid"><span class="farmer-id-label">FID-RJ-88214-JR</span></div>
               </div>
               <div class="info-sidebar">
@@ -3560,6 +3991,83 @@ footer.main-footer {
   </div>
 </div>
 
+<!-- J-Form / Form-J Procurement Settlement Certificate Modal -->
+<div class="fb-modal-backdrop" id="jformModal" onclick="if(event.target===this)closeJFormModal()" style="display:none; align-items:center; justify-content:center; padding:16px;">
+  <div class="fb-modal-content" style="max-width: 680px; max-height: 90vh; overflow-y: auto; padding: 24px;">
+    <button class="fb-modal-close" onclick="closeJFormModal()">&times;</button>
+    
+    <div class="jform-paper" style="border: 2px dashed #94a3b8; border-radius: 10px; padding: 24px; background: #fff;">
+      <div style="text-align: center; border-bottom: 2px solid #0f2942; padding-bottom: 12px; margin-bottom: 16px;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; font-weight: 700;">Government of Rajasthan • Food &amp; Civil Supplies Department</div>
+        <h3 style="margin: 4px 0; font-size: 18px; color: #0f2942; font-weight: 800;">FORM-J (जे-फॉर्म) / MSP PURCHASE SETTLEMENT VOUCHER</h3>
+        <div style="font-size: 12px; color: #16a34a; font-weight: 700;">Direct Benefit Transfer (DBT) Authorized Payment Certificate</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12.5px; margin-bottom: 16px;">
+        <div><strong>J-Form Serial No:</strong> <span class="mono" id="jfSerialNo">JF-RAJ-2026-99042</span></div>
+        <div><strong>Date of Issue:</strong> <span class="mono" id="jfDate">27 Aug 2026</span></div>
+        <div><strong>Farmer Name:</strong> <span id="jfFarmerName">Ramkishan Choudhary</span></div>
+        <div><strong>Jan Aadhaar / FID:</strong> <span class="mono" id="jfJanAadhaar">7482 •••• 8472 (FID-88214)</span></div>
+        <div><strong>Procurement Mandi:</strong> <span id="jfMandi">Bassi APMC Mandi</span></div>
+        <div><strong>Gate Entry Token:</strong> <span class="mono" id="jfToken">B-046</span></div>
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 12.5px;">
+        <thead>
+          <tr style="background: rgba(15,41,66,0.05); border-bottom: 1.5px solid var(--border); text-align: left;">
+            <th style="padding: 8px;">Commodity</th>
+            <th style="padding: 8px;">Quality Grade</th>
+            <th style="padding: 8px; text-align: right;">Net Qty</th>
+            <th style="padding: 8px; text-align: right;">MSP Rate/Qtl</th>
+            <th style="padding: 8px; text-align: right;">Total Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 8px;" id="jfCrop">Wheat (Kanak)</td>
+            <td style="padding: 8px;"><span style="color:#16a34a; font-weight:700;">FAQ Grade A</span></td>
+            <td style="padding: 8px; text-align: right;" id="jfQty">50.00 Qtl</td>
+            <td style="padding: 8px; text-align: right;" id="jfRate">₹2,275</td>
+            <td style="padding: 8px; text-align: right; font-weight:700;" id="jfGross">₹1,13,750</td>
+          </tr>
+          <tr style="color: var(--text-muted); font-size: 12px; border-bottom: 1px solid var(--border);">
+            <td colspan="4" style="padding: 6px 8px;">Mandi User Charges / Loading &amp; Weighing Cess (Borne by Govt)</td>
+            <td style="padding: 6px 8px; text-align: right;">₹0.00</td>
+          </tr>
+          <tr style="font-size: 14px; font-weight: 800; background: rgba(22,163,74,0.06);">
+            <td colspan="4" style="padding: 10px 8px; color: var(--navy);">Net Disbursal via PFMS-DBT to Bank Account:</td>
+            <td style="padding: 10px 8px; text-align: right; color: #16a34a;" id="jfNetTotal">₹1,13,750</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background: rgba(15,41,66,0.03); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-size: 12px; margin-bottom: 16px;">
+        <div><strong>Bank Disbursal Account:</strong> State Bank of India • A/c No: ••••••••4650 • IFSC: SBIN0001234</div>
+        <div style="color: var(--text-muted); margin-top: 3px;">Payment directly credited to Aadhaar-seeded primary account without intermediary deductions.</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; padding-top: 8px; flex-wrap: wrap; gap: 10px;">
+        <div style="font-size: 11px; color: var(--text-muted);">
+          Digitally signed by Centre Manager &amp; Weighbridge Operator.<br>
+          Verification Hash: <span class="mono">e7b39a48f092c2</span>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; color: #16a34a; font-weight: 700;">DIGITALLY CERTIFIED</div>
+          <div style="font-size: 12px; font-weight: 700; color: var(--navy);">Procurement Officer, RSAMB</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 16px; display: flex; justify-content: flex-end; gap: 10px;">
+      <button class="btn btn-outline" onclick="closeJFormModal()">Close</button>
+      <button class="btn btn-primary" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px;"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / Save PDF
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ================= BACKEND INTEGRATION CONFIG ================= */
 const API_BASE = (window.location.protocol.startsWith('http')) ? window.location.origin : 'http://localhost:8000';
@@ -3638,7 +4146,7 @@ const I18N = {
     "wa.restart": "Restart Chat",
     "wa.demo": "Run Full Demo",
     "queue.your": "Your Assigned Token", "queue.est": "Estimated wait time",
-    "queue.ahead": "4 tokens ahead of you", "queue.alert": "Automatic SMS reminder will fire when 3 tokens remain before your turn.",
+    "queue.ahead": "4 tokens ahead of you", "queue.alert": "Automatic SMS reminder will fire when 10 and 3 tokens remain before your turn.",
     "qr.title": "Fast-Track Gate Entry Pass", "qr.p1": "Present this QR code at the Mandi entry barrier. Centre operators scan it with the gate camera for instant verification.",
     "atbl.token": "Token ID", "atbl.farmer": "Farmer Name", "atbl.crop": "Crop", "atbl.qty": "Declared Qty", "atbl.status": "Stage Status",
     "auth.signin": "Sign In",
@@ -3843,7 +4351,7 @@ const I18N = {
     "wa.restart": "चैट फिर शुरू करें",
     "wa.demo": "डेमो चलाएं",
     "queue.your": "आपका आवंटित टोकन", "queue.est": "अनुमानित प्रतीक्षा समय",
-    "queue.ahead": "आपसे पहले 4 टोकन शेष", "queue.alert": "आपकी बारी से 3 टोकन पहले स्वतः SMS अलर्ट भेजा जाएगा।",
+    "queue.ahead": "आपसे पहले 4 टोकन शेष", "queue.alert": "आपकी बारी से 10 और 3 टोकन पहले स्वतः SMS अलर्ट भेजा जाएगा।",
     "qr.title": "फास्ट-ट्रैक गेट एंट्री पास", "qr.p1": "गेट पर यह QR कोड दिखाएं। ऑपरेटर कैमरा स्कैन कर तुरंत प्रवेश की पुष्टि करते हैं।",
     "qr.print": "पास प्रिंट करें", "qr.download": "PNG डाउनलोड करें",
     "atbl.token": "टोकन", "atbl.farmer": "किसान का नाम", "atbl.crop": "फसल", "atbl.qty": "मात्रा", "atbl.status": "स्थिति",
@@ -4232,6 +4740,7 @@ window.handleFarmerTab = function(tabKey) {
   showView('farmer', tabKey);
   if (tabKey === 'qr') renderPassQR();
   if (tabKey === 'queue') updateLiveQueueUI();
+  if (tabKey === 'payment') renderStages();
   if (tabKey === 'feedback') {
     if (typeof fbSwitchView === 'function') fbSwitchView('submit');
   }
@@ -4276,19 +4785,87 @@ if (heroQueueBtnInit) heroQueueBtnInit.addEventListener('click', () => {
 });
 
 /* ================= LIVE TOKEN STATE & TICKER ================= */
-const TOKEN_LIST = ["B-039", "B-040", "B-041", "B-042", "B-043", "B-044", "B-045", "B-046"];
-let currentServingIdx = 3; // Serving B-042
-let userAssignedToken = "B-046";
-let userAssignedCrop = "Wheat";
-let userAssignedCentre = "Bassi APMC Mandi";
-let userAssignedDate = "Today, 28 Aug";
-let userAssignedSlot = "09:00 AM – 10:00 AM";
+const KS_CENTRE_NAMES = {
+  bassi: { en: 'Bassi APMC Mandi', hi: 'बस्सी APMC मंडी' },
+  chomu: { en: 'Chomu Mandi Yard', hi: 'चोमू मंडी यार्ड' },
+  dudu: { en: 'Dudu APMC Yard', hi: 'दूदू APMC यार्ड' }
+};
+
+function getCentreDisplayName(cId, lang) {
+  const cKey = (cId || '').toLowerCase();
+  if (KS_CENTRE_NAMES[cKey]) {
+    return KS_CENTRE_NAMES[cKey][lang || currentLang] || KS_CENTRE_NAMES[cKey]['en'];
+  }
+  return userAssignedCentre || 'Bassi APMC Mandi';
+}
+
+function generateTokenList(token) {
+  const match = String(token || 'B-046').trim().match(/^([A-Za-z]+)-?(\d+)$/);
+  if (!match) {
+    return ["B-039", "B-040", "B-041", "B-042", "B-043", "B-044", "B-045", "B-046"];
+  }
+  const prefix = match[1];
+  const num = parseInt(match[2], 10);
+  const padLen = match[2].length;
+  const list = [];
+  for (let i = 7; i >= 0; i--) {
+    const n = Math.max(1, num - i);
+    const nStr = String(n).padStart(padLen, '0');
+    list.push(`${prefix}-${nStr}`);
+  }
+  return list;
+}
+
+let savedToken = localStorage.getItem('kisan_setu_token');
+let savedCentreId = localStorage.getItem('kisan_setu_centre');
+let savedCentreName = localStorage.getItem('kisan_setu_centre_name');
+let savedCrop = localStorage.getItem('kisan_setu_crop');
+let savedDate = localStorage.getItem('kisan_setu_date');
+let savedSlot = localStorage.getItem('kisan_setu_slot');
+
+let userAssignedToken = savedToken || "B-046";
+let userAssignedCentreId = savedCentreId || (userAssignedToken.startsWith('C') ? 'chomu' : (userAssignedToken.startsWith('D') ? 'dudu' : 'bassi'));
+let userAssignedCentre = savedCentreName || (userAssignedCentreId === 'chomu' ? 'Chomu Mandi Yard' : (userAssignedCentreId === 'dudu' ? 'Dudu APMC Yard' : 'Bassi APMC Mandi'));
+let userAssignedCrop = savedCrop || "Wheat";
+let userAssignedDate = savedDate || "Today, 28 Aug";
+let userAssignedSlot = savedSlot || "09:00 AM – 10:00 AM";
+
+let TOKEN_LIST = generateTokenList(userAssignedToken);
+let currentServingIdx = Math.min(3, Math.max(0, TOKEN_LIST.length - 4));
 
 function updateLiveQueueUI() {
   try {
-    const servingToken = TOKEN_LIST[currentServingIdx] || "B-042";
+    if (!TOKEN_LIST || TOKEN_LIST.length === 0) {
+      TOKEN_LIST = generateTokenList(userAssignedToken);
+    }
+    const servingToken = TOKEN_LIST[currentServingIdx] || TOKEN_LIST[0] || "B-042";
     const heroTokenEl = document.getElementById('liveTokenDisplay');
     if (heroTokenEl) heroTokenEl.textContent = servingToken;
+
+    const heroCentreEl = document.getElementById('heroCentreDisplay');
+    if (heroCentreEl) {
+      heroCentreEl.textContent = getCentreDisplayName(userAssignedCentreId, currentLang);
+    }
+
+    const queueAssignedTokenEl = document.getElementById('queueAssignedToken');
+    if (queueAssignedTokenEl) {
+      queueAssignedTokenEl.textContent = userAssignedToken;
+    }
+
+    const gatePassTokenEl = document.getElementById('gatePassTokenDisplay');
+    if (gatePassTokenEl) {
+      gatePassTokenEl.textContent = userAssignedToken;
+    }
+
+    // Sync Mandi Feedback Chip
+    const fbLinkedCenterEl = document.getElementById('fbLinkedCenter');
+    if (fbLinkedCenterEl) fbLinkedCenterEl.textContent = getCentreDisplayName(userAssignedCentreId, currentLang);
+    const fbLinkedTokenEl = document.getElementById('fbLinkedToken');
+    if (fbLinkedTokenEl) fbLinkedTokenEl.textContent = userAssignedToken;
+    const fbLinkedBookingEl = document.getElementById('fbLinkedBooking');
+    if (fbLinkedBookingEl && typeof activeFarmerBookingId !== 'undefined') {
+      fbLinkedBookingEl.textContent = activeFarmerBookingId;
+    }
 
     const servingNum = parseInt(servingToken.replace(/\D/g, '')) || 42;
     const assignedNum = parseInt(userAssignedToken.replace(/\D/g, '')) || 46;
@@ -4326,7 +4903,10 @@ function updateLiveQueueUI() {
 
 // Live Ticker runs every 3.5 seconds
 setInterval(() => {
-  currentServingIdx = (currentServingIdx + 1) % 6; // Loops B-039 through B-044
+  if (TOKEN_LIST && TOKEN_LIST.length > 0) {
+    const loopLimit = Math.max(1, TOKEN_LIST.length - 2);
+    currentServingIdx = (currentServingIdx + 1) % (loopLimit + 1);
+  }
   updateLiveQueueUI();
 }, 3500);
 
@@ -4589,8 +5169,20 @@ function handleFregSubmitRegistration() {
   userAssignedToken = fregState.generatedToken;
   userAssignedCrop = fregState.cropName;
   userAssignedCentre = fregState.centreName;
+  userAssignedCentreId = (fregState.centre || (userAssignedToken.startsWith('C') ? 'chomu' : (userAssignedToken.startsWith('D') ? 'dudu' : 'bassi'))).toLowerCase();
   userAssignedDate = fregState.date;
   userAssignedSlot = fregState.slot;
+  TOKEN_LIST = generateTokenList(userAssignedToken);
+  currentServingIdx = Math.min(3, Math.max(0, TOKEN_LIST.length - 4));
+  activeFarmerAssignedCentre = userAssignedCentreId;
+  activeFarmerBookingId = `BK-${(userAssignedCentreId || 'BASSI').toUpperCase()}-${userAssignedToken}`;
+  try {
+    localStorage.setItem('kisan_setu_token', userAssignedToken);
+    localStorage.setItem('kisan_setu_centre', userAssignedCentreId);
+    localStorage.setItem('kisan_setu_centre_name', userAssignedCentre);
+    localStorage.setItem('kisan_setu_crop', userAssignedCrop);
+    localStorage.setItem('kisan_setu_booking_id', activeFarmerBookingId);
+  } catch(e) {}
   document.querySelectorAll('.farmer-id-label').forEach(el => el.textContent = fregState.generatedFid);
 
   updateLiveQueueUI();
@@ -4988,7 +5580,7 @@ function waUserSend(text) {
     setTimeout(() => waRenderStep(0), 300);
   } else if (lo.includes('status') || lo.includes('token') || lo.includes('स्थिति') || lo.includes('टोकन')) {
     const isHi = waLang === 'hi';
-    const msg = isHi ? 'आपका वर्तमान टोकन *B-046* है — कतार स्थिति 4। अनुमानित समय: *~24 मिनट*।' : 'Your current token is *B-046* — Queue Position 4. Estimated wait: *~24 minutes*.';
+    const msg = isHi ? `आपका वर्तमान टोकन *${userAssignedToken}* है — कतार स्थिति 4। अनुमानित समय: *~24 मिनट*।` : `Your current token is *${userAssignedToken}* — Queue Position 4. Estimated wait: *~24 minutes*.`;
     const bub = waBotBubble(msg);
     setTimeout(() => { container.appendChild(bub); container.scrollTop = container.scrollHeight; }, 300);
   } else if (lo.includes('payment') || lo.includes('भुगतान') || lo.includes('पैसा')) {
@@ -5050,55 +5642,273 @@ if (waSendBtn && waTextInput) {
 
 /* ================= 4. PAYMENT & STAGES ================= */
 const STAGES = [
-  { label_en: 'Farmer Registration Verified', label_hi: 'किसान पंजीकरण सत्यापित', done: true, time_en: '26 Aug, 06:12 PM', time_hi: '26 अगस्त, शाम 6:12' },
-  { label_en: 'Procurement Slot Booked', label_hi: 'खरीद स्लॉट बुक हुआ', done: true, time_en: '26 Aug, 06:14 PM', time_hi: '26 अगस्त, शाम 6:14' },
-  { label_en: 'Weighbridge Gross & Tare Weighed', label_hi: 'धर्मकांटा तौल पूर्ण', done: true, time_en: '27 Aug, 09:41 AM', time_hi: '27 अगस्त, सुबह 9:41' },
-  { label_en: 'Assay Quality Certified (FAQ Grade A)', label_hi: 'गुणवत्ता परीक्षण प्रमाणित (FAQ ग्रेड A)', done: true, time_en: '27 Aug, 10:05 AM', time_hi: '27 अगस्त, सुबह 10:05' },
-  { label_en: 'PFMS Direct Bank Transfer Dispatched', label_hi: 'PFMS द्वारा बैंक खाता हस्तांतरण प्रेषित', done: false, time_en: 'Pending', time_hi: 'प्रक्रियाधीन' },
-  { label_en: 'Credit Confirmed in Bank Account', label_hi: 'बैंक खाते में राशि जमा पुष्ट', done: false, time_en: 'Pending', time_hi: 'प्रक्रियाधीन' }
+  {
+    step: 1,
+    status: 'completed',
+    label_en: 'Farmer Registration Verified',
+    label_hi: 'किसान पंजीकरण सत्यापित',
+    badge_en: 'Verified',
+    badge_hi: 'सत्यापित',
+    badge_type: 'success',
+    time_en: '26 Aug, 06:12 PM',
+    time_hi: '26 अगस्त, शाम 06:12',
+    detail_en: 'Jan Aadhaar authenticated via UIDAI OTP • KYC credentials verified for MSP procurement quota.',
+    detail_hi: 'जन आधार एवं मोबाइल OTP द्वारा पहचान प्रमाणित • MSP खरीद कोटे हेतु विवरण सत्यापित।',
+    tags: ['Jan Aadhaar 7482••••8472', 'OTP Verified', 'KYC Matched']
+  },
+  {
+    step: 2,
+    status: 'completed',
+    label_en: 'Procurement Slot Booked',
+    label_hi: 'खरीद स्लॉट बुक हुआ',
+    badge_en: 'Confirmed',
+    badge_hi: 'पुष्टित',
+    badge_type: 'success',
+    time_en: '26 Aug, 06:14 PM',
+    time_hi: '26 अगस्त, शाम 06:14',
+    detail_en: 'Gate Entry Token issued • Designated Mandi intake slot allocated without yard congestion.',
+    detail_hi: 'गेट एंट्री टोकन आवंटित • मंडी यार्ड में बिना भीड़ समयबद्ध स्लॉट सुरक्षित।',
+    tags: ['Arrival 09:00 AM – 10:00 AM', 'Fast-Track Lane', 'Mandi Gate Pass']
+  },
+  {
+    step: 3,
+    status: 'completed',
+    label_en: 'Weighbridge Gross & Tare Weighed',
+    label_hi: 'धर्मकांटा तौल पूर्ण',
+    badge_en: 'Weight Recorded',
+    badge_hi: 'तौल दर्ज',
+    badge_type: 'success',
+    time_en: '27 Aug, 09:41 AM',
+    time_hi: '27 अगस्त, सुबह 09:41',
+    detail_en: 'Gross: 6,840 kg | Tare: 1,840 kg | Net Produce: 50.00 Qtl • Electronic weighbridge slip calibrated.',
+    detail_hi: 'सकल भार: 6,840 किग्रा | खाली वाहन: 1,840 किग्रा | शुद्ध उपज: 50.00 क्विंटल (पर्ची #WB-88214)।',
+    tags: ['Gross 6,840 kg', 'Tare 1,840 kg', 'Net 50.00 Qtl', 'Slip #WB-88214']
+  },
+  {
+    step: 4,
+    status: 'completed',
+    label_en: 'Assay Quality Certified (FAQ Grade A)',
+    label_hi: 'गुणवत्ता परीक्षण प्रमाणित (FAQ ग्रेड A)',
+    badge_en: 'FAQ Grade Passed',
+    badge_hi: 'FAQ ग्रेड उत्तीर्ण',
+    badge_type: 'success',
+    time_en: '27 Aug, 10:05 AM',
+    time_hi: '27 अगस्त, सुबह 10:05',
+    detail_en: 'Moisture: 11.2% (Norm <12%) | Admixture: 0.4% • Certified by NABL accredited mandi assayer.',
+    detail_hi: 'नमी: 11.2% (मानक <12%) | अशुद्धि: 0.4% • प्रयोगशाला द्वारा FAQ ग्रेड A प्रमाणित।',
+    tags: ['Moisture 11.2%', 'Foreign Matter 0.4%', 'Grade A Certified', 'Zero Deduction']
+  },
+  {
+    step: 5,
+    status: 'in_progress',
+    label_en: 'PFMS Direct Bank Transfer Dispatched',
+    label_hi: 'PFMS द्वारा बैंक खाता हस्तांतरण प्रेषित',
+    badge_en: 'In Banking Channel',
+    badge_hi: 'बैंक प्रक्रियाधीन',
+    badge_type: 'active',
+    time_en: '27 Aug, 11:30 AM (Batch In-Transit)',
+    time_hi: '27 अगस्त, सुबह 11:30 (बैंकिंग चैनल में)',
+    detail_en: 'Sanction Batch #PFMS-RAJ-2026-9042 submitted to RBI PFMS Gateway • Direct Benefit Transfer active.',
+    detail_hi: 'स्वीकृति आदेश #PFMS-RAJ-2026-9042 RBI PFMS गेटवे को प्रेषित • आधार लिंक बैंक खाते में DBT जारी।',
+    tags: ['Sanction Batch #9042', 'DBT Active', 'Beneficiary SBI ••••4650']
+  },
+  {
+    step: 6,
+    status: 'pending',
+    label_en: 'Credit Confirmed in Bank Account',
+    label_hi: 'बैंक खाते में राशि जमा पुष्ट',
+    badge_en: 'Pending Settlement',
+    badge_hi: 'जमा प्रतीक्षित',
+    badge_type: 'pending',
+    time_en: 'Expected within 24–48 Hours',
+    time_hi: '24–48 घंटों में अपेक्षित',
+    detail_en: 'Direct deposit into Aadhaar-linked Bank Account via RBI NACH/NEFT • SMS & UTR update will trigger automatically.',
+    detail_hi: 'RBI NACH/NEFT द्वारा सीधे बैंक खाते में जमा • UTR व राशि जमा होते ही मोबाइल पर SMS प्राप्त होगा।',
+    tags: ['RBI NACH / NEFT', 'Aadhaar Seeded Bank', 'Automatic SMS Confirmation']
+  }
 ];
 
 function renderStages() {
   const isHi = currentLang === 'hi';
+  
+  // Calculate dynamic payment amounts based on registered crop and quantity
+  const qty = parseInt(localStorage.getItem('kisan_setu_crop_qty') || '50', 10);
+  const crop = userAssignedCrop || 'Wheat';
+  let rate = 2275;
+  const cLower = crop.toLowerCase();
+  if (cLower.includes('mustard') || cLower.includes('sarson')) rate = 5650;
+  else if (cLower.includes('bajra')) rate = 2500;
+  const totalAmount = qty * rate;
+
+  // Update top hero summary card
+  const amtNumEl = document.getElementById('payAmtNum');
+  if (amtNumEl) amtNumEl.textContent = `₹${totalAmount.toLocaleString('en-IN')}`;
+
+  const amtRateEl = document.getElementById('payAmtRate');
+  if (amtRateEl) {
+    amtRateEl.textContent = isHi
+      ? `${qty}.00 क्विंटल ${crop} × ₹${rate.toLocaleString('en-IN')}/क्विंटल (100% गारंटीड MSP)`
+      : `${qty}.00 Quintals ${crop} × ₹${rate.toLocaleString('en-IN')}/Qtl (100% Guaranteed MSP)`;
+  }
+
+  const sanctionRefEl = document.getElementById('paySanctionRef');
+  if (sanctionRefEl) {
+    sanctionRefEl.textContent = `SO-${(userAssignedCentreId || 'RAJ').toUpperCase()}-2026-${userAssignedToken || '88214'}`;
+  }
+
+  // Language updates for headers & labels
+  const headingEl = document.getElementById('payHeroHeading');
+  if (headingEl) headingEl.textContent = isHi ? 'MSP खरीद भुगतान एवं बैंक स्थिति' : 'MSP Settlement & Payment Status';
+
+  const descEl = document.getElementById('payHeroDesc');
+  if (descEl) descEl.textContent = isHi ? 'राजस्थान सरकार • खाद्य एवं नागरिक आपूर्ति विभाग • डायरेक्ट बेनिफिट ट्रांसफर (DBT)' : 'Government of Rajasthan • Food & Civil Supplies Department • Direct PFMS Transfer';
+
+  const amtSubEl = document.getElementById('payAmtSub');
+  if (amtSubEl) amtSubEl.textContent = isHi ? 'कुल शुद्ध MSP देय राशि' : 'Total Net MSP Disbursal';
+
+  const statusPillText = document.getElementById('payStatusPillText');
+  if (statusPillText) statusPillText.textContent = isHi ? 'PFMS बैच प्रेषित • डायरेक्ट बेनिफिट ट्रांसफर (DBT) सक्रिय' : 'PFMS Batch Dispatched • Direct Benefit Transfer (DBT) Active';
+
+  const labelAcc = document.getElementById('pmiLabelAcc');
+  if (labelAcc) labelAcc.textContent = isHi ? 'लाभार्थी बैंक खाता' : 'Beneficiary Account';
+
+  const labelIfsc = document.getElementById('pmiLabelIfsc');
+  if (labelIfsc) labelIfsc.textContent = isHi ? 'बैंक IFSC कोड' : 'Bank IFSC Code';
+
+  const labelSanction = document.getElementById('pmiLabelSanction');
+  if (labelSanction) labelSanction.textContent = isHi ? 'स्वीकृति आदेश संख्या' : 'Sanction Order Ref';
+
+  const labelEta = document.getElementById('pmiLabelEta');
+  if (labelEta) labelEta.textContent = isHi ? 'अपेक्षित बैंक जमा' : 'Estimated Direct Credit';
+
+  const etaVal = document.getElementById('payEtaVal');
+  if (etaVal) etaVal.textContent = isHi ? '24–48 घंटों के भीतर' : 'Within 24–48 Hours';
+
+  const stageCount = document.getElementById('payStageCount');
+  if (stageCount) stageCount.innerHTML = isHi ? '<b>चरण 4/6 पूर्ण</b> (67%)' : '<b>Stage 4 of 6 Completed</b> (67%)';
+
+  const stageNotice = document.getElementById('payStageNotice');
+  if (stageNotice) stageNotice.textContent = isHi ? 'बैंक क्लीयरिंग एवं जमा प्रक्रियाधीन' : 'Bank Clearing & Credit Processing';
+
+  const btnJFormText = document.getElementById('btnJFormText');
+  if (btnJFormText) btnJFormText.textContent = isHi ? 'जे-फॉर्म पर्ची देखें / प्रिंट करें' : 'View / Print Form-J Slip';
+
+  const btnSmsAlertText = document.getElementById('btnSmsAlertText');
+  if (btnSmsAlertText) btnSmsAlertText.textContent = isHi ? 'SMS स्टेटस अलर्ट भेजें' : 'Send SMS Status Alert';
+
+  const btnGrievanceText = document.getElementById('btnGrievanceText');
+  if (btnGrievanceText) btnGrievanceText.textContent = isHi ? 'भुगतान शिकायत दर्ज करें' : 'Report Payment Grievance';
+
+  const timelineTitle = document.getElementById('payTimelineTitle');
+  if (timelineTitle) timelineTitle.textContent = isHi ? 'एंड-टू-एंड खरीद एवं भुगतान ऑडिट ट्रेल' : 'End-to-End Procurement & Payment Audit Trail';
+
+  const timelineSub = document.getElementById('payTimelineSub');
+  if (timelineSub) timelineSub.textContent = isHi ? 'ई-मित्र सत्यापन से लेकर बैंक खाता जमा तक की डिजिटल समय-सारणी' : 'Immutable timestamped stages from e-Mitra verification to bank credit confirmation';
+
+  // Render enhanced timeline stages
   const container = document.getElementById('stagesContainer');
   if (!container) return;
-  container.innerHTML = STAGES.map((s, i) => `
-    <div class="timeline-step ${s.done ? 'completed' : ''}">
-      <div class="timeline-icon">${s.done ? '✓' : (i+1)}</div>
-      ${i < STAGES.length - 1 ? '<div class="timeline-line"></div>' : ''}
-      <div class="timeline-content">
-        <h5>${isHi ? s.label_hi : s.label_en}</h5>
-        <span>${isHi ? s.time_hi : s.time_en}</span>
+
+  container.innerHTML = STAGES.map((s, i) => {
+    const isCompleted = s.status === 'completed';
+    const isInProgress = s.status === 'in_progress';
+    const statusClass = isCompleted ? 'completed' : (isInProgress ? 'in-progress' : 'pending');
+    const iconContent = isInProgress ? `<span class="pulse-ring"></span>${s.step}` : s.step;
+    const badgeLabel = isHi ? s.badge_hi : s.badge_en;
+    const timeLabel = isHi ? s.time_hi : s.time_en;
+    const titleLabel = isHi ? s.label_hi : s.label_en;
+    const detailLabel = isHi ? s.detail_hi : s.detail_en;
+    const isLast = i === STAGES.length - 1;
+
+    return `
+      <div class="timeline-step ${statusClass}">
+        <div class="timeline-icon-col">
+          <div class="timeline-icon">${iconContent}</div>
+          ${!isLast ? '<div class="timeline-line"></div>' : ''}
+        </div>
+        <div class="timeline-step-card">
+          <div class="step-card-header">
+            <h5 class="step-card-title">${titleLabel}</h5>
+            <span class="step-badge ${s.badge_type}">${badgeLabel}</span>
+          </div>
+          <div class="step-card-time">
+            <span>${timeLabel}</span>
+          </div>
+          <p class="step-card-detail">${detailLabel}</p>
+          <div class="step-tags">
+            ${s.tags.map(t => `<span class="step-tag">${t}</span>`).join('')}
+          </div>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 window.renderStages = renderStages;
 
+window.showJFormModal = function() {
+  const modal = document.getElementById('jformModal');
+  if (!modal) return;
+  const isHi = currentLang === 'hi';
+  const qty = parseInt(localStorage.getItem('kisan_setu_crop_qty') || '50', 10);
+  const crop = userAssignedCrop || 'Wheat';
+  let rate = 2275;
+  const cLower = crop.toLowerCase();
+  if (cLower.includes('mustard') || cLower.includes('sarson')) rate = 5650;
+  else if (cLower.includes('bajra')) rate = 2500;
+  const total = qty * rate;
+
+  const setT = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  setT('jfFarmerName', localStorage.getItem('kisan_setu_farmer_name') || 'Ramkishan Choudhary');
+  setT('jfJanAadhaar', (localStorage.getItem('kisan_setu_jan_aadhaar') || '748291038472').replace(/(\d{4})(?=\d)/g,'$1 ').trim() + ' (FID-88214)');
+  setT('jfMandi', getCentreDisplayName(userAssignedCentreId, currentLang));
+  setT('jfToken', userAssignedToken || 'B-046');
+  setT('jfCrop', crop);
+  setT('jfQty', `${qty}.00 Qtl`);
+  setT('jfRate', `₹${rate.toLocaleString('en-IN')}`);
+  setT('jfGross', `₹${total.toLocaleString('en-IN')}`);
+  setT('jfNetTotal', `₹${total.toLocaleString('en-IN')}`);
+  setT('jfSerialNo', `JF-RAJ-2026-${(userAssignedToken || '88214').replace(/\D/g, '') || '99042'}`);
+  
+  modal.style.display = 'flex';
+};
+
+window.closeJFormModal = function() {
+  const modal = document.getElementById('jformModal');
+  if (modal) modal.style.display = 'none';
+};
+
 /* ================= 5. QR PASS RENDERER ================= */
-let passRendered = false;
+let lastRenderedToken = null;
 function renderPassQR() {
-  if (passRendered) return;
+  const gatePassTokenEl = document.getElementById('gatePassTokenDisplay');
+  if (gatePassTokenEl) gatePassTokenEl.textContent = userAssignedToken;
+
+  if (lastRenderedToken === userAssignedToken) return;
   const target = document.getElementById('passQrCode');
   if (!target) return;
   target.innerHTML = '';
   try {
     if (typeof QRCode !== 'undefined') {
       new QRCode(target, {
-        text: JSON.stringify({ fid: 'FID-RJ-88214-JR', token: userAssignedToken, centre: 'bassi', crop: userAssignedCrop }),
+        text: JSON.stringify({
+          fid: (typeof activeFarmerId !== 'undefined' ? activeFarmerId : 'FID-RJ-88214-JR'),
+          token: userAssignedToken,
+          centre: userAssignedCentreId || 'bassi',
+          crop: userAssignedCrop
+        }),
         width: 160,
         height: 160,
         colorDark: '#0f2942',
         colorLight: '#ffffff'
       });
-      passRendered = true;
+      lastRenderedToken = userAssignedToken;
     } else {
       target.innerHTML = `<svg width="150" height="150" viewBox="0 0 140 140" fill="#0f2942" xmlns="http://www.w3.org/2000/svg" style="background:#fff;border-radius:6px;border:1px solid #cbd5e1;padding:6px;"><rect width="140" height="140" fill="#ffffff"/><rect width="36" height="36" x="8" y="8" fill="#0f2942"/><rect width="24" height="24" x="14" y="14" fill="#ffffff"/><rect width="12" height="12" x="20" y="20" fill="#0f2942"/><rect width="36" height="36" x="96" y="8" fill="#0f2942"/><rect width="24" height="24" x="102" y="14" fill="#ffffff"/><rect width="12" height="12" x="108" y="20" fill="#0f2942"/><rect width="36" height="36" x="8" y="96" fill="#0f2942"/><rect width="24" height="24" x="14" y="102" fill="#ffffff"/><rect width="12" height="12" x="20" y="108" fill="#0f2942"/><rect width="8" height="8" x="52" y="12" fill="#0f2942"/><rect width="8" height="8" x="68" y="12" fill="#0f2942"/><rect width="8" height="8" x="52" y="28" fill="#0f2942"/><rect width="8" height="8" x="68" y="28" fill="#0f2942"/><rect width="8" height="8" x="12" y="52" fill="#0f2942"/><rect width="8" height="8" x="28" y="52" fill="#0f2942"/><rect width="8" height="8" x="52" y="52" fill="#0f2942"/><rect width="8" height="8" x="68" y="52" fill="#0f2942"/><rect width="8" height="8" x="84" y="52" fill="#0f2942"/><rect width="8" height="8" x="104" y="52" fill="#0f2942"/><rect width="8" height="8" x="12" y="68" fill="#0f2942"/><rect width="8" height="8" x="52" y="68" fill="#0f2942"/><rect width="8" height="8" x="84" y="68" fill="#0f2942"/><rect width="8" height="8" x="52" y="84" fill="#0f2942"/><rect width="8" height="8" x="68" y="84" fill="#0f2942"/><rect width="8" height="8" x="52" y="104" fill="#0f2942"/><rect width="8" height="8" x="84" y="84" fill="#0f2942"/><rect width="8" height="8" x="104" y="84" fill="#0f2942"/><rect width="8" height="8" x="68" y="104" fill="#0f2942"/><rect width="8" height="8" x="96" y="104" fill="#0f2942"/></svg>`;
-      passRendered = true;
+      lastRenderedToken = userAssignedToken;
     }
   } catch (e) {
     target.textContent = 'QR Code Active';
-    passRendered = true;
+    lastRenderedToken = userAssignedToken;
   }
 }
 window.renderPassQR = renderPassQR;
@@ -5823,8 +6633,8 @@ if (openTab === 'register' || openTab === 'verify') {
 
 let activeReallocationOffer = null;
 let activeFarmerId = localStorage.getItem('kisan_setu_user_id') || 'FID-88214';
-let activeFarmerBookingId = 'BK-BASSI-B-046';
-let activeFarmerAssignedCentre = 'bassi';
+let activeFarmerAssignedCentre = (typeof userAssignedCentreId !== 'undefined' ? userAssignedCentreId : (localStorage.getItem('kisan_setu_centre') || 'bassi')).toLowerCase();
+let activeFarmerBookingId = localStorage.getItem('kisan_setu_booking_id') || `BK-${activeFarmerAssignedCentre.toUpperCase()}-${userAssignedToken || 'B-046'}`;
 
 // --- FEATURE 1: CENTRE LOAD & CAPACITY DASHBOARD ---
 
@@ -6304,10 +7114,10 @@ async function submitFarmerFeedback() {
 
   const payload = {
     farmer_id: activeFarmerId || 'FID-88214',
-    token_id: 'B-046',
+    token_id: userAssignedToken || 'B-046',
     center_id: activeFarmerAssignedCentre || 'bassi',
-    crop: 'Mustard (Sarson)',
-    booking_id: activeFarmerBookingId || 'BK-BASSI-B-046',
+    crop: userAssignedCrop || 'Mustard (Sarson)',
+    booking_id: activeFarmerBookingId || `BK-${(activeFarmerAssignedCentre || 'BASSI').toUpperCase()}-${userAssignedToken || 'B-046'}`,
     staff_behavior: fbState.answers.staff_behavior,
     quality_checking: fbState.answers.quality_checking,
     rejection_reason: fbState.answers.rejection_reason,

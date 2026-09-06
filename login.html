@@ -99,12 +99,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 
 /* Progress Bar */
 .wizard-progress{display:flex;justify-content:space-between;margin-bottom:30px;position:relative;overflow-x:auto;padding-bottom:6px;}
-.wizard-progress::before{content:'';position:absolute;top:15px;left:20px;right:20px;height:2px;background:var(--border);z-index:1;}
-.wizard-step-node{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--bg-surface);padding:0 6px;cursor:pointer;min-width:60px;}
-.wizard-step-circle{width:32px;height:32px;border-radius:50%;background:var(--bg-subtle);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text-muted);transition:all .2s;}
+.wizard-progress::before{content:'';position:absolute;top:17px;left:30px;right:30px;height:2px;background:var(--border);z-index:1;}
+.wizard-step-node{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--bg-surface);padding:0 12px;cursor:pointer;min-width:90px;}
+.wizard-step-circle{width:36px;height:36px;border-radius:50%;background:var(--bg-subtle);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--text-muted);transition:all .2s;}
 .wizard-step-node.active .wizard-step-circle{border-color:var(--primary);background:var(--primary);color:#fff;box-shadow:0 0 0 4px rgba(22,101,52,0.15);}
 .wizard-step-node.completed .wizard-step-circle{border-color:var(--success);background:var(--success);color:#fff;}
-.wizard-step-label{font-size:10.5px;font-weight:600;color:var(--text-muted);white-space:nowrap;text-align:center;}
+.wizard-step-label{font-size:12px;font-weight:600;color:var(--text-muted);white-space:nowrap;text-align:center;}
 .wizard-step-node.active .wizard-step-label{color:var(--text-main);font-weight:700;}
 .wizard-step-node.completed .wizard-step-label{color:var(--success);}
 
@@ -187,7 +187,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 .reg-detail-item span{font-size:13.5px;font-weight:700;color:var(--navy);}
 
 /* Login panels */
-.login-panel{max-width:480px;}
+.login-panel{width:100%;}
 .form-field{margin-bottom:16px;}
 .form-field label{display:block;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
 .form-input{width:100%;padding:10px 14px;font-size:14px;font-family:inherit;background:var(--bg-input);color:var(--text-main);border:1px solid var(--border-input);border-radius:7px;transition:border-color .15s,box-shadow .15s;outline:none;}
@@ -260,17 +260,24 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
   <div id="farmerPanel" class="form-view active">
     <div class="wizard-card">
 
-      <!-- Progress -->
+      <!-- Progress (4 Unified Sections) -->
       <div class="wizard-progress" id="loginWizardProgress">
-        <div class="wizard-step-node active" id="lstepNode1" onclick="lgoToStep(1)"><div class="wizard-step-circle">1</div><div class="wizard-step-label" data-i18n="step.jan">Jan Aadhaar</div></div>
-        <div class="wizard-step-node" id="lstepNode2" onclick="lgoToStep(2)"><div class="wizard-step-circle">2</div><div class="wizard-step-label" data-i18n="step.otp">OTP Verify</div></div>
-        <div class="wizard-step-node" id="lstepNode3" onclick="lgoToStep(3)"><div class="wizard-step-circle">3</div><div class="wizard-step-label" data-i18n="step.bank">Bank Account</div></div>
-        <div class="wizard-step-node" id="lstepNode4" onclick="lgoToStep(4)"><div class="wizard-step-circle">4</div><div class="wizard-step-label" data-i18n="step.land">Land Details</div></div>
-        <div class="wizard-step-node" id="lstepNode5" onclick="lgoToStep(5)"><div class="wizard-step-circle">5</div><div class="wizard-step-label" data-i18n="step.crop">Crop Details</div></div>
-        <div class="wizard-step-node" id="lstepNode6" onclick="lgoToStep(6)"><div class="wizard-step-circle">6</div><div class="wizard-step-label" data-i18n="step.own">Ownership</div></div>
-        <div class="wizard-step-node" id="lstepNode7" onclick="lgoToStep(7)"><div class="wizard-step-circle">7</div><div class="wizard-step-label" data-i18n="step.centre">Mandi Centre</div></div>
-        <div class="wizard-step-node" id="lstepNode8" onclick="lgoToStep(8)"><div class="wizard-step-circle">8</div><div class="wizard-step-label" data-i18n="step.slot">Book Slot</div></div>
-        <div class="wizard-step-node" id="lstepNode9" onclick="lgoToStep(9)"><div class="wizard-step-circle">9</div><div class="wizard-step-label" data-i18n="step.token">Token</div></div>
+        <div class="wizard-step-node active" id="lstepNode1" onclick="lgoToStep(1)">
+          <div class="wizard-step-circle">1</div>
+          <div class="wizard-step-label" data-i18n="step.farmer">Farmer Identity</div>
+        </div>
+        <div class="wizard-step-node" id="lstepNode2" onclick="lgoToStep(2)">
+          <div class="wizard-step-circle">2</div>
+          <div class="wizard-step-label" data-i18n="step.landBank">Bank &amp; Land Details</div>
+        </div>
+        <div class="wizard-step-node" id="lstepNode3" onclick="lgoToStep(3)">
+          <div class="wizard-step-circle">3</div>
+          <div class="wizard-step-label" data-i18n="step.cropSlot">Crop &amp; Slot Booking</div>
+        </div>
+        <div class="wizard-step-node" id="lstepNode4" onclick="lgoToStep(4)">
+          <div class="wizard-step-circle">4</div>
+          <div class="wizard-step-label" data-i18n="step.token">Gate Pass</div>
+        </div>
       </div>
 
       <!-- Demo Bar -->
@@ -281,12 +288,16 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
         <button type="button" class="demo-pick-btn" onclick="lFillDemo(2)" data-i18n="demo.farmer3">Farmer 3 (Bajra &middot; Inherited &middot; Dudu)</button>
       </div>
 
-      <!-- STEP 1 -->
+      <!-- SECTION 1: FARMER IDENTITY & OTP VERIFICATION -->
       <div id="lStep1" class="step-card">
         <div class="step-header">
-          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><rect width="18" height="14" x="3" y="5" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 9h4"/><path d="M14 13h4"/><path d="M14 15h2"/></svg><span data-i18n="step1.title">1. Jan Aadhaar Number &amp; Farmer Details</span></h3>
-          <p data-i18n="step1.desc">Enter your 10 or 12 digit Rajasthan Jan Aadhaar Identification number to initiate MSP registration.</p>
+          <h3>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><rect width="18" height="14" x="3" y="5" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 9h4"/><path d="M14 13h4"/><path d="M14 15h2"/></svg>
+            <span data-i18n="step1.combinedTitle">1. Farmer Details &amp; Mobile OTP Verification</span>
+          </h3>
+          <p data-i18n="step1.combinedDesc">Enter your 10 or 12 digit Rajasthan Jan Aadhaar Identification number and authenticate with OTP.</p>
         </div>
+
         <div class="form-grid-2">
           <div class="form-group"><label data-i18n="lbl.janAadhaar">Jan Aadhaar Number *</label><input type="text" id="lJanAadhaar" class="form-control mono" placeholder="748291038472" value="748291038472"></div>
           <div class="form-group"><label data-i18n="lbl.mobile">Registered Mobile Number *</label><input type="tel" id="lMobile" class="form-control mono" maxlength="10" placeholder="10-digit mobile" value="9829019835"></div>
@@ -295,186 +306,212 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
           <div class="form-group"><label data-i18n="lbl.farmerName">Farmer Full Name *</label><input type="text" id="lFarmerName" class="form-control" placeholder="e.g. Ramkishan Choudhary" value="Ramkishan Choudhary"></div>
           <div class="form-group"><label data-i18n="lbl.fatherName">Father's / Husband's Name</label><input type="text" id="lFatherName" class="form-control" placeholder="e.g. Hariram Choudhary" value="Hariram Choudhary"></div>
         </div>
-        <div style="display:flex;justify-content:flex-end;margin-top:20px;">
-          <button type="button" class="btn btn-primary" onclick="lSendOtp()"><span data-i18n="btn.sendOtp">Send OTP</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+
+        <!-- Integrated OTP Verification Box -->
+        <div id="lInlineOtpBox" style="margin-top:20px; padding:20px 22px; background:var(--bg-subtle); border:1.5px solid var(--border); border-radius:10px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="width:28px; height:28px; border-radius:50%; background:rgba(22,163,74,0.12); color:var(--primary); display:flex; align-items:center; justify-content:center;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="14" height="20" x="5" y="2" rx="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+              </div>
+              <strong style="font-size:14px; color:var(--navy);" data-i18n="step2.title">Mobile OTP Verification</strong>
+            </div>
+            <button type="button" class="btn btn-outline" id="lSendOtpTriggerBtn" onclick="lSendOtp()" style="padding:6px 14px; font-size:12px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <span id="lSendOtpBtnText" data-i18n="btn.sendOtp">Send / Resend OTP</span>
+            </button>
+          </div>
+
+          <div class="otp-sent-alert" style="display:inline-flex; width:100%; justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span id="lotpSentText">OTP has been sent to the registered mobile number XXXXXX9835</span>
+          </div>
+
+          <div style="text-align:center;">
+            <div class="otp-boxes-wrap" style="margin:14px 0;">
+              <input type="text" maxlength="1" class="otp-digit-input" id="lOtp1" oninput="lOtpDigit(1)" onkeydown="lOtpKey(event,1)" value="1">
+              <input type="text" maxlength="1" class="otp-digit-input" id="lOtp2" oninput="lOtpDigit(2)" onkeydown="lOtpKey(event,2)" value="2">
+              <input type="text" maxlength="1" class="otp-digit-input" id="lOtp3" oninput="lOtpDigit(3)" onkeydown="lOtpKey(event,3)" value="3">
+              <input type="text" maxlength="1" class="otp-digit-input" id="lOtp4" oninput="lOtpDigit(4)" onkeydown="lOtpKey(event,4)" value="4">
+              <input type="text" maxlength="1" class="otp-digit-input" id="lOtp5" oninput="lOtpDigit(5)" onkeydown="lOtpKey(event,5)" value="5">
+              <input type="text" maxlength="1" class="otp-digit-input" id="lOtp6" oninput="lOtpDigit(6)" onkeydown="lOtpKey(event,6)" value="6">
+            </div>
+            <div style="font-size:12px;color:var(--text-faint);margin-bottom:16px;">
+              (<span data-i18n="demo.otpPrompt">Demo OTP:</span> <strong>123456</strong>) &middot; <span id="lotpTimer">Resend in 30s</span><button id="lResendOtpBtn" style="display:none;background:none;border:none;color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;" onclick="lSendOtp()" data-i18n="btn.resendOtp">Resend OTP</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;margin-top:24px;">
+          <button type="button" class="btn btn-primary" onclick="lVerifyOtp()">
+            <span data-i18n="btn.verifyOtp">Verify OTP &amp; Proceed to Bank/Land</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
         </div>
       </div>
 
-      <!-- STEP 2 -->
-      <div id="lStep2" class="step-card" style="display:none;text-align:center;">
-        <div style="width:48px;height:48px;border-radius:50%;background:rgba(22,163,74,0.1);color:var(--primary);display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg></div>
-        <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:14px;" data-i18n="step2.title">2. Mobile OTP Verification</h3>
-        <div class="otp-sent-alert" style="display:inline-flex;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <span id="lotpSentText">OTP has been sent to the registered mobile number XXXXXX9835</span>
+      <!-- SECTION 2: BANK & AGRICULTURAL LAND DETAILS -->
+      <div id="lStep2" class="step-card" style="display:none;">
+        <div class="step-header">
+          <h3>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+            <span data-i18n="step2.combinedTitle">2. Bank &amp; Agricultural Land Details</span>
+          </h3>
+          <p data-i18n="step2.combinedDesc">PFMS direct bank disbursal information and revenue land records as per Jamabandi / Girdawari.</p>
         </div>
-        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;" data-i18n="step2.desc">Enter the 6-digit OTP verification code received on your mobile.</p>
-        <div class="otp-boxes-wrap">
-          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp1" oninput="lOtpDigit(1)" onkeydown="lOtpKey(event,1)">
-          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp2" oninput="lOtpDigit(2)" onkeydown="lOtpKey(event,2)">
-          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp3" oninput="lOtpDigit(3)" onkeydown="lOtpKey(event,3)">
-          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp4" oninput="lOtpDigit(4)" onkeydown="lOtpKey(event,4)">
-          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp5" oninput="lOtpDigit(5)" onkeydown="lOtpKey(event,5)">
-          <input type="text" maxlength="1" class="otp-digit-input" id="lOtp6" oninput="lOtpDigit(6)" onkeydown="lOtpKey(event,6)">
+
+        <!-- 2A: Bank Information -->
+        <div style="margin-bottom:28px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--primary); color:#fff; font-size:11px; font-weight:700;">A</span>
+            <h4 style="margin:0; font-size:15px; font-weight:700; color:var(--navy);" data-i18n="step3.title">Bank Account Information (PFMS Direct Disbursal)</h4>
+          </div>
+          <div style="background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.25);border-radius:8px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:13px;color:#15803d;font-weight:600;" data-i18n="step3.seeded">Jan Aadhaar Seeded Account Detected &mdash; Pre-verified with PFMS</span>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group"><label data-i18n="lbl.bankName">Bank Name *</label><input type="text" id="lBankName" class="form-control" value="State Bank of India"></div>
+            <div class="form-group"><label data-i18n="lbl.branchName">Branch Name</label><input type="text" id="lBranchName" class="form-control" value="Bassi Mandi Branch, Jaipur"></div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group"><label data-i18n="lbl.accNo">Account Number *</label><input type="text" id="lAccNo" class="form-control mono" value="389201948214"></div>
+            <div class="form-group"><label data-i18n="lbl.ifsc">IFSC Code *</label><input type="text" id="lIfsc" class="form-control mono" value="SBIN0031245"></div>
+          </div>
         </div>
-        <div style="font-size:12px;color:var(--text-faint);margin-bottom:24px;">(<span data-i18n="demo.otpPrompt">Demo OTP:</span> <strong>123456</strong>) &middot; <span id="lotpTimer">Resend in 30s</span><button id="lResendOtpBtn" style="display:none;background:none;border:none;color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;" onclick="lSendOtp()" data-i18n="btn.resendOtp">Resend OTP</button></div>
-        <div style="display:flex;gap:12px;justify-content:center;">
+
+        <!-- 2B: Agricultural Land Details -->
+        <div style="margin-bottom:28px; border-top:1px solid var(--border); padding-top:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--primary); color:#fff; font-size:11px; font-weight:700;">B</span>
+            <h4 style="margin:0; font-size:15px; font-weight:700; color:var(--navy);" data-i18n="step4.title">Agricultural Land Details</h4>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group"><label data-i18n="lbl.district">District *</label><select id="lDistrict" class="form-control"><option value="jaipur" selected>Jaipur</option><option value="nagaur">Nagaur</option><option value="alwar">Alwar</option><option value="kota">Kota</option><option value="jodhpur">Jodhpur</option></select></div>
+            <div class="form-group"><label data-i18n="lbl.tehsil">Tehsil *</label><input type="text" id="lTehsil" class="form-control" value="Bassi"></div>
+            <div class="form-group"><label data-i18n="lbl.village">Village *</label><input type="text" id="lVillage" class="form-control" value="Mohanpura"></div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group"><label data-i18n="lbl.khasra">Khasra Number(s) *</label><input type="text" id="lKhasra" class="form-control mono" value="412/1, 415/2"></div>
+            <div class="form-group"><label data-i18n="lbl.landArea">Land Area (Hectares) *</label><input type="number" step="0.1" id="lLandArea" class="form-control mono" value="3.5"></div>
+            <div class="form-group"><label data-i18n="lbl.girdawari">Girdawari Record No.</label><input type="text" id="lGirdawari" class="form-control mono" value="GIRD-RJ-2026-9912"></div>
+          </div>
+        </div>
+
+        <!-- 2C: Land Ownership -->
+        <div style="border-top:1px solid var(--border); padding-top:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--primary); color:#fff; font-size:11px; font-weight:700;">C</span>
+            <h4 style="margin:0; font-size:15px; font-weight:700; color:var(--navy);" data-i18n="step6.title">Land Ownership Details</h4>
+          </div>
+          <div class="ownership-info-alert">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex:none;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+            <span data-i18n="ownership.alert">Information regarding land ownership type (Self-Owned, Sharecropper, or Inherited) must be specified.</span>
+          </div>
+          <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectOwn">Select Land Ownership Type *</label>
+          <div class="ownership-cards-grid">
+            <div class="ownership-card active" id="lOwnSelf" onclick="lSelectOwnership('Self-Owned')">
+              <div class="ownership-card-head"><span class="ownership-card-title">&#127969; <span data-i18n="own.selfTitle">Self-Owned</span></span><div class="ownership-radio-dot"></div></div>
+              <p class="ownership-card-desc" data-i18n="own.selfDesc">The land is legally owned by you with title deed / Jamabandi in your name.</p>
+            </div>
+            <div class="ownership-card" id="lOwnShare" onclick="lSelectOwnership('Sharecropper')">
+              <div class="ownership-card-head"><span class="ownership-card-title">&#129309; <span data-i18n="own.shareTitle">Sharecropper</span></span><div class="ownership-radio-dot"></div></div>
+              <p class="ownership-card-desc" data-i18n="own.shareDesc">Cultivating land under mutual tenancy, sharecropping agreement or Batai system.</p>
+            </div>
+            <div class="ownership-card" id="lOwnInherited" onclick="lSelectOwnership('Inherited')">
+              <div class="ownership-card-head"><span class="ownership-card-title">&#128220; <span data-i18n="own.inheritTitle">Inherited</span></span><div class="ownership-radio-dot"></div></div>
+              <p class="ownership-card-desc" data-i18n="own.inheritDesc">Ancestral land holding with inheritance / legal heir mutation in progress.</p>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group"><label data-i18n="lbl.ownRef">Jamabandi / Agreement Ref No.</label><input type="text" id="lOwnershipRef" class="form-control mono" value="JAM-2026-88192"></div>
+            <div class="form-group"><label data-i18n="lbl.ownSelected">Selected Ownership Type</label><input type="text" id="lOwnershipDisplay" class="form-control" readonly value="Self-Owned" style="font-weight:700;color:var(--primary);background:var(--bg-subtle);"></div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;margin-top:24px;">
           <button type="button" class="btn btn-outline" onclick="lgoToStep(1)" data-i18n="btn.back">Back</button>
-          <button type="button" class="btn btn-primary" onclick="lVerifyOtp()"><span data-i18n="btn.verifyOtp">Verify OTP &amp; Proceed</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+          <button type="button" class="btn btn-primary" onclick="lgoToStep(3)"><span data-i18n="btn.nextCrop">Next: Crop &amp; Slot Booking</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
         </div>
       </div>
 
-      <!-- STEP 3 -->
+      <!-- SECTION 3: CROP DETAILS & MANDI SLOT BOOKING -->
       <div id="lStep3" class="step-card" style="display:none;">
         <div class="step-header">
-          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg><span data-i18n="step3.title">3. Bank Account Information (PFMS Direct Disbursal)</span></h3>
-          <p data-i18n="step3.desc">Mandatory for direct benefit transfer. MSP payments deposited within 48 hours.</p>
+          <h3>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span data-i18n="step3.combinedTitle">3. Crop Details &amp; Mandi Slot Booking</span>
+          </h3>
+          <p data-i18n="step3.combinedDesc">Select your crop for MSP procurement, choose designated Mandi centre and book your arrival window.</p>
         </div>
-        <div style="background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.25);border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:13px;color:#15803d;font-weight:600;" data-i18n="step3.seeded">Jan Aadhaar Seeded Account Detected &mdash; Pre-verified with PFMS</span></div>
-        <div class="form-grid-2">
-          <div class="form-group"><label data-i18n="lbl.bankName">Bank Name *</label><input type="text" id="lBankName" class="form-control" value="State Bank of India"></div>
-          <div class="form-group"><label data-i18n="lbl.branchName">Branch Name</label><input type="text" id="lBranchName" class="form-control" value="Bassi Mandi Branch, Jaipur"></div>
+
+        <!-- 3A: Crop Selection -->
+        <div style="margin-bottom:28px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--primary); color:#fff; font-size:11px; font-weight:700;">A</span>
+            <h4 style="margin:0; font-size:15px; font-weight:700; color:var(--navy);" data-i18n="step5.title">Crop Details &amp; Declared Quantity</h4>
+          </div>
+          <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectCrop">Select Crop *</label>
+          <div class="option-row" id="lCropOptions" style="margin-bottom:18px;">
+            <div class="choice-chip active" data-lcrop="wheat" onclick="lSelectCrop('wheat','Wheat','&#8377;2,275/Qtl')">&#127806; <span data-i18n="crop.wheat">Wheat (&#8377;2,275/Q)</span></div>
+            <div class="choice-chip" data-lcrop="mustard" onclick="lSelectCrop('mustard','Mustard','&#8377;5,650/Qtl')">&#127803; <span data-i18n="crop.mustard">Mustard (&#8377;5,650/Q)</span></div>
+            <div class="choice-chip" data-lcrop="bajra" onclick="lSelectCrop('bajra','Bajra','&#8377;2,500/Qtl')">&#127805; <span data-i18n="crop.bajra">Bajra (&#8377;2,500/Q)</span></div>
+            <div class="choice-chip" data-lcrop="chana" onclick="lSelectCrop('chana','Chana','&#8377;5,440/Qtl')">&#129752; <span data-i18n="crop.chana">Chana (&#8377;5,440/Q)</span></div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group"><label data-i18n="lbl.sownArea">Sown Area (Hectares) *</label><input type="number" step="0.1" id="lSownArea" class="form-control mono" value="3.0"></div>
+            <div class="form-group"><label data-i18n="lbl.estYield">Estimated Yield (Qtl)</label><input type="number" id="lEstYield" class="form-control mono" value="65"></div>
+            <div class="form-group"><label data-i18n="lbl.procureQty">Declared Qty (Qtl) *</label><input type="number" id="lProcureQty" class="form-control mono" value="50"></div>
+          </div>
         </div>
-        <div class="form-grid-2">
-          <div class="form-group"><label data-i18n="lbl.accNo">Account Number *</label><input type="text" id="lAccNo" class="form-control mono" value="389201948214"></div>
-          <div class="form-group"><label data-i18n="lbl.ifsc">IFSC Code *</label><input type="text" id="lIfsc" class="form-control mono" value="SBIN0031245"></div>
+
+        <!-- 3B: Centre & Date Selection -->
+        <div style="margin-bottom:28px; border-top:1px solid var(--border); padding-top:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--primary); color:#fff; font-size:11px; font-weight:700;">B</span>
+            <h4 style="margin:0; font-size:15px; font-weight:700; color:var(--navy);" data-i18n="step7.title">Procurement Centre &amp; Date Selection</h4>
+          </div>
+          <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectCentre">Select Procurement Centre *</label>
+          <div class="option-row" id="lCentreOptions" style="margin-bottom:16px;">
+            <div class="choice-chip active" data-lcentre="bassi" onclick="lSelectCentre('bassi','Bassi APMC Mandi')"><span data-i18n="centre.bassi">Bassi APMC Mandi</span><span class="pill high" style="margin-left:4px;"><i></i><span data-i18n="load.high">High Load</span></span></div>
+            <div class="choice-chip" data-lcentre="chomu" onclick="lSelectCentre('chomu','Chomu Mandi Yard')"><span data-i18n="centre.chomu">Chomu Mandi Yard</span><span class="pill low" style="margin-left:4px;"><i></i><span data-i18n="load.low">Low Load</span></span></div>
+            <div class="choice-chip" data-lcentre="dudu" onclick="lSelectCentre('dudu','Dudu APMC Yard')"><span data-i18n="centre.dudu">Dudu APMC Yard</span><span class="pill medium" style="margin-left:4px;"><i></i><span data-i18n="load.medium">Medium Load</span></span></div>
+          </div>
+          <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectDate">Select Appointment Date *</label>
+          <div class="option-row" id="lDateOptions" style="margin-bottom:18px;">
+            <div class="choice-chip active" data-ldate="d1" onclick="lSelectDate('d1','Today, 28 Aug')"><span data-i18n="date.today">Today, 28 Aug</span></div>
+            <div class="choice-chip" data-ldate="d2" onclick="lSelectDate('d2','Tomorrow, 29 Aug')"><span data-i18n="date.tomorrow">Tomorrow, 29 Aug</span></div>
+            <div class="choice-chip" data-ldate="d3" onclick="lSelectDate('d3','Friday, 30 Aug')"><span data-i18n="date.friday">Friday, 30 Aug</span></div>
+          </div>
         </div>
-        <div style="display:flex;justify-content:space-between;margin-top:20px;">
+
+        <!-- 3C: Slot Booking -->
+        <div style="border-top:1px solid var(--border); padding-top:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--primary); color:#fff; font-size:11px; font-weight:700;">C</span>
+            <h4 style="margin:0; font-size:15px; font-weight:700; color:var(--navy);" data-i18n="step8.title">Book Mandi Arrival Time Slot</h4>
+          </div>
+          <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectTime">Select Available Time Window *</label>
+          <div class="slot-grid" id="lSlotGrid">
+            <div class="slot-option" data-lslot="s1" onclick="lSelectSlot('s1','08:00 AM &ndash; 09:00 AM')"><span>08:00 AM &ndash; 09:00 AM</span><span class="pill low"><i></i><span data-i18n="slot.fast">Fast intake</span></span></div>
+            <div class="slot-option active" data-lslot="s2" onclick="lSelectSlot('s2','09:00 AM &ndash; 10:00 AM')"><span>09:00 AM &ndash; 10:00 AM</span><span class="pill medium"><i></i><span data-i18n="slot.normal">Normal</span></span></div>
+            <div class="slot-option" data-lslot="s3" onclick="lSelectSlot('s3','10:00 AM &ndash; 11:00 AM')"><span>10:00 AM &ndash; 11:00 AM</span><span class="pill high"><i></i><span data-i18n="slot.heavy">Heavy rush</span></span></div>
+            <div class="slot-option" data-lslot="s4" onclick="lSelectSlot('s4','11:00 AM &ndash; 12:00 PM')"><span>11:00 AM &ndash; 12:00 PM</span><span class="pill low"><i></i><span data-i18n="slot.fast">Fast intake</span></span></div>
+          </div>
+          <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:18px;">
+            <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;" data-i18n="lbl.bookingSummary">Booking Summary</div>
+            <div style="font-size:13.5px;color:var(--navy);font-weight:600;" id="lSlotSummary">Farmer: Ramkishan Choudhary &middot; Wheat (50 Qtl) &middot; Bassi APMC Mandi &middot; 28 Aug, 09:00 &ndash; 10:00 AM</div>
+          </div>
+          <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:12.5px;color:var(--text-muted);">
+            <strong style="color:var(--text-main);" data-i18n="lbl.loadGuide">Yard Load Guide:</strong>
+            <span class="pill low" style="vertical-align:middle;margin-left:6px;"><i></i><span data-i18n="load.low">Low Load</span></span> &mdash; &lt;15 min &nbsp;
+            <span class="pill medium" style="vertical-align:middle;"><i></i><span data-i18n="load.medium">Medium</span></span> &mdash; &lt;35 min &nbsp;
+            <span class="pill high" style="vertical-align:middle;"><i></i><span data-i18n="load.high">High</span></span> &mdash; <span data-i18n="load.altPrompt">Consider alternate slot</span>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;margin-top:24px;">
           <button type="button" class="btn btn-outline" onclick="lgoToStep(2)" data-i18n="btn.back">Back</button>
-          <button type="button" class="btn btn-primary" onclick="lgoToStep(4)"><span data-i18n="btn.nextLand">Next: Land Details</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-      </div>
-
-      <!-- STEP 4 -->
-      <div id="lStep4" class="step-card" style="display:none;">
-        <div class="step-header">
-          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span data-i18n="step4.title">4. Agricultural Land Details</span></h3>
-          <p data-i18n="step4.desc">Land location and revenue identification as registered in Jamabandi / Girdawari.</p>
-        </div>
-        <div class="form-grid-3">
-          <div class="form-group"><label data-i18n="lbl.district">District *</label><select id="lDistrict" class="form-control"><option value="jaipur" selected>Jaipur</option><option value="nagaur">Nagaur</option><option value="alwar">Alwar</option><option value="kota">Kota</option><option value="jodhpur">Jodhpur</option></select></div>
-          <div class="form-group"><label data-i18n="lbl.tehsil">Tehsil *</label><input type="text" id="lTehsil" class="form-control" value="Bassi"></div>
-          <div class="form-group"><label data-i18n="lbl.village">Village *</label><input type="text" id="lVillage" class="form-control" value="Mohanpura"></div>
-        </div>
-        <div class="form-grid-3">
-          <div class="form-group"><label data-i18n="lbl.khasra">Khasra Number(s) *</label><input type="text" id="lKhasra" class="form-control mono" value="412/1, 415/2"></div>
-          <div class="form-group"><label data-i18n="lbl.landArea">Land Area (Hectares) *</label><input type="number" step="0.1" id="lLandArea" class="form-control mono" value="3.5"></div>
-          <div class="form-group"><label data-i18n="lbl.girdawari">Girdawari Record No.</label><input type="text" id="lGirdawari" class="form-control mono" value="GIRD-RJ-2026-9912"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:20px;">
-          <button type="button" class="btn btn-outline" onclick="lgoToStep(3)" data-i18n="btn.back">Back</button>
-          <button type="button" class="btn btn-primary" onclick="lgoToStep(5)"><span data-i18n="btn.nextCrop">Next: Crop Details</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-      </div>
-
-      <!-- STEP 5 -->
-      <div id="lStep5" class="step-card" style="display:none;">
-        <div class="step-header">
-          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10S2 17.5 2 12A10 10 0 0 1 12 2z"/><path d="m9 12 2 2 4-4"/></svg><span data-i18n="step5.title">5. Crop Details &amp; Declared Quantity</span></h3>
-          <p data-i18n="step5.desc">Select the crop for MSP procurement with estimated and declared quantities.</p>
-        </div>
-        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectCrop">Select Crop *</label>
-        <div class="option-row" id="lCropOptions" style="margin-bottom:20px;">
-          <div class="choice-chip active" data-lcrop="wheat" onclick="lSelectCrop('wheat','Wheat','&#8377;2,275/Qtl')">&#127806; <span data-i18n="crop.wheat">Wheat (&#8377;2,275/Q)</span></div>
-          <div class="choice-chip" data-lcrop="mustard" onclick="lSelectCrop('mustard','Mustard','&#8377;5,650/Qtl')">&#127803; <span data-i18n="crop.mustard">Mustard (&#8377;5,650/Q)</span></div>
-          <div class="choice-chip" data-lcrop="bajra" onclick="lSelectCrop('bajra','Bajra','&#8377;2,500/Qtl')">&#127805; <span data-i18n="crop.bajra">Bajra (&#8377;2,500/Q)</span></div>
-          <div class="choice-chip" data-lcrop="chana" onclick="lSelectCrop('chana','Chana','&#8377;5,440/Qtl')">&#129752; <span data-i18n="crop.chana">Chana (&#8377;5,440/Q)</span></div>
-        </div>
-        <div class="form-grid-3">
-          <div class="form-group"><label data-i18n="lbl.sownArea">Sown Area (Hectares) *</label><input type="number" step="0.1" id="lSownArea" class="form-control mono" value="3.0"></div>
-          <div class="form-group"><label data-i18n="lbl.estYield">Estimated Yield (Qtl)</label><input type="number" id="lEstYield" class="form-control mono" value="65"></div>
-          <div class="form-group"><label data-i18n="lbl.procureQty">Declared Qty (Qtl) *</label><input type="number" id="lProcureQty" class="form-control mono" value="50"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:20px;">
-          <button type="button" class="btn btn-outline" onclick="lgoToStep(4)" data-i18n="btn.back">Back</button>
-          <button type="button" class="btn btn-primary" onclick="lgoToStep(6)"><span data-i18n="btn.nextOwn">Next: Ownership</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-      </div>
-
-      <!-- STEP 6 -->
-      <div id="lStep6" class="step-card" style="display:none;">
-        <div class="step-header">
-          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="step6.title">6. Land Ownership Details</span></h3>
-          <p data-i18n="step6.desc">Specify the legal ownership title or tenancy type of the cultivated land.</p>
-        </div>
-        <div class="ownership-info-alert">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex:none;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
-          <span data-i18n="ownership.alert">Information regarding land ownership type (Self-Owned, Sharecropper, or Inherited) must be specified.</span>
-        </div>
-        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectOwn">Select Land Ownership Type *</label>
-        <div class="ownership-cards-grid">
-          <div class="ownership-card active" id="lOwnSelf" onclick="lSelectOwnership('Self-Owned')">
-            <div class="ownership-card-head"><span class="ownership-card-title">&#127969; <span data-i18n="own.selfTitle">Self-Owned</span></span><div class="ownership-radio-dot"></div></div>
-            <p class="ownership-card-desc" data-i18n="own.selfDesc">The land is legally owned by you with title deed / Jamabandi in your name.</p>
-          </div>
-          <div class="ownership-card" id="lOwnShare" onclick="lSelectOwnership('Sharecropper')">
-            <div class="ownership-card-head"><span class="ownership-card-title">&#129309; <span data-i18n="own.shareTitle">Sharecropper</span></span><div class="ownership-radio-dot"></div></div>
-            <p class="ownership-card-desc" data-i18n="own.shareDesc">Cultivating land under mutual tenancy, sharecropping agreement or Batai system.</p>
-          </div>
-          <div class="ownership-card" id="lOwnInherited" onclick="lSelectOwnership('Inherited')">
-            <div class="ownership-card-head"><span class="ownership-card-title">&#128220; <span data-i18n="own.inheritTitle">Inherited</span></span><div class="ownership-radio-dot"></div></div>
-            <p class="ownership-card-desc" data-i18n="own.inheritDesc">Ancestral land holding with inheritance / legal heir mutation in progress.</p>
-          </div>
-        </div>
-        <div class="form-grid-2">
-          <div class="form-group"><label data-i18n="lbl.ownRef">Jamabandi / Agreement Ref No.</label><input type="text" id="lOwnershipRef" class="form-control mono" value="JAM-2026-88192"></div>
-          <div class="form-group"><label data-i18n="lbl.ownSelected">Selected Ownership Type</label><input type="text" id="lOwnershipDisplay" class="form-control" readonly value="Self-Owned" style="font-weight:700;color:var(--primary);background:var(--bg-subtle);"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:20px;">
-          <button type="button" class="btn btn-outline" onclick="lgoToStep(5)" data-i18n="btn.back">Back</button>
-          <button type="button" class="btn btn-primary" onclick="lgoToStep(7)"><span data-i18n="btn.nextCentre">Next: Procurement Centre</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-      </div>
-
-      <!-- STEP 7 -->
-      <div id="lStep7" class="step-card" style="display:none;">
-        <div class="step-header">
-          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="step7.title">7. Procurement Centre &amp; Date Selection</span></h3>
-          <p data-i18n="step7.desc">Choose your designated Mandi procurement centre and preferred appointment date.</p>
-        </div>
-        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectCentre">Select Procurement Centre *</label>
-        <div class="option-row" id="lCentreOptions" style="margin-bottom:20px;">
-          <div class="choice-chip active" data-lcentre="bassi" onclick="lSelectCentre('bassi','Bassi APMC Mandi')"><span data-i18n="centre.bassi">Bassi APMC Mandi</span><span class="pill high" style="margin-left:4px;"><i></i><span data-i18n="load.high">High Load</span></span></div>
-          <div class="choice-chip" data-lcentre="chomu" onclick="lSelectCentre('chomu','Chomu Mandi Yard')"><span data-i18n="centre.chomu">Chomu Mandi Yard</span><span class="pill low" style="margin-left:4px;"><i></i><span data-i18n="load.low">Low Load</span></span></div>
-          <div class="choice-chip" data-lcentre="dudu" onclick="lSelectCentre('dudu','Dudu APMC Yard')"><span data-i18n="centre.dudu">Dudu APMC Yard</span><span class="pill medium" style="margin-left:4px;"><i></i><span data-i18n="load.medium">Medium Load</span></span></div>
-        </div>
-        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectDate">Select Appointment Date *</label>
-        <div class="option-row" id="lDateOptions" style="margin-bottom:24px;">
-          <div class="choice-chip active" data-ldate="d1" onclick="lSelectDate('d1','Today, 28 Aug')"><span data-i18n="date.today">Today, 28 Aug</span></div>
-          <div class="choice-chip" data-ldate="d2" onclick="lSelectDate('d2','Tomorrow, 29 Aug')"><span data-i18n="date.tomorrow">Tomorrow, 29 Aug</span></div>
-          <div class="choice-chip" data-ldate="d3" onclick="lSelectDate('d3','Friday, 30 Aug')"><span data-i18n="date.friday">Friday, 30 Aug</span></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:20px;">
-          <button type="button" class="btn btn-outline" onclick="lgoToStep(6)" data-i18n="btn.back">Back</button>
-          <button type="button" class="btn btn-primary" onclick="lgoToStep(8)"><span data-i18n="btn.nextSlot">Next: Book Time Slot</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-      </div>
-
-      <!-- STEP 8 -->
-      <div id="lStep8" class="step-card" style="display:none;">
-        <div class="step-header">
-          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="step8.title">8. Book Mandi Arrival Time Slot</span></h3>
-          <p data-i18n="step8.desc">Select your arrival time window. AI-controlled slot allocation prevents traffic choke points at weighing bridges.</p>
-        </div>
-        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;" data-i18n="lbl.selectTime">Select Available Time Window *</label>
-        <div class="slot-grid" id="lSlotGrid">
-          <div class="slot-option" data-lslot="s1" onclick="lSelectSlot('s1','08:00 AM &ndash; 09:00 AM')"><span>08:00 AM &ndash; 09:00 AM</span><span class="pill low"><i></i><span data-i18n="slot.fast">Fast intake</span></span></div>
-          <div class="slot-option active" data-lslot="s2" onclick="lSelectSlot('s2','09:00 AM &ndash; 10:00 AM')"><span>09:00 AM &ndash; 10:00 AM</span><span class="pill medium"><i></i><span data-i18n="slot.normal">Normal</span></span></div>
-          <div class="slot-option" data-lslot="s3" onclick="lSelectSlot('s3','10:00 AM &ndash; 11:00 AM')"><span>10:00 AM &ndash; 11:00 AM</span><span class="pill high"><i></i><span data-i18n="slot.heavy">Heavy rush</span></span></div>
-          <div class="slot-option" data-lslot="s4" onclick="lSelectSlot('s4','11:00 AM &ndash; 12:00 PM')"><span>11:00 AM &ndash; 12:00 PM</span><span class="pill low"><i></i><span data-i18n="slot.fast">Fast intake</span></span></div>
-        </div>
-        <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:20px;">
-          <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;" data-i18n="lbl.bookingSummary">Booking Summary</div>
-          <div style="font-size:13.5px;color:var(--navy);font-weight:600;" id="lSlotSummary">Farmer: Ramkishan Choudhary &middot; Wheat (50 Qtl) &middot; Bassi APMC Mandi &middot; 28 Aug, 09:00 &ndash; 10:00 AM</div>
-        </div>
-        <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:12.5px;color:var(--text-muted);">
-          <strong style="color:var(--text-main);" data-i18n="lbl.loadGuide">Yard Load Guide:</strong>
-          <span class="pill low" style="vertical-align:middle;margin-left:6px;"><i></i><span data-i18n="load.low">Low Load</span></span> &mdash; &lt;15 min &nbsp;
-          <span class="pill medium" style="vertical-align:middle;"><i></i><span data-i18n="load.medium">Medium</span></span> &mdash; &lt;35 min &nbsp;
-          <span class="pill high" style="vertical-align:middle;"><i></i><span data-i18n="load.high">High</span></span> &mdash; <span data-i18n="load.altPrompt">Consider alternate slot</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:20px;">
-          <button type="button" class="btn btn-outline" onclick="lgoToStep(7)" data-i18n="btn.back">Back</button>
           <button type="button" class="btn btn-primary" onclick="lSubmitRegistration()">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             <span data-i18n="btn.confirmReg">Confirm Registration &amp; Generate Token</span>
@@ -482,8 +519,8 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
         </div>
       </div>
 
-      <!-- STEP 9 -->
-      <div id="lStep9" class="step-card" style="display:none;text-align:center;">
+      <!-- SECTION 4: GATE PASS & TOKEN -->
+      <div id="lStep4" class="step-card" style="display:none;text-align:center;">
         <div style="width:56px;height:56px;border-radius:50%;background:rgba(34,197,94,0.1);color:#16a34a;display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 0 0 8px rgba(34,197,94,0.1);"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
         <h3 style="font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px;" id="ltokenTitle">Token Generated Successfully &mdash; B-046</h3>
         <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:22px;" data-i18n="step9.desc">Your MSP procurement registration is complete and your Mandi entry slot has been locked.</p>
@@ -593,27 +630,51 @@ footer{text-align:center;padding:18px 24px;font-size:12px;color:var(--text-faint
 
   <!-- CENTRE STAFF -->
   <div id="centrePanel" class="form-view">
-    <div class="wizard-card login-panel">
-      <h2 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px;" data-i18n="staff.title">Centre Staff Sign In</h2>
-      <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:24px;" data-i18n="staff.desc">Sign in to access the gate scanner and live queue manager.</p>
+    <div class="wizard-card">
+      <div class="step-header">
+        <h3>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          <span data-i18n="staff.title">Centre Staff Sign In</span>
+        </h3>
+        <p data-i18n="staff.desc">Sign in to access the gate scanner and live queue manager.</p>
+      </div>
       <form onsubmit="handleCentreLogin(event)">
-        <div class="form-field"><label data-i18n="lbl.centreSelect">Procurement Centre</label><select id="centreSelect" class="form-input"><option value="bassi" data-i18n="centre.bassiLong">Bassi APMC Procurement Centre</option><option value="chomu" data-i18n="centre.chomu">Chomu Mandi Yard</option><option value="dudu" data-i18n="centre.dudu">Dudu APMC Yard</option></select></div>
-        <div class="form-field"><label data-i18n="lbl.staffId">Operator Staff ID</label><input type="text" id="staffId" class="form-input" placeholder="OP-BASSI-01" value="OP-BASSI-01"></div>
-        <div class="form-field"><label data-i18n="lbl.staffPass">Operator Password</label><input type="password" class="form-input" value="operator2026"></div>
-        <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px;"><span data-i18n="btn.staffLogin">Access Operator Console</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        <div class="form-grid-3">
+          <div class="form-group"><label data-i18n="lbl.centreSelect">Procurement Centre</label><select id="centreSelect" class="form-control"><option value="bassi" data-i18n="centre.bassiLong">Bassi APMC Procurement Centre</option><option value="chomu" data-i18n="centre.chomu">Chomu Mandi Yard</option><option value="dudu" data-i18n="centre.dudu">Dudu APMC Yard</option></select></div>
+          <div class="form-group"><label data-i18n="lbl.staffId">Operator Staff ID</label><input type="text" id="staffId" class="form-control mono" placeholder="OP-BASSI-01" value="OP-BASSI-01"></div>
+          <div class="form-group"><label data-i18n="lbl.staffPass">Operator Password</label><input type="password" id="staffPass" class="form-control" value="operator2026"></div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:24px;">
+          <button type="submit" class="btn btn-primary" style="padding:11px 26px;">
+            <span data-i18n="btn.staffLogin">Access Operator Console</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
       </form>
     </div>
   </div>
 
   <!-- ADMIN -->
   <div id="adminPanel" class="form-view">
-    <div class="wizard-card login-panel">
-      <h2 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px;" data-i18n="admin.title">Department Administration</h2>
-      <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:24px;" data-i18n="admin.desc">State-level procurement surveillance and reporting console.</p>
+    <div class="wizard-card">
+      <div class="step-header">
+        <h3>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <span data-i18n="admin.title">Department Administration</span>
+        </h3>
+        <p data-i18n="admin.desc">State-level procurement surveillance and reporting console.</p>
+      </div>
       <form onsubmit="handleAdminLogin(event)">
-        <div class="form-field"><label data-i18n="lbl.adminEmail">Gov.in Email Address</label><input type="email" id="adminEmail" class="form-input" placeholder="officer@nic.in" value="procurement.officer@nic.in"></div>
-        <div class="form-field"><label data-i18n="lbl.adminPass">Department Passcode</label><input type="password" class="form-input" value="nicadmin2026"></div>
-        <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px;"><span data-i18n="btn.adminLogin">Access Department Console</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        <div class="form-grid-2">
+          <div class="form-group"><label data-i18n="lbl.adminEmail">Gov.in Email Address</label><input type="email" id="adminEmail" class="form-control mono" placeholder="officer@nic.in" value="procurement.officer@nic.in"></div>
+          <div class="form-group"><label data-i18n="lbl.adminPass">Department Passcode</label><input type="password" id="adminPass" class="form-control" value="nicadmin2026"></div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:24px;">
+          <button type="submit" class="btn btn-primary" style="padding:11px 26px;">
+            <span data-i18n="btn.adminLogin">Access Department Console</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
       </form>
     </div>
   </div>
@@ -643,7 +704,16 @@ const I18N = {
     "step.own": "Ownership",
     "step.centre": "Mandi Centre",
     "step.slot": "Book Slot",
-    "step.token": "Token",
+    "step.token": "Gate Pass",
+    "step.farmer": "Farmer Identity",
+    "step.landBank": "Bank & Land Details",
+    "step.cropSlot": "Crop & Slot Booking",
+    "step1.combinedTitle": "1. Farmer Details & Mobile OTP Verification",
+    "step1.combinedDesc": "Enter your 10 or 12 digit Rajasthan Jan Aadhaar Identification number and authenticate with OTP.",
+    "step2.combinedTitle": "2. Bank & Agricultural Land Details",
+    "step2.combinedDesc": "PFMS direct bank disbursal information and revenue land records as per Jamabandi / Girdawari.",
+    "step3.combinedTitle": "3. Crop Details & Mandi Slot Booking",
+    "step3.combinedDesc": "Select your crop for MSP procurement, choose designated Mandi centre and book your arrival window.",
     "demo.barTitle": "⚡ Quick Demo Auto-Fill:",
     "demo.farmer1": "Farmer 1 (Wheat · Self-Owned · Bassi)",
     "demo.farmer2": "Farmer 2 (Mustard · Sharecropper · Chomu)",
@@ -783,7 +853,16 @@ const I18N = {
     "step.own": "स्वामित्व",
     "step.centre": "मंडी केंद्र",
     "step.slot": "स्लॉट बुक करें",
-    "step.token": "टोकन",
+    "step.token": "गेट पास",
+    "step.farmer": "किसान पहचान",
+    "step.landBank": "बैंक एवं भूमि विवरण",
+    "step.cropSlot": "फसल एवं स्लॉट बुकिंग",
+    "step1.combinedTitle": "1. किसान विवरण एवं मोबाइल ओटीपी सत्यापन",
+    "step1.combinedDesc": "एमएसपी पंजीकरण शुरू करने के लिए अपना 10 या 12 अंकों का राजस्थान जन आधार नंबर दर्ज करें और ओटीपी से सत्यापित करें।",
+    "step2.combinedTitle": "2. बैंक एवं कृषि भूमि विवरण",
+    "step2.combinedDesc": "PFMS सीधा बैंक भुगतान विवरण एवं जमाबंदी / गिरदावरी के अनुसार राजस्व भूमि रिकॉर्ड।",
+    "step3.combinedTitle": "3. फसल विवरण एवं मंडी स्लॉट बुकिंग",
+    "step3.combinedDesc": "एमएसपी खरीद के लिए फसल चुनें, निर्धारित मंडी केंद्र चुनें और अपने आगमन का समय स्लॉट बुक करें।",
     "demo.barTitle": "⚡ त्वरित डेमो स्वतः भरें:",
     "demo.farmer1": "किसान 1 (गेहूं · स्वयं का स्वामित्व · बस्सी)",
     "demo.farmer2": "किसान 2 (सरसों · बटाईदार · चोमू)",
@@ -1190,7 +1269,12 @@ function lRenderPassQr(){
 }
 
 function lgoToStep(n){
-  for(let i=1;i<=9;i++){
+  if (n > 4) {
+    if (n === 9) n = 4;
+    else if (n >= 7) n = 3;
+    else n = 2;
+  }
+  for(let i=1;i<=4;i++){
     const el=document.getElementById('lStep'+i);
     if(el) el.style.display=(i===n)?'':'none';
     const nd=document.getElementById('lstepNode'+i);
@@ -1202,8 +1286,8 @@ function lgoToStep(n){
   }
   lState.step=n;
   const es=document.getElementById('lEmitraSection');
-  if(es) es.style.display=(n===9)?'none':'';
-  if(n===9) lRenderPassQr();
+  if(es) es.style.display=(n===1)?'':'none';
+  if(n===4) lRenderPassQr();
 }
 
 // OTP
@@ -1212,27 +1296,41 @@ function lSendOtp(){
   const mob=document.getElementById('lMobile').value.trim()||'9829019835';
   updateOtpSentText(currentLang);
   ['1','2','3','4','5','6'].forEach((v,i)=>{const el=document.getElementById('lOtp'+(i+1));if(el)el.value=v;});
-  lgoToStep(2);
+  const box = document.getElementById('lInlineOtpBox');
+  if (box) {
+    box.style.border = '1.5px solid var(--primary)';
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  showToast(currentLang==='hi'?'OTP भेजा गया':'OTP Sent', currentLang==='hi'?'मोबाइल नंबर पर 6 अंकों का OTP भेजा गया है':'6-digit OTP sent to registered mobile.');
   let s=30;
   const te=document.getElementById('lotpTimer');
   const rb=document.getElementById('lResendOtpBtn');
-  rb.style.display='none';
-  te.style.display='';
+  if (rb) rb.style.display='none';
+  if (te) te.style.display='';
   if(lotpCountdown)clearInterval(lotpCountdown);
   lotpCountdown=setInterval(()=>{
     s--;
     if(s<=0){
       clearInterval(lotpCountdown);
-      te.style.display='none';
-      rb.style.display='';
+      if (te) te.style.display='none';
+      if (rb) rb.style.display='';
     } else {
-      te.textContent = (currentLang==='hi') ? s + 's में पुनः भेजें' : 'Resend in ' + s + 's';
+      if (te) te.textContent = (currentLang==='hi') ? s + 's में पुनः भेजें' : 'Resend in ' + s + 's';
     }
   },1000);
 }
 function lOtpDigit(n){const i=document.getElementById('lOtp'+n);i.value=i.value.replace(/\D/g,'').slice(-1);if(i.value&&n<6)document.getElementById('lOtp'+(n+1)).focus();}
 function lOtpKey(e,n){if(e.key==='Backspace'&&!document.getElementById('lOtp'+n).value&&n>1)document.getElementById('lOtp'+(n-1)).focus();}
-function lVerifyOtp(){const otp=[1,2,3,4,5,6].map(i=>document.getElementById('lOtp'+i).value).join('');if(otp.length<6){showToast('OTP Required','Please enter the 6-digit OTP.');return;}lState.farmerName=document.getElementById('lFarmerName').value.trim()||'Ramkishan Choudhary';lState.janAadhaar=document.getElementById('lJanAadhaar').value.trim()||'748291038472';lState.mobile=document.getElementById('lMobile').value.trim()||'9829019835';lgoToStep(3);}
+function lVerifyOtp(){
+  const otp=[1,2,3,4,5,6].map(i=>document.getElementById('lOtp'+i).value).join('');
+  if(otp.length<6){showToast('OTP Required','Please enter the 6-digit OTP.');return;}
+  lState.farmerName=document.getElementById('lFarmerName').value.trim()||'Ramkishan Choudhary';
+  if(document.getElementById('lFatherName')) lState.fatherName=document.getElementById('lFatherName').value.trim()||'Hariram Choudhary';
+  lState.janAadhaar=document.getElementById('lJanAadhaar').value.trim()||'748291038472';
+  lState.mobile=document.getElementById('lMobile').value.trim()||'9829019835';
+  showToast(currentLang==='hi'?'सत्यापित':'Verified', currentLang==='hi'?'किसान पहचान सत्यापित हो गई है':'Farmer identity verified.');
+  lgoToStep(2);
+}
 
 // Crop
 function lSelectCrop(id,name,rate){lState.crop=id;lState.cropName=name;lState.cropRate=rate;document.querySelectorAll('#lCropOptions .choice-chip').forEach(c=>c.classList.toggle('active',c.dataset.lcrop===id));lUpdateSummary();}
@@ -1309,10 +1407,9 @@ async function lSubmitRegistration(){
     document.getElementById('ltokenCentre').textContent=getCentreLabel(lState.centre, currentLang);
     document.getElementById('ltokenSlot').textContent=`${lState.date} (${lState.slot})`;
     lRenderPassQr();
-    localStorage.setItem('kisan_setu_role','farmer');
-    localStorage.setItem('kisan_setu_user_id','FID-88214');
+    lPersistRegistrationState();
     showToast(currentLang==='hi'?'पंजीकरण पूर्ण':'Registration Complete',`Token ${lState.generatedToken} issued. Slot: ${lState.slot}`);
-    lgoToStep(9);
+    lgoToStep(4);
   } catch (error) {
     console.warn('Backend server unavailable, proceeding with local token generation:', error);
     const prefix = (lState.centre || 'bassi').charAt(0).toUpperCase();
@@ -1329,16 +1426,41 @@ async function lSubmitRegistration(){
     document.getElementById('ltokenCentre').textContent=getCentreLabel(lState.centre || 'bassi', currentLang);
     document.getElementById('ltokenSlot').textContent=`${lState.date || 'Today'} (${lState.slot || '09:00 AM \u2013 10:00 AM'})`;
     lRenderPassQr();
-    localStorage.setItem('kisan_setu_role','farmer');
-    localStorage.setItem('kisan_setu_user_id','FID-88214');
+    lPersistRegistrationState();
     showToast(currentLang==='hi'?'पंजीकरण पूर्ण':'Registration Complete', `Token ${lState.generatedToken} issued.`);
-    lgoToStep(9);
+    lgoToStep(4);
   } finally {
     if(btn) { btn.innerHTML = originalText; btn.disabled = false; }
   }
 }
+function lPersistRegistrationState(){
+  try {
+    if(lState.generatedToken) localStorage.setItem('kisan_setu_token', lState.generatedToken);
+    const cId = lState.centre || 'bassi';
+    localStorage.setItem('kisan_setu_centre', cId);
+    const cLabel = (typeof getCentreLabel==='function') ? getCentreLabel(cId, 'en') : (lState.centreName || cId);
+    localStorage.setItem('kisan_setu_centre_name', cLabel);
+    if(lState.crop) {
+      localStorage.setItem('kisan_setu_crop_id', lState.crop);
+      const crLabel = (typeof getCropLabel==='function') ? getCropLabel(lState.crop, 'en') : (lState.cropName || lState.crop);
+      localStorage.setItem('kisan_setu_crop', crLabel);
+    }
+    if(lState.cropQty) localStorage.setItem('kisan_setu_crop_qty', lState.cropQty);
+    if(lState.farmerName) localStorage.setItem('kisan_setu_farmer_name', lState.farmerName);
+    if(lState.slot) localStorage.setItem('kisan_setu_slot', lState.slot);
+    if(lState.date) localStorage.setItem('kisan_setu_date', lState.date);
+    if(lState.janAadhaar) localStorage.setItem('kisan_setu_jan_aadhaar', lState.janAadhaar);
+    if(lState.generatedToken) {
+      localStorage.setItem('kisan_setu_booking_id', `BK-${cId.toUpperCase()}-${lState.generatedToken}`);
+    }
+    localStorage.setItem('kisan_setu_role', 'farmer');
+    localStorage.setItem('kisan_setu_user_id', 'FID-88214');
+  } catch(e) {
+    console.warn('Could not save registration state to localStorage:', e);
+  }
+}
 function lResetWizard(){document.getElementById('lFarmerName').value='';document.getElementById('lJanAadhaar').value='';document.getElementById('lMobile').value='';lgoToStep(1);document.getElementById('lEmitraSection').style.display='';}
-function goToDashboard(){localStorage.setItem('kisan_setu_role','farmer');window.location.href='index.html?tab=queue';}
+function goToDashboard(){lPersistRegistrationState();localStorage.setItem('kisan_setu_role','farmer');window.location.href='index.html?tab=queue';}
 
 // Demo Fill
 const DEMO_FARMERS=[
@@ -1352,6 +1474,8 @@ function lFillDemo(idx){
   document.getElementById('lFarmerName').value=d.name;
   document.getElementById('lFatherName').value=d.father;
   document.getElementById('lMobile').value=d.mobile;
+  ['1','2','3','4','5','6'].forEach((v,i)=>{const el=document.getElementById('lOtp'+(i+1));if(el)el.value=v;});
+  updateOtpSentText(currentLang);
   Object.assign(lState,{janAadhaar:d.jan,farmerName:d.name,mobile:d.mobile,crop:d.crop,cropName:d.cropName,cropRate:d.cropRate,cropQty:d.qty,ownershipType:d.ownership,centre:d.centre,centreName:d.centreName,dateId:d.dateId,date:d.date,slot:d.slotLabel});
   document.querySelectorAll('#lCropOptions .choice-chip').forEach(c=>c.classList.toggle('active',c.dataset.lcrop===d.crop));
   ['lOwnSelf','lOwnShare','lOwnInherited'].forEach(id=>document.getElementById(id).classList.remove('active'));
@@ -1378,7 +1502,7 @@ function lEmitraSendOtp(){
 function leOtpDigit(n){const i=document.getElementById('leOtp'+n);i.value=i.value.replace(/\D/g,'').slice(-1);if(i.value&&n<6)document.getElementById('leOtp'+(n+1)).focus();}
 function leOtpKey(e,n){if(e.key==='Backspace'&&!document.getElementById('leOtp'+n).value&&n>1)document.getElementById('leOtp'+(n-1)).focus();}
 function lEmitraVerify(){const regId=document.getElementById('lEmitraRegId').value.trim();const rec=EMITRA_RECORDS.find(r=>r.regId===regId)||EMITRA_RECORDS[0];document.getElementById('lEVerifiedRegId').textContent=rec.regId;document.getElementById('lEVerifiedName').textContent=rec.name;document.getElementById('lEVerifiedCropQty').textContent=rec.crop;document.getElementById('lEVerifiedCentre').textContent=rec.centre;document.getElementById('lEVerifiedJanAadhaar').textContent=rec.jan;document.getElementById('lEmitraStep2').style.display='none';document.getElementById('lEmitraStep3').style.display='';showToast('Verified',`Registration ${rec.regId} authenticated.`);}
-function lEmitraProceedToSlot(){lState.farmerName=document.getElementById('lEVerifiedName').textContent;lState.centreName=document.getElementById('lEVerifiedCentre').textContent;lgoToStep(7);document.getElementById('lEmitraSection').style.display='none';showToast('Slot Booking','Please select your arrival time slot.');}
+function lEmitraProceedToSlot(){lState.farmerName=document.getElementById('lEVerifiedName').textContent;lState.centreName=document.getElementById('lEVerifiedCentre').textContent;lgoToStep(3);document.getElementById('lEmitraSection').style.display='none';showToast('Slot Booking','Please select your arrival time slot.');}
 
 // Auth handlers
 function handleCentreLogin(e){e.preventDefault();const centre=document.getElementById('centreSelect').value;const staff=document.getElementById('staffId').value.trim()||'OP-BASSI-01';localStorage.setItem('kisan_setu_role','centre');localStorage.setItem('kisan_setu_user_id',staff);localStorage.setItem('kisan_setu_centre',centre);window.location.href='index.html';}
